@@ -1,0 +1,21 @@
+{
+  "currentSymptoms": [
+    "Body ache"
+  ],
+  "medicalHistory": [
+    "Hypertension",
+    "pain"
+  ],
+  "familyHistory": [],
+  "lifestyle": {
+    "smoker": true,
+    "alcohol": "regular",
+    "exerciseFrequency": "daily",
+    "sleepHours": 3,
+    "diet": "junk-heavy"
+  },
+  "medicines": [],
+  "onboardingComplete": true,
+  "updatedAt": "2026-04-17T14:34:19.885Z",
+  "userId": "mo2zx78o2wfwr"
+}

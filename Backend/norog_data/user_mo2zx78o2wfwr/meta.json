@@ -1,0 +1,13 @@
+{
+  "id": "mo2zx78o2wfwr",
+  "name": "Admin",
+  "email": "admin@gmail.com",
+  "password": "$2a$10$Vp12YveFRjn2DShroYjXRuuuNPOw5TtudeAuWU5lmR7r0PL0i4TuO",
+  "createdAt": "2026-04-17T14:20:54.120Z",
+  "age": 20,
+  "gender": "male",
+  "location": {
+    "city": "",
+    "country": ""
+  }
+}

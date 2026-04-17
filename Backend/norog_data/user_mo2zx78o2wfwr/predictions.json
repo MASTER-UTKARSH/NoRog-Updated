@@ -1,0 +1,110 @@
+[
+  {
+    "_id": "mo30em1j1qlb0",
+    "userId": "mo2zx78o2wfwr",
+    "risks": [
+      {
+        "disease": "Chronic Obstructive Pulmonary Disease (COPD)",
+        "confidence": 60,
+        "contributingSymptoms": [
+          "Body ache"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Cardiovascular Disease",
+        "confidence": 80,
+        "contributingSymptoms": [
+          "Hypertension",
+          "Body ache"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Sleep Disorder",
+        "confidence": 90,
+        "contributingSymptoms": [
+          "Body ache"
+        ],
+        "urgency": "Seek immediate care",
+        "geneticFactor": false
+      }
+    ],
+    "healthScore": 40,
+    "trend": "declining",
+    "correlations": [
+      {
+        "symptoms": [
+          "Body ache",
+          "Hypertension"
+        ],
+        "possibleCondition": "Cardiovascular Disease"
+      },
+      {
+        "symptoms": [
+          "Body ache",
+          "Sleep disturbance"
+        ],
+        "possibleCondition": "Sleep Disorder"
+      }
+    ],
+    "summary": "The patient's lifestyle choices, such as smoking and a junk-heavy diet, are increasing their risk for various diseases. The lack of sleep is a significant concern and requires immediate attention. It is essential for the patient to consult a doctor soon to address these risks and develop a plan to improve their overall health.",
+    "createdAt": "2026-04-17T14:34:26.455Z"
+  },
+  {
+    "_id": "mo30j8m39npsk",
+    "userId": "mo2zx78o2wfwr",
+    "risks": [
+      {
+        "disease": "Cardiovascular Disease",
+        "confidence": 60,
+        "contributingSymptoms": [
+          "Hypertension",
+          "Body ache"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Chronic Obstructive Pulmonary Disease (COPD)",
+        "confidence": 70,
+        "contributingSymptoms": [
+          "Smoker"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Sleep Deprivation Disorder",
+        "confidence": 80,
+        "contributingSymptoms": [
+          "Sleep: 3hrs"
+        ],
+        "urgency": "Seek immediate care",
+        "geneticFactor": false
+      }
+    ],
+    "healthScore": 40,
+    "trend": "declining",
+    "correlations": [
+      {
+        "symptoms": [
+          "Body ache",
+          "Hypertension"
+        ],
+        "possibleCondition": "Cardiovascular Disease"
+      },
+      {
+        "symptoms": [
+          "Smoker",
+          "Body ache"
+        ],
+        "possibleCondition": "Chronic Obstructive Pulmonary Disease (COPD)"
+      }
+    ],
+    "summary": "The patient is at high risk for cardiovascular disease and COPD due to their smoking habit and hypertension. The patient's sleep deprivation is also a major concern and requires immediate attention. Overall, the patient's health is declining due to their lifestyle choices and existing medical conditions.",
+    "createdAt": "2026-04-17T14:38:02.331Z"
+  }
+]

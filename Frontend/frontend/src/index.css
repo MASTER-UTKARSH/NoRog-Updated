@@ -1,0 +1,344 @@
+@import "tailwindcss";
+
+/* ===== NoRog Design System v3 — Medical + Dark Theme ===== */
+
+@theme {
+  --color-bg-primary: #0a0a0f;
+  --color-bg-surface: #12121a;
+  --color-bg-surface-hover: #1a1a2e;
+  --color-bg-surface-alt: #16162a;
+  --color-border: #2a2a40;
+  --color-border-light: #3a3a55;
+
+  --color-brand: #2563EB;
+  --color-brand-light: #60a5fa;
+  --color-brand-glow: rgba(37, 99, 235, 0.3);
+
+  --color-accent: #10B981;
+  --color-accent-glow: rgba(16, 185, 129, 0.3);
+
+  --color-success: #10B981;
+  --color-success-glow: rgba(16, 185, 129, 0.2);
+  --color-warning: #F59E0B;
+  --color-warning-glow: rgba(245, 158, 11, 0.2);
+  --color-danger: #EF4444;
+  --color-danger-glow: rgba(239, 68, 68, 0.2);
+
+  --color-text-primary: #f0f0f5;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+
+  --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ===== Base Styles ===== */
+body {
+  font-family: var(--font-family-sans);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-border-light); }
+
+/* ===== Glass Card ===== */
+.glass-card {
+  background: rgba(18, 18, 26, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-card:hover {
+  border-color: var(--color-border-light);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== Glow Effects ===== */
+.glow-brand { box-shadow: 0 0 20px var(--color-brand-glow), 0 0 60px rgba(37, 99, 235, 0.1); }
+.glow-accent { box-shadow: 0 0 20px var(--color-accent-glow), 0 0 60px rgba(16, 185, 129, 0.1); }
+.glow-success { box-shadow: 0 0 20px var(--color-success-glow); }
+.glow-warning { box-shadow: 0 0 20px var(--color-warning-glow); }
+.glow-danger { box-shadow: 0 0 20px var(--color-danger-glow); }
+
+/* ===== Animations ===== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px var(--color-brand-glow); }
+  50% { box-shadow: 0 0 40px var(--color-brand-glow), 0 0 80px rgba(37, 99, 235, 0.15); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes bounceIn {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 1; transform: scale(1.05); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+.animate-fade-in-up { animation: fadeInUp 0.5s ease-out forwards; }
+.animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+.animate-slide-in-right { animation: slideInRight 0.5s ease-out forwards; }
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+.animate-bounce-in { animation: bounceIn 0.6s ease-out forwards; }
+.animate-spin { animation: spin 1s linear infinite; }
+
+/* Staggered animations */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* ===== Gradient Text ===== */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-brand), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== Button Styles ===== */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-brand), #3b82f6);
+  color: white;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--color-brand-glow);
+}
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-weight: 500;
+  border: 1px solid var(--color-border);
+  transition: all 0.3s;
+  cursor: pointer;
+  font-size: 14px;
+}
+.btn-secondary:hover {
+  background: var(--color-bg-surface-hover);
+  border-color: var(--color-brand);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, var(--color-danger), #dc2626);
+  color: white;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 14px;
+}
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--color-danger-glow);
+}
+
+/* ===== Chip/Tag Styles ===== */
+.symptom-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-surface);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+.symptom-chip:hover {
+  border-color: var(--color-brand);
+  color: var(--color-text-primary);
+  background: var(--color-bg-surface-hover);
+}
+.symptom-chip.selected {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(96, 165, 250, 0.1));
+  border-color: var(--color-brand);
+  color: var(--color-brand-light);
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.15);
+}
+
+/* ===== Risk Card Severity Colors ===== */
+.risk-low { border-left: 4px solid var(--color-success); }
+.risk-moderate { border-left: 4px solid var(--color-warning); }
+.risk-high { border-left: 4px solid var(--color-danger); }
+
+/* ===== Input Styles ===== */
+.input-field {
+  width: 100%;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: var(--color-text-primary);
+  font-size: 14px;
+  transition: border-color 0.2s;
+  outline: none;
+}
+.input-field:focus {
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+.input-field::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* ===== Severity Bar ===== */
+.severity-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--color-bg-surface);
+  overflow: hidden;
+}
+.severity-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* ===== Loading Spinner ===== */
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-brand);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 240px;
+  background: rgba(18, 18, 26, 0.95);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid var(--color-border);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 12px;
+  margin: 2px 12px;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.sidebar-link:hover {
+  background: var(--color-bg-surface-hover);
+  color: var(--color-text-primary);
+}
+.sidebar-link.active {
+  background: rgba(37, 99, 235, 0.15);
+  color: var(--color-brand-light);
+}
+
+/* ===== Bottom Tab Bar (Mobile) ===== */
+.bottom-tabs {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(18, 18, 26, 0.95);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0;
+  z-index: 40;
+}
+.bottom-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 8px;
+  color: var(--color-text-muted);
+  font-size: 10px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.bottom-tab.active {
+  color: var(--color-brand-light);
+}
+.bottom-tab span:first-child {
+  font-size: 20px;
+}
+
+/* ===== Progress Bar (Onboarding) ===== */
+.progress-bar {
+  height: 4px;
+  background: var(--color-bg-surface);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-brand), var(--color-accent));
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* ===== Toast overrides ===== */
+.toast-custom {
+  background: var(--color-bg-surface) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border) !important;
+}

@@ -1,0 +1,395 @@
+[
+  {
+    "_id": "mo30f1ud2iblr",
+    "userId": "mo2zx78o2wfwr",
+    "scenario": "Eat junk food daily",
+    "impact": {
+      "oneYear": {
+        "summary": "Significant decline in overall health due to increased junk food consumption, exacerbating existing hypertension and pain",
+        "worseningConditions": [
+          "Hypertension",
+          "Pain"
+        ],
+        "newRisks": [
+          "Obesity",
+          "Type 2 Diabetes"
+        ],
+        "improvements": [],
+        "healthScoreChange": -10
+      },
+      "fiveYear": {
+        "summary": "Increased risk of cardiovascular disease and other diet-related health issues, with potential development of new conditions",
+        "worseningConditions": [
+          "Hypertension",
+          "Pain",
+          "Cardiovascular Disease"
+        ],
+        "newRisks": [
+          "Obesity",
+          "Type 2 Diabetes",
+          "Certain types of cancer"
+        ],
+        "improvements": [],
+        "healthScoreChange": -20
+      },
+      "tenYear": {
+        "summary": "Severe decline in overall health, with high risk of developing life-threatening conditions, such as heart disease and stroke",
+        "worseningConditions": [
+          "Hypertension",
+          "Pain",
+          "Cardiovascular Disease",
+          "Obesity",
+          "Type 2 Diabetes"
+        ],
+        "newRisks": [
+          "Kidney Disease",
+          "Blindness",
+          "Amputations"
+        ],
+        "improvements": [],
+        "healthScoreChange": -35
+      }
+    },
+    "createdAt": "2026-04-17T14:34:46.933Z"
+  },
+  {
+    "_id": "mo30f8nf30nvt",
+    "userId": "mo2zx78o2wfwr",
+    "scenario": "Start meditating daily",
+    "impact": {
+      "oneYear": {
+        "summary": "Reduced stress and anxiety, improved sleep quality, and lowered blood pressure",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "Hypertension management",
+          "Pain reduction",
+          "Improved sleep quality"
+        ],
+        "healthScoreChange": 10
+      },
+      "fiveYear": {
+        "summary": "Sustained benefits from meditation, including reduced cardiovascular risk and improved mental health",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "Cardiovascular Disease risk reduction",
+          "Improved mental health",
+          "Enhanced cognitive function"
+        ],
+        "healthScoreChange": 25
+      },
+      "tenYear": {
+        "summary": "Long-term meditation practice leads to significant reductions in chronic disease risk and improved overall well-being",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "Substantial reduction in Cardiovascular Disease risk",
+          "Improved sleep quality",
+          "Enhanced emotional regulation"
+        ],
+        "healthScoreChange": 40
+      }
+    },
+    "createdAt": "2026-04-17T14:34:55.755Z"
+  },
+  {
+    "_id": "mo30g1qn4vp2s",
+    "userId": "mo2zx78o2wfwr",
+    "scenario": "Start meditating daily",
+    "impact": {
+      "oneYear": {
+        "summary": "Reduced stress and anxiety, improved sleep quality, and enhanced overall well-being",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "Reduced blood pressure",
+          "Improved pain management",
+          "Enhanced mood"
+        ],
+        "healthScoreChange": 10
+      },
+      "fiveYear": {
+        "summary": "Sustained benefits from regular meditation, with notable reductions in cardiovascular disease risk and improved sleep quality",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "Reduced risk of Cardiovascular Disease",
+          "Improved sleep quality",
+          "Enhanced emotional regulation"
+        ],
+        "healthScoreChange": 20
+      },
+      "tenYear": {
+        "summary": "Long-term meditation practice has led to significant reductions in chronic disease risk, improved mental health, and enhanced overall quality of life",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "Reduced risk of Chronic Obstructive Pulmonary Disease (COPD)",
+          "Improved emotional well-being",
+          "Enhanced cognitive function"
+        ],
+        "healthScoreChange": 30
+      }
+    },
+    "createdAt": "2026-04-17T14:35:33.455Z"
+  },
+  {
+    "_id": "mo30g5od5fkbv",
+    "userId": "mo2zx78o2wfwr",
+    "scenario": "Eat junk food daily",
+    "impact": {
+      "oneYear": {
+        "summary": "Significant decline in overall health due to increased junk food consumption",
+        "worseningConditions": [
+          "Hypertension",
+          "pain"
+        ],
+        "newRisks": [
+          "Obesity",
+          "Type 2 Diabetes"
+        ],
+        "improvements": [],
+        "healthScoreChange": -15
+      },
+      "fiveYear": {
+        "summary": "High risk of developing cardiovascular disease and other diet-related conditions",
+        "worseningConditions": [
+          "Hypertension",
+          "pain",
+          "Obesity"
+        ],
+        "newRisks": [
+          "Cardiovascular Disease",
+          "Certain types of cancer"
+        ],
+        "improvements": [],
+        "healthScoreChange": -30
+      },
+      "tenYear": {
+        "summary": "Severe decline in health with high risk of life-threatening conditions",
+        "worseningConditions": [
+          "Hypertension",
+          "pain",
+          "Obesity",
+          "Cardiovascular Disease"
+        ],
+        "newRisks": [
+          "Kidney Disease",
+          "Liver Disease"
+        ],
+        "improvements": [],
+        "healthScoreChange": -50
+      }
+    },
+    "createdAt": "2026-04-17T14:35:38.557Z"
+  },
+  {
+    "_id": "mo30g8zs6pvyg",
+    "userId": "mo2zx78o2wfwr",
+    "scenario": "Start smoking",
+    "impact": {
+      "oneYear": {
+        "summary": "Significant decline in respiratory health and increased risk of cardiovascular disease",
+        "worseningConditions": [
+          "Hypertension",
+          "Sleep Disorder"
+        ],
+        "newRisks": [
+          "Lung Cancer",
+          "Chronic Bronchitis"
+        ],
+        "improvements": [],
+        "healthScoreChange": -12
+      },
+      "fiveYear": {
+        "summary": "Accelerated decline in lung function, increased risk of cardiovascular events, and potential development of COPD",
+        "worseningConditions": [
+          "Hypertension",
+          "Sleep Disorder",
+          "Chronic Obstructive Pulmonary Disease (COPD)"
+        ],
+        "newRisks": [
+          "Emphysema",
+          "Heart Failure"
+        ],
+        "improvements": [],
+        "healthScoreChange": -25
+      },
+      "tenYear": {
+        "summary": "Severe decline in overall health, high risk of life-threatening cardiovascular events, and potential development of smoking-related cancers",
+        "worseningConditions": [
+          "Hypertension",
+          "Sleep Disorder",
+          "Chronic Obstructive Pulmonary Disease (COPD)",
+          "Cardiovascular Disease"
+        ],
+        "newRisks": [
+          "Throat Cancer",
+          "Pancreatic Cancer"
+        ],
+        "improvements": [],
+        "healthScoreChange": -40
+      }
+    },
+    "createdAt": "2026-04-17T14:35:42.856Z"
+  },
+  {
+    "_id": "mo30h0vx7uoxo",
+    "userId": "mo2zx78o2wfwr",
+    "scenario": "swimming daily",
+    "impact": {
+      "oneYear": {
+        "summary": "Significant improvements in cardiovascular health and pain management, with some risks due to overexertion",
+        "worseningConditions": [
+          "Sleep Disorder"
+        ],
+        "newRisks": [
+          "Overuse injury",
+          "Swimmer's ear"
+        ],
+        "improvements": [
+          "Hypertension management",
+          "Pain reduction",
+          "Cardiovascular health"
+        ],
+        "healthScoreChange": 12
+      },
+      "fiveYear": {
+        "summary": "Substantial long-term benefits in cardiovascular health, with potential for improved sleep and reduced disease risk",
+        "worseningConditions": [],
+        "newRisks": [
+          "Osteoarthritis"
+        ],
+        "improvements": [
+          "Cardiovascular Disease risk reduction",
+          "Sleep Disorder management",
+          "Chronic pain reduction"
+        ],
+        "healthScoreChange": 25
+      },
+      "tenYear": {
+        "summary": "Excellent long-term outcomes, with potential for increased lifespan and improved overall health, but requires consistent lifestyle habits",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "Increased lifespan",
+          "Improved overall health",
+          "Reduced risk of Chronic Obstructive Pulmonary Disease (COPD)"
+        ],
+        "healthScoreChange": 40
+      }
+    },
+    "createdAt": "2026-04-17T14:36:19.005Z"
+  },
+  {
+    "_id": "mo30hwhy8u6ek",
+    "userId": "mo2zx78o2wfwr",
+    "scenario": "swimming daily in petrol",
+    "impact": {
+      "oneYear": {
+        "summary": "Severe deterioration in health due to toxic exposure",
+        "worseningConditions": [
+          "Hypertension",
+          "pain"
+        ],
+        "newRisks": [
+          "Respiratory failure",
+          "Skin cancer",
+          "Neurological damage"
+        ],
+        "improvements": [],
+        "healthScoreChange": -30
+      },
+      "fiveYear": {
+        "summary": "Critical health crisis with potential organ damage",
+        "worseningConditions": [
+          "Hypertension",
+          "pain",
+          "Respiratory failure",
+          "Skin cancer",
+          "Neurological damage"
+        ],
+        "newRisks": [
+          "Kidney failure",
+          "Liver disease",
+          "Immune system suppression"
+        ],
+        "improvements": [],
+        "healthScoreChange": -60
+      },
+      "tenYear": {
+        "summary": "Life-threatening conditions with severe quality of life impact",
+        "worseningConditions": [
+          "Hypertension",
+          "pain",
+          "Respiratory failure",
+          "Skin cancer",
+          "Neurological damage",
+          "Kidney failure",
+          "Liver disease",
+          "Immune system suppression"
+        ],
+        "newRisks": [
+          "Organ transplant necessity",
+          "Terminal illness"
+        ],
+        "improvements": [],
+        "healthScoreChange": -90
+      }
+    },
+    "createdAt": "2026-04-17T14:36:59.974Z"
+  },
+  {
+    "_id": "mo30kbk8amiqh",
+    "userId": "mo2zx78o2wfwr",
+    "scenario": "masturbation daily 2 times",
+    "impact": {
+      "oneYear": {
+        "summary": "Mild improvements in stress reduction and sleep quality, but potential negative impacts on cardiovascular health and existing hypertension due to increased heart rate and blood pressure during masturbation.",
+        "worseningConditions": [
+          "Hypertension"
+        ],
+        "newRisks": [
+          "Erectile Dysfunction",
+          "Prostate Issues"
+        ],
+        "improvements": [
+          "Stress Reduction",
+          "Sleep Quality"
+        ],
+        "healthScoreChange": -2
+      },
+      "fiveYear": {
+        "summary": "Increased risk of cardiovascular disease and worsening hypertension due to frequent masturbation, potentially leading to more severe health issues if left unmanaged.",
+        "worseningConditions": [
+          "Hypertension",
+          "Cardiovascular Disease"
+        ],
+        "newRisks": [
+          "Prostate Cancer",
+          "Mental Health Issues"
+        ],
+        "improvements": [
+          "Stress Reduction"
+        ],
+        "healthScoreChange": -10
+      },
+      "tenYear": {
+        "summary": "Significant negative impacts on cardiovascular health, potential development of prostate issues, and increased risk of mental health problems if masturbation frequency is not balanced with a healthy lifestyle.",
+        "worseningConditions": [
+          "Hypertension",
+          "Cardiovascular Disease",
+          "Prostate Issues"
+        ],
+        "newRisks": [
+          "Depression",
+          "Anxiety"
+        ],
+        "improvements": [],
+        "healthScoreChange": -20
+      }
+    },
+    "createdAt": "2026-04-17T14:38:52.808Z"
+  }
+]
