@@ -27,13 +27,24 @@ if (!fs.existsSync(uploadsDir)) {
 }
 
 // Middleware
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "http://localhost:5175",
+  "http://localhost:3000",
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "http://localhost:5175",
-    "http://localhost:3000"
-  ],
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV === "development") {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 }));
 app.use(express.json({ limit: "10mb" }));
@@ -59,22 +70,8 @@ app.get("/", (req, res) => {
   res.json({
     name: "NoRog API",
     version: "4.0.0",
-    storage: "local-filesystem",
-    dataRoot: DATA_ROOT,
-    status: "running",
-    endpoints: [
-      "POST /api/auth/register",
-      "POST /api/auth/login",
-      "GET  /api/profile",
-      "POST /api/profile",
-      "POST /api/symptoms/log",
-      "GET  /api/symptoms/history",
-      "POST /api/ai/predict",
-      "POST /api/ai/whatif",
-      "POST /api/ai/seasonal",
-      "POST /api/medicines/check",
-      "GET  /api/report/generate"
-    ]
+    storage: "Firebase/Firestore",
+    status: "running"
   });
 });
 
@@ -85,12 +82,7 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`\n🩺 NoRog API Server v4.0 (Local Storage) running on http://localhost:${PORT}`);
-  console.log(`📁 Data folder: ${DATA_ROOT}`);
-  console.log(`   Auth:      POST http://localhost:${PORT}/api/auth/register | login`);
-  console.log(`   Profile:   GET/POST http://localhost:${PORT}/api/profile`);
-  console.log(`   Symptoms:  POST http://localhost:${PORT}/api/symptoms/log`);
-  console.log(`   AI:        POST http://localhost:${PORT}/api/ai/predict | whatif | seasonal`);
-  console.log(`   Medicines: POST http://localhost:${PORT}/api/medicines/check`);
-  console.log(`   Report:    GET  http://localhost:${PORT}/api/report/generate\n`);
+  console.log(`\n🩺 NoRog API Server running on port ${PORT}`);
+  console.log(`🔗 Environment: ${process.env.NODE_ENV || "production"}`);
+  console.log(`📡 Storage: Firebase Firestore\n`);
 });

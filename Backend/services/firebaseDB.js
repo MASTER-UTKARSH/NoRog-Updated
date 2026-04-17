@@ -9,16 +9,27 @@ const serviceAccountPath = path.join(__dirname, '..', 'firebaseServiceAccount.js
 
 let db = null;
 try {
-  if (fs.existsSync(serviceAccountPath)) {
-    const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, 'utf8'));
+  let serviceAccount = null;
+
+  // Try reading from environment variable first (for Render/Production)
+  if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+    console.log("Initializing Firebase via environment variable...");
+  } 
+  // Fallback to local file
+  else if (fs.existsSync(serviceAccountPath)) {
+    serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, 'utf8'));
+    console.log("Initializing Firebase via service account JSON file...");
+  }
+
+  if (serviceAccount) {
     initializeApp({
       credential: cert(serviceAccount)
     });
     db = getFirestore();
     console.log("Firebase initialized successfully");
   } else {
-    console.warn("WARNING: firebaseServiceAccount.json not found in Backend folder!");
-    console.warn("Please download your Firebase Service Account file and place it there.");
+    console.warn("WARNING: Firebase credentials NOT found! (Checked FIREBASE_SERVICE_ACCOUNT env and firebaseServiceAccount.json)");
   }
 } catch (error) {
   console.error("Error initializing Firebase:", error);
