@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
+import { Bot, Sparkles, Pill, Dna, CloudRain, FileText, Activity, ShieldAlert } from 'lucide-react';
 
 const features = [
-  { icon: "🤖", title: "AI-Powered Risk Prediction", desc: "Advanced AI analyzes your symptoms, medical history, and genetics to predict disease risks." },
-  { icon: "🔮", title: "What-If Scenario Analyzer", desc: "See how lifestyle changes would impact your health in 1, 5, and 10 years." },
-  { icon: "💊", title: "Drug Interaction Checker", desc: "Check medicine combinations for dangerous interactions before you take them." },
-  { icon: "🧬", title: "Genetic Risk Profiling", desc: "Factor in family history to identify hereditary disease predispositions." },
-  { icon: "🌧️", title: "Seasonal Disease Alerts", desc: "Location-based alerts for diseases common in your area this season." },
-  { icon: "📄", title: "Doctor-Ready Reports", desc: "Generate comprehensive PDF health reports to share with your physician." },
+  { icon: <Bot size={32} className="text-blue-500" />, title: "AI-Powered Risk Prediction", desc: "Advanced AI analyzes your symptoms, medical history, and genetics to predict disease risks." },
+  { icon: <Sparkles size={32} className="text-purple-500" />, title: "What-If Scenario Analyzer", desc: "See how lifestyle changes would impact your health in 1, 5, and 10 years." },
+  { icon: <Pill size={32} className="text-rose-500" />, title: "Drug Interaction Checker", desc: "Check medicine combinations for dangerous interactions before you take them." },
+  { icon: <Dna size={32} className="text-indigo-500" />, title: "Genetic Risk Profiling", desc: "Factor in family history to identify hereditary disease predispositions." },
+  { icon: <CloudRain size={32} className="text-amber-500" />, title: "Seasonal Disease Alerts", desc: "Location-based alerts for diseases common in your area this season." },
 ];
 
 export default function Landing() {
@@ -21,7 +21,7 @@ export default function Landing() {
         />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(37,99,235,0.1)] border border-[rgba(37,99,235,0.3)] mb-6">
-            <span className="text-sm">🩺</span>
+            <span className="flex items-center justify-center"><Activity size={14} className="text-[var(--color-brand)]" /></span>
             <span className="text-xs font-medium text-[var(--color-brand-light)]">Proactive Disease Monitoring System</span>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
@@ -97,7 +97,7 @@ export default function Landing() {
 
       {/* Footer */}
       <footer className="text-center py-8 px-4 border-t border-[var(--color-border)] text-xs text-[var(--color-text-muted)]">
-        <p>⚕️ NoRog is an AI-powered health intelligence tool, not a medical diagnosis system.</p>
+        <p className="flex items-center justify-center gap-1"><ShieldAlert size={14} /> NoRog is an AI-powered health intelligence tool, not a medical diagnosis system.</p>
         <p className="mt-1">Always consult a qualified healthcare professional for medical advice.</p>
       </footer>
     </div>

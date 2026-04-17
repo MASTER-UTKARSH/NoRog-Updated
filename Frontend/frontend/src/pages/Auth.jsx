@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Activity } from 'lucide-react';
 import { useAuth } from "../context/AuthContext";
 import { registerUser, loginUser } from "../services/api";
 import toast from "react-hot-toast";
@@ -45,9 +46,9 @@ export default function Auth() {
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white"
                  style={{ background: "linear-gradient(135deg, var(--color-brand), var(--color-accent))" }}>
-              🩺
+              <Activity size={24} />
             </div>
             <span className="text-2xl font-bold gradient-text">NoRog</span>
           </div>

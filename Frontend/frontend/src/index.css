@@ -3,32 +3,32 @@
 /* ===== NoRog Design System v3 — Medical + Dark Theme ===== */
 
 @theme {
-  --color-bg-primary: #0a0a0f;
-  --color-bg-surface: #12121a;
-  --color-bg-surface-hover: #1a1a2e;
-  --color-bg-surface-alt: #16162a;
-  --color-border: #2a2a40;
-  --color-border-light: #3a3a55;
+  --color-bg-primary: #F8FAFC;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-surface-hover: #F1F5F9;
+  --color-bg-surface-alt: #F1F5F9;
+  --color-border: #E2E8F0;
+  --color-border-light: #CBD5E1;
 
-  --color-brand: #2563EB;
-  --color-brand-light: #60a5fa;
-  --color-brand-glow: rgba(37, 99, 235, 0.3);
+  --color-brand: #3b82f6;
+  --color-brand-light: #EFF6FF;
+  --color-brand-glow: rgba(59, 130, 246, 0.15);
 
-  --color-accent: #10B981;
-  --color-accent-glow: rgba(16, 185, 129, 0.3);
+  --color-accent: #6366f1;
+  --color-accent-glow: rgba(99, 102, 241, 0.15);
 
   --color-success: #10B981;
-  --color-success-glow: rgba(16, 185, 129, 0.2);
+  --color-success-glow: rgba(16, 185, 129, 0.15);
   --color-warning: #F59E0B;
-  --color-warning-glow: rgba(245, 158, 11, 0.2);
+  --color-warning-glow: rgba(245, 158, 11, 0.15);
   --color-danger: #EF4444;
-  --color-danger-glow: rgba(239, 68, 68, 0.2);
+  --color-danger-glow: rgba(239, 68, 68, 0.15);
 
-  --color-text-primary: #f0f0f5;
-  --color-text-secondary: #94a3b8;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
   --color-text-muted: #64748b;
 
-  --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
 
 /* ===== Base Styles ===== */
@@ -49,7 +49,7 @@ body {
 
 /* ===== Glass Card ===== */
 .glass-card {
-  background: rgba(18, 18, 26, 0.8);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--color-border);
@@ -259,7 +259,7 @@ body {
   top: 0;
   bottom: 0;
   width: 240px;
-  background: rgba(18, 18, 26, 0.95);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   border-right: 1px solid var(--color-border);
   z-index: 40;
@@ -296,7 +296,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(18, 18, 26, 0.95);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   border-top: 1px solid var(--color-border);
   display: flex;

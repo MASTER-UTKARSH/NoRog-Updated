@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
-const MODEL = "llama-3.3-70b-versatile";
+const MODEL = process.env.GROQ_MODEL || "llama-3.3-70b-versatile";
 
 /**
  * Call Groq API with system prompt and user message.
@@ -9,6 +9,10 @@ const MODEL = "llama-3.3-70b-versatile";
  */
 export const callGroq = async (systemPrompt, userMessage) => {
   try {
+    const key = process.env.GROQ_API_KEY?.trim();
+    if (!key) console.error("GROQ_API_KEY is MISSING in process.env");
+    else console.log(`Attempting Groq call with key starting with: ${key.substring(0, 10)}... (Length: ${key.length})`);
+
     const response = await axios.post(
       GROQ_URL,
       {
@@ -17,15 +21,15 @@ export const callGroq = async (systemPrompt, userMessage) => {
           { role: "system", content: systemPrompt },
           { role: "user", content: userMessage }
         ],
-        temperature: 0.4,
-        max_tokens: 2000
+        temperature: 0.2, // lower temperature for more consistent JSON
+        max_tokens: 3000
       },
       {
         headers: {
-          "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
+          "Authorization": `Bearer ${process.env.GROQ_API_KEY?.trim()}`,
           "Content-Type": "application/json"
         },
-        timeout: 30000
+        timeout: 45000 // slightly longer timeout
       }
     );
 
@@ -34,32 +38,37 @@ export const callGroq = async (systemPrompt, userMessage) => {
       throw new Error("Empty response from Groq");
     }
 
-    // Clean any markdown formatting the model might add
-    let cleaned = content.trim();
-    if (cleaned.startsWith("```json")) {
-      cleaned = cleaned.slice(7);
+    // ROBUST JSON EXTRACTION: Find the first { and last }
+    const startIdx = content.indexOf('{');
+    const endIdx = content.lastIndexOf('}');
+    
+    if (startIdx === -1 || endIdx === -1) {
+      console.warn("AI did not return a valid JSON block, content:", content);
+      throw new Error("AI returned a non-JSON response");
     }
-    if (cleaned.startsWith("```")) {
-      cleaned = cleaned.slice(3);
-    }
-    if (cleaned.endsWith("```")) {
-      cleaned = cleaned.slice(0, -3);
-    }
-    cleaned = cleaned.trim();
 
-    const parsed = JSON.parse(cleaned);
-    return parsed;
+    const jsonStr = content.substring(startIdx, endIdx + 1);
+    
+    try {
+      return JSON.parse(jsonStr);
+    } catch (parseError) {
+      console.error("JSON Parse Error. Data:", jsonStr);
+      throw new Error("Failed to parse AI response");
+    }
   } catch (error) {
+    if (error.response?.status === 401) {
+      console.error("Groq Authentication Error. Check your API key.");
+      throw new Error("Invalid Groq API Key.");
+    }
     if (error.response?.status === 429) {
-      console.error("Groq rate limit hit. Try again in a moment.");
+      console.error("Groq rate limit hit.");
       throw new Error("AI service is busy. Please try again in a moment.");
     }
-    if (error instanceof SyntaxError) {
-      console.error("Failed to parse Groq response as JSON:", error.message);
-      throw new Error("AI returned an invalid response. Please try again.");
-    }
     console.error("Groq API error:", error.message);
-    throw new Error("AI service unavailable. Please try again later.");
+    if (error.response?.data) {
+      console.error("Groq API Error Details:", JSON.stringify(error.response.data, null, 2));
+    }
+    throw new Error(`AI service Error: ${error.message}`);
   }
 };
 
@@ -68,6 +77,9 @@ export const callGroq = async (systemPrompt, userMessage) => {
  */
 export const callGroqRaw = async (systemPrompt, userMessage) => {
   try {
+    const key = process.env.GROQ_API_KEY?.trim();
+    if (!key) console.error("GROQ_API_KEY is MISSING in process.env");
+
     const response = await axios.post(
       GROQ_URL,
       {
@@ -81,16 +93,19 @@ export const callGroqRaw = async (systemPrompt, userMessage) => {
       },
       {
         headers: {
-          "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
+          "Authorization": `Bearer ${process.env.GROQ_API_KEY?.trim()}`,
           "Content-Type": "application/json"
         },
-        timeout: 30000
+        timeout: 45000
       }
     );
 
     return response.data?.choices?.[0]?.message?.content?.trim() || "";
   } catch (error) {
     console.error("Groq raw call error:", error.message);
-    throw new Error("AI service unavailable.");
+    if (error.response?.data) {
+      console.error("Groq Raw API Error Details:", JSON.stringify(error.response.data, null, 2));
+    }
+    throw new Error(`AI service unavailable: ${error.message}`);
   }
 };

@@ -1,0 +1,22 @@
+{
+  "currentSymptoms": [
+    "Headache",
+    "Cough"
+  ],
+  "medicalHistory": [
+    "Hypertension",
+    "i get cough and cold easily and frequently"
+  ],
+  "familyHistory": [],
+  "lifestyle": {
+    "smoker": false,
+    "alcohol": "none",
+    "exerciseFrequency": "never",
+    "sleepHours": 12,
+    "diet": "vegetarian"
+  },
+  "medicines": [],
+  "onboardingComplete": true,
+  "updatedAt": "2026-04-17T16:22:07.396Z",
+  "userId": "mo346v9qcv6tz"
+}

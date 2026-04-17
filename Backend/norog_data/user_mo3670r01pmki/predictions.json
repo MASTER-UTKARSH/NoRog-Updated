@@ -1,0 +1,50 @@
+[
+  {
+    "_id": "mo368yl12nczk",
+    "userId": "mo3670r01pmki",
+    "risks": [
+      {
+        "disease": "Osteoarthritis",
+        "confidence": 40,
+        "contributingSymptoms": [
+          "Joint pain",
+          "Back pain"
+        ],
+        "urgency": "Monitor",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Fibromyalgia",
+        "confidence": 30,
+        "contributingSymptoms": [
+          "Joint pain",
+          "Back pain"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Herniated Disk",
+        "confidence": 50,
+        "contributingSymptoms": [
+          "Back pain"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      }
+    ],
+    "healthScore": 70,
+    "trend": "stable",
+    "correlations": [
+      {
+        "symptoms": [
+          "Joint pain",
+          "Back pain"
+        ],
+        "possibleCondition": "Musculoskeletal disorder"
+      }
+    ],
+    "summary": "The patient is at risk for musculoskeletal disorders due to reported joint and back pain. A medical professional should be consulted to determine the cause of these symptoms. Regular exercise and a balanced diet may help alleviate symptoms, but a doctor's evaluation is necessary for proper diagnosis and treatment.",
+    "createdAt": "2026-04-17T17:18:00.469Z"
+  }
+]

@@ -8,7 +8,7 @@ import {
   getProfile,
   saveProfile,
   generateId
-} from "../services/localDB.js";
+} from "../services/firebaseDB.js";
 
 const router = Router();
 
@@ -21,7 +21,7 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ success: false, error: "Name, email, and password are required" });
     }
 
-    const existing = findUserByEmail(email);
+    const existing = await findUserByEmail(email);
     if (existing) {
       return res.status(400).json({ success: false, error: "Email already registered" });
     }
@@ -29,10 +29,10 @@ router.post("/register", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const id = generateId();
 
-    const user = createUser({ id, name, email, password: hashedPassword });
+    const user = await createUser({ id, name, email, password: hashedPassword });
 
     // Create empty health profile
-    saveProfile(id, { onboardingComplete: false });
+    await saveProfile(id, { onboardingComplete: false });
 
     const token = jwt.sign(
       { id: user.id, email: user.email },
@@ -62,7 +62,7 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ success: false, error: "Email and password are required" });
     }
 
-    const user = findUserByEmail(email);
+    const user = await findUserByEmail(email);
     if (!user) {
       return res.status(401).json({ success: false, error: "Invalid email or password" });
     }
@@ -72,7 +72,7 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ success: false, error: "Invalid email or password" });
     }
 
-    const profile = getProfile(user.id);
+    const profile = await getProfile(user.id);
 
     const token = jwt.sign(
       { id: user.id, email: user.email },

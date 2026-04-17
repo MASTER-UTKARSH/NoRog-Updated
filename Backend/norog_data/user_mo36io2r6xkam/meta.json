@@ -1,0 +1,13 @@
+{
+  "id": "mo36io2r6xkam",
+  "name": "kaalu kumar singh",
+  "email": "kaalu@singh",
+  "password": "$2a$10$F8wX1c1eGH7e3O9glIvyI.B1uwJDQFYKad22af6zu6ofhyuurJPzy",
+  "createdAt": "2026-04-17T17:25:33.411Z",
+  "age": -90,
+  "gender": "other",
+  "location": {
+    "city": "",
+    "country": ""
+  }
+}

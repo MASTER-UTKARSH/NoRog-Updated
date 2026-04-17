@@ -11,6 +11,9 @@
  *       predictions.json            ← array of AI predictions
  *       whatif_logs.json            ← array of what-if analyses
  *       medicine_logs.json          ← array of medicine interaction checks
+ *       chat_history.json           ← array of {role, content, options, timestamp}
+ *       insights.json                ← {mood, habits, patterns, stress_triggers, goals}
+ *       family_members.json         ← array of {id, name, relation, age, health, habits, emotionalState, routines}
  */
 
 import fs from "fs";
@@ -219,6 +222,90 @@ export function getLatestMedicineLog(userId) {
   const logs = readJSON(file, []);
   if (!logs.length) return null;
   return [...logs].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CHAT HISTORY (chat_history.json)
+// ─────────────────────────────────────────────────────────────────────────────
+
+export function getChatHistory(userId, limit = 50) {
+  const file = userFile(userId, "chat_history.json");
+  const history = readJSON(file, []);
+  return history.slice(-limit);
+}
+
+export function addToChatHistory(userId, message) {
+  const file = userFile(userId, "chat_history.json");
+  const history = readJSON(file, []);
+  const entry = {
+    ...message,
+    timestamp: new Date().toISOString()
+  };
+  history.push(entry);
+  writeJSON(file, history);
+  return entry;
+}
+
+export function clearChatHistory(userId) {
+  const file = userFile(userId, "chat_history.json");
+  writeJSON(file, []);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// INSIGHTS & PATTERNS (insights.json)
+// ─────────────────────────────────────────────────────────────────────────────
+
+export function getInsights(userId) {
+  return readJSON(userFile(userId, "insights.json"), {
+    mood: [],
+    habits: [],
+    patterns: [],
+    stress_triggers: [],
+    goals: [],
+    behavioral_changes: []
+  });
+}
+
+export function updateInsights(userId, updates) {
+  const existing = getInsights(userId);
+  const updated = { ...existing };
+  
+  Object.keys(updates).forEach(key => {
+    if (Array.isArray(updated[key])) {
+      // If it's an array, we append unique items or update existing ones
+      // For simplicity here, we replace or merge depending on context
+      // But let's assume valid JSON structure from LLM
+      updated[key] = updates[key]; 
+    } else {
+      updated[key] = updates[key];
+    }
+  });
+
+  writeJSON(userFile(userId, "insights.json"), updated);
+  return updated;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// FAMILY MEMBERS (family_members.json)
+// ─────────────────────────────────────────────────────────────────────────────
+
+export function getFamilyMembers(userId) {
+  return readJSON(userFile(userId, "family_members.json"), []);
+}
+
+export function addOrUpdateFamilyMember(userId, member) {
+  const file = userFile(userId, "family_members.json");
+  const members = readJSON(file, []);
+  const existingIdx = members.findIndex(m => m.id === member.id || (m.name === member.name && m.relation === member.relation));
+  
+  if (existingIdx >= 0) {
+    members[existingIdx] = { ...members[existingIdx], ...member };
+  } else {
+    members.push({ id: member.id || generateId(), ...member });
+  }
+  
+  writeJSON(file, members);
+  return member;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

@@ -9,7 +9,7 @@ import {
   getSymptomLogs,
   updateSymptomLog,
   getProfile
-} from "../services/localDB.js";
+} from "../services/firebaseDB.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const uploadDir = path.join(__dirname, "..", "uploads");
@@ -46,7 +46,7 @@ router.post("/log", upload.single("photo"), async (req, res) => {
     }
 
     // Create the log entry (save to disk)
-    let log = addSymptomLog(req.user.id, {
+    let log = await addSymptomLog(req.user.id, {
       symptoms: parsedSymptoms,
       severity: Number(severity) || 5,
       notes: notes || "",
@@ -60,8 +60,8 @@ router.post("/log", upload.single("photo"), async (req, res) => {
     // Auto early-warning check
     let warning = null;
     try {
-      const recentLogs = getSymptomLogs(req.user.id, 10);
-      const profile = getProfile(req.user.id);
+      const recentLogs = await getSymptomLogs(req.user.id, 10);
+      const profile = await getProfile(req.user.id);
 
       const warningResult = await callGroq(
         `You are an early warning medical AI. Analyze recent symptom patterns for urgent health concerns. You must respond with ONLY valid JSON. No markdown, no backticks, no text before or after. Just the raw JSON object.`,
@@ -77,7 +77,7 @@ Return: { "warningTriggered": boolean, "reason": "string or null", "urgency": "n
       );
 
       if (warningResult.warningTriggered) {
-        log = updateSymptomLog(req.user.id, log._id, {
+        log = await updateSymptomLog(req.user.id, log._id, {
           warningFlagged: true,
           warningReason: warningResult.reason || "",
           warningUrgency: warningResult.urgency || "monitor"
@@ -98,7 +98,7 @@ Return: { "warningTriggered": boolean, "reason": "string or null", "urgency": "n
 // GET /api/symptoms/history
 router.get("/history", async (req, res) => {
   try {
-    const logs = getSymptomLogs(req.user.id, 50);
+    const logs = await getSymptomLogs(req.user.id, 50);
     res.json({ success: true, data: logs });
   } catch (error) {
     console.error("Get history error:", error);

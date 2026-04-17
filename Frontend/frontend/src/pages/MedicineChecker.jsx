@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getProfile, checkMedicineInteractions } from "../services/api";
+import { Pill, Search, CheckCircle, AlertTriangle, Lightbulb, X } from 'lucide-react';
 import LoadingOverlay from "../components/LoadingOverlay";
 import toast from "react-hot-toast";
 
@@ -70,10 +71,13 @@ export default function MedicineChecker() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-fade-in">
-      <LoadingOverlay visible={loading} message="💊 Scanning for drug interactions..." />
+      <LoadingOverlay visible={loading} message="Scanning for drug interactions..." />
 
+      <div className="flex items-center gap-3">
+        <Pill size={28} className="text-[var(--color-brand)]" />
+        <h1 className="text-2xl font-bold">Medicine Interaction Checker</h1>
+      </div>
       <div>
-        <h1 className="text-2xl font-bold">💊 Medicine Interaction Checker</h1>
         <p className="text-sm text-[var(--color-text-muted)] mt-1">Check for dangerous drug-drug and drug-disease interactions</p>
       </div>
 
@@ -83,7 +87,7 @@ export default function MedicineChecker() {
         {profileMeds.length > 0 ? (
           <div className="flex flex-wrap gap-2">
             {profileMeds.map((m, i) => (
-              <span key={i} className="symptom-chip selected">💊 {m}</span>
+              <span key={i} className="symptom-chip selected flex items-center gap-1"><Pill size={12} /> {m}</span>
             ))}
           </div>
         ) : (
@@ -109,15 +113,15 @@ export default function MedicineChecker() {
             {tempMeds.map((m, i) => (
               <span key={i} className="symptom-chip selected">
                 {m}
-                <button className="ml-2" onClick={() => removeTempMed(m)}>✕</button>
+                <button className="ml-2 flex items-center justify-center p-0.5 rounded-full hover:bg-black/10" onClick={() => removeTempMed(m)}><X size={12} /></button>
               </span>
             ))}
           </div>
         )}
       </div>
 
-      <button onClick={checkInteractions} className="btn-primary w-full py-3.5" disabled={loading}>
-        🔍 Check Interactions
+      <button onClick={checkInteractions} className="btn-primary w-full py-3.5 flex justify-center items-center gap-2" disabled={loading}>
+        <Search size={18} /> Check Interactions
       </button>
 
       {/* Results */}
@@ -126,13 +130,13 @@ export default function MedicineChecker() {
           {/* Safe / Unsafe banner */}
           {result.safeToTake ? (
             <div className="rounded-xl p-4 bg-[rgba(16,185,129,0.1)] border border-[var(--color-success)] text-center">
-              <span className="text-2xl">✅</span>
+              <div className="flex justify-center mb-1"><CheckCircle size={32} className="text-[var(--color-success)]" /></div>
               <h3 className="font-semibold text-[var(--color-success)] mt-1">All Clear</h3>
               <p className="text-sm text-[var(--color-text-secondary)]">No dangerous interactions detected</p>
             </div>
           ) : (
             <div className="rounded-xl p-4 bg-[rgba(239,68,68,0.1)] border border-[var(--color-danger)] text-center">
-              <span className="text-2xl">⚠️</span>
+              <div className="flex justify-center mb-1"><AlertTriangle size={32} className="text-[var(--color-danger)]" /></div>
               <h3 className="font-semibold text-[var(--color-danger)] mt-1">Interactions Found</h3>
               <p className="text-sm text-[var(--color-text-secondary)]">Consult your doctor before taking these together</p>
             </div>
@@ -179,7 +183,7 @@ export default function MedicineChecker() {
           {/* Recommendation */}
           {result.recommendation && (
             <div className="glass-card p-5">
-              <h3 className="text-sm font-medium mb-2">💡 Recommendation</h3>
+              <h3 className="text-sm font-medium mb-2 flex items-center gap-1"><Lightbulb size={16} /> Recommendation</h3>
               <p className="text-sm text-[var(--color-text-secondary)]">{result.recommendation}</p>
             </div>
           )}

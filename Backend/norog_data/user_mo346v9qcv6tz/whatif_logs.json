@@ -1,0 +1,131 @@
+[
+  {
+    "_id": "mo34bt8wfbsu1",
+    "userId": "mo346v9qcv6tz",
+    "scenario": "Increased masturbation",
+    "impact": {
+      "oneYear": {
+        "summary": "Mild impact on physical and mental health",
+        "worseningConditions": [
+          "Hypertension"
+        ],
+        "newRisks": [
+          "Sexually Transmitted Infections (low risk)",
+          "Erectile Dysfunction (low risk)"
+        ],
+        "improvements": [
+          "Stress reduction",
+          "Improved sleep quality"
+        ],
+        "healthScoreChange": -2
+      },
+      "fiveYear": {
+        "summary": "Potential negative impact on mental and physical health",
+        "worseningConditions": [
+          "Hypertension",
+          "Erectile Dysfunction"
+        ],
+        "newRisks": [
+          "Depression",
+          "Anxiety",
+          "Premature Ejaculation"
+        ],
+        "improvements": [
+          "Stress reduction"
+        ],
+        "healthScoreChange": -5
+      },
+      "tenYear": {
+        "summary": "Significant negative impact on mental and physical health",
+        "worseningConditions": [
+          "Hypertensive Heart Disease",
+          "Erectile Dysfunction",
+          "Depression"
+        ],
+        "newRisks": [
+          "Cardiovascular disease",
+          "Prostate issues"
+        ],
+        "improvements": [],
+        "healthScoreChange": -10
+      }
+    },
+    "createdAt": "2026-04-17T16:24:14.288Z"
+  },
+  {
+    "_id": "mo34cdmogeacy",
+    "userId": "mo346v9qcv6tz",
+    "scenario": "aapla",
+    "impact": {
+      "oneYear": {
+        "summary": "Incorporating aapla into daily life may lead to improved respiratory health and reduced frequency of cough and cold",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "reduced cough and cold frequency",
+          "improved lung function"
+        ],
+        "healthScoreChange": 5
+      },
+      "fiveYear": {
+        "summary": "Long-term consumption of aapla may help mitigate the risk of Chronic Bronchitis and improve overall respiratory health",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "reduced risk of Chronic Bronchitis",
+          "improved immune function"
+        ],
+        "healthScoreChange": 10
+      },
+      "tenYear": {
+        "summary": "Sustained incorporation of aapla into daily life may lead to significant improvements in overall health, including reduced risk of Hypertensive Heart Disease",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "reduced risk of Hypertensive Heart Disease",
+          "improved cardiovascular health"
+        ],
+        "healthScoreChange": 15
+      }
+    },
+    "createdAt": "2026-04-17T16:24:40.704Z"
+  },
+  {
+    "_id": "mo34d7noh3s06",
+    "userId": "mo346v9qcv6tz",
+    "scenario": "Din me 3 baar letrin (Assuming this means drinking 3 liters of water per day)",
+    "impact": {
+      "oneYear": {
+        "summary": "Improved hydration may help alleviate cough and cold symptoms, but may not significantly impact hypertension",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "Reduced frequency of cough and cold",
+          "Improved overall hydration"
+        ],
+        "healthScoreChange": 5
+      },
+      "fiveYear": {
+        "summary": "Consistent hydration may lead to better management of hypertension and reduced risk of chronic bronchitis",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "Improved blood pressure management",
+          "Reduced risk of chronic bronchitis"
+        ],
+        "healthScoreChange": 10
+      },
+      "tenYear": {
+        "summary": "Long-term hydration may contribute to overall cardiovascular health and reduced risk of hypertensive heart disease",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "Reduced risk of hypertensive heart disease",
+          "Improved overall cardiovascular health"
+        ],
+        "healthScoreChange": 15
+      }
+    },
+    "createdAt": "2026-04-17T16:25:19.620Z"
+  }
+]

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getSymptomHistory } from "../services/api";
 import toast from "react-hot-toast";
+import { FolderClock, Inbox, Calendar, AlertTriangle, Thermometer, Camera } from 'lucide-react';
 
 const FILTERS = ["All", "Symptom Logs", "Warnings"];
 
@@ -37,7 +38,10 @@ export default function HealthHistory() {
   return (
     <div className="space-y-6 animate-fade-in">
       <div>
-        <h1 className="text-2xl font-bold">📁 Health History</h1>
+        <div className="flex items-center gap-3">
+          <FolderClock size={28} className="text-[var(--color-brand)]" />
+          <h1 className="text-2xl font-bold">Health History</h1>
+        </div>
         <p className="text-sm text-[var(--color-text-muted)] mt-1">Your complete health timeline</p>
       </div>
 
@@ -60,7 +64,7 @@ export default function HealthHistory() {
 
       {filteredLogs.length === 0 ? (
         <div className="glass-card p-12 text-center">
-          <div className="text-5xl mb-4">📭</div>
+          <div className="flex justify-center mb-4 text-[var(--color-text-muted)]"><Inbox size={48} /></div>
           <h3 className="text-lg font-semibold mb-2">No entries yet</h3>
           <p className="text-sm text-[var(--color-text-muted)]">
             Start logging symptoms to build your health timeline.
@@ -72,7 +76,7 @@ export default function HealthHistory() {
             <div key={i} className="glass-card p-5 animate-fade-in-up" style={{ animationDelay: `${Math.min(i * 0.05, 0.5)}s` }}>
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
-                  <div className="text-sm">📅</div>
+                  <div className="text-sm text-[var(--color-brand)]"><Calendar size={18} /></div>
                   <div>
                     <div className="text-sm font-medium">
                       {new Date(log.date).toLocaleDateString("en-US", {
@@ -86,8 +90,8 @@ export default function HealthHistory() {
                 </div>
                 <div className="flex items-center gap-2">
                   {log.warningFlagged && (
-                    <span className="text-xs px-2 py-1 rounded-full bg-[rgba(239,68,68,0.15)] text-[var(--color-danger)]">
-                      ⚠️ Warning
+                    <span className="text-xs px-2 py-1 rounded-full bg-[rgba(239,68,68,0.15)] text-[var(--color-danger)] flex items-center gap-1">
+                      <AlertTriangle size={12} /> Warning
                     </span>
                   )}
                   <div className="flex items-center gap-2">
@@ -105,8 +109,8 @@ export default function HealthHistory() {
               {/* Symptoms */}
               <div className="flex flex-wrap gap-1.5 mb-2">
                 {log.symptoms.map((s, j) => (
-                  <span key={j} className="text-xs px-2.5 py-1 rounded-full bg-[var(--color-bg-surface-alt)] text-[var(--color-text-secondary)]">
-                    🤒 {s}
+                  <span key={j} className="text-xs px-2.5 py-1 rounded-full bg-[var(--color-bg-surface-alt)] text-[var(--color-text-secondary)] flex items-center gap-1">
+                    <Thermometer size={12} /> {s}
                   </span>
                 ))}
               </div>
@@ -119,7 +123,7 @@ export default function HealthHistory() {
               {/* Photo AI Description */}
               {log.photoAIDescription && (
                 <div className="mt-3 p-3 rounded-lg bg-[var(--color-bg-surface-alt)] border border-[var(--color-border)]">
-                  <span className="text-xs font-medium text-[var(--color-brand-light)]">📸 AI Photo Analysis:</span>
+                  <span className="text-xs font-medium text-[var(--color-brand-light)] flex items-center gap-1"><Camera size={12} /> AI Photo Analysis:</span>
                   <p className="text-xs text-[var(--color-text-secondary)] mt-1">{log.photoAIDescription}</p>
                 </div>
               )}
@@ -127,7 +131,7 @@ export default function HealthHistory() {
               {/* Warning reason */}
               {log.warningFlagged && log.warningReason && (
                 <div className="mt-3 p-3 rounded-lg bg-[rgba(239,68,68,0.05)] border border-[rgba(239,68,68,0.2)]">
-                  <span className="text-xs font-medium text-[var(--color-danger)]">⚠️ Warning:</span>
+                  <span className="text-xs font-medium text-[var(--color-danger)] flex items-center gap-1"><AlertTriangle size={12} /> Warning:</span>
                   <p className="text-xs text-[var(--color-text-secondary)] mt-1">{log.warningReason}</p>
                 </div>
               )}

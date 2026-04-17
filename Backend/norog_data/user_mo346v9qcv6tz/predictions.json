@@ -1,0 +1,262 @@
+[
+  {
+    "_id": "mo349lokdvuz6",
+    "userId": "mo346v9qcv6tz",
+    "risks": [
+      {
+        "disease": "Hypertensive Heart Disease",
+        "confidence": 60,
+        "contributingSymptoms": [
+          "Headache"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Chronic Bronchitis",
+        "confidence": 70,
+        "contributingSymptoms": [
+          "Cough"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Vitamin B12 Deficiency",
+        "confidence": 40,
+        "contributingSymptoms": [
+          "Headache"
+        ],
+        "urgency": "Monitor",
+        "geneticFactor": false
+      }
+    ],
+    "healthScore": 60,
+    "trend": "stable",
+    "correlations": [
+      {
+        "symptoms": [
+          "Headache",
+          "Cough"
+        ],
+        "possibleCondition": "Upper Respiratory Infection"
+      }
+    ],
+    "summary": "The patient's medical history of hypertension and frequent cough and colds are concerning, and the current symptoms of headache and cough require attention. A healthy lifestyle change, including regular exercise and a balanced diet, is recommended. Regular check-ups with a doctor are necessary to monitor the patient's condition and adjust treatment plans as needed.",
+    "createdAt": "2026-04-17T16:22:31.172Z"
+  },
+  {
+    "_id": "mo34aifpernz3",
+    "userId": "mo346v9qcv6tz",
+    "risks": [
+      {
+        "disease": "Chronic Bronchitis",
+        "confidence": 60,
+        "contributingSymptoms": [
+          "Cough"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Hypertensive Heart Disease",
+        "confidence": 80,
+        "contributingSymptoms": [
+          "Headache"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Common Cold",
+        "confidence": 90,
+        "contributingSymptoms": [
+          "Cough",
+          "Headache"
+        ],
+        "urgency": "Monitor",
+        "geneticFactor": false
+      }
+    ],
+    "healthScore": 60,
+    "trend": "declining",
+    "correlations": [
+      {
+        "symptoms": [
+          "Cough",
+          "Headache"
+        ],
+        "possibleCondition": "Respiratory Infection"
+      },
+      {
+        "symptoms": [
+          "Headache"
+        ],
+        "possibleCondition": "Hypertension"
+      }
+    ],
+    "summary": "The patient is at risk for chronic bronchitis and hypertensive heart disease due to their medical history of hypertension and frequent cough and cold. The current symptoms of headache and cough also suggest a possible common cold or respiratory infection. It is recommended to see a doctor soon to monitor and manage these conditions.",
+    "createdAt": "2026-04-17T16:23:13.621Z"
+  },
+  {
+    "_id": "mo3c3sbb1uzgj",
+    "userId": "mo346v9qcv6tz",
+    "risks": [
+      {
+        "disease": "Hypertensive Heart Disease",
+        "confidence": 60,
+        "contributingSymptoms": [
+          "Headache",
+          "Hypertension"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Chronic Bronchitis",
+        "confidence": 40,
+        "contributingSymptoms": [
+          "Cough"
+        ],
+        "urgency": "Monitor",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Vitamin B12 Deficiency",
+        "confidence": 30,
+        "contributingSymptoms": [
+          "Headache"
+        ],
+        "urgency": "Monitor",
+        "geneticFactor": false
+      }
+    ],
+    "healthScore": 70,
+    "trend": "stable",
+    "correlations": [
+      {
+        "symptoms": [
+          "Headache",
+          "Cough"
+        ],
+        "possibleCondition": "Upper Respiratory Infection"
+      },
+      {
+        "symptoms": [
+          "Headache"
+        ],
+        "possibleCondition": "Migraine"
+      }
+    ],
+    "summary": "The patient is at moderate risk for hypertensive heart disease due to pre-existing hypertension. The frequent coughs and colds may be indicative of an underlying respiratory issue. A vegetarian diet may also increase the risk of vitamin B12 deficiency, which can cause headaches.",
+    "createdAt": "2026-04-17T20:01:56.759Z"
+  },
+  {
+    "_id": "mo3cf7pp37vnf",
+    "userId": "mo346v9qcv6tz",
+    "risks": [
+      {
+        "disease": "Hypertensive Heart Disease",
+        "confidence": 60,
+        "contributingSymptoms": [
+          "Headache",
+          "Hypertension"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Chronic Bronchitis",
+        "confidence": 40,
+        "contributingSymptoms": [
+          "Cough"
+        ],
+        "urgency": "Monitor",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Vitamin B12 Deficiency",
+        "confidence": 30,
+        "contributingSymptoms": [
+          "Headache",
+          "Muscle cramp"
+        ],
+        "urgency": "Monitor",
+        "geneticFactor": false
+      }
+    ],
+    "healthScore": 70,
+    "trend": "stable",
+    "correlations": [
+      {
+        "symptoms": [
+          "Headache",
+          "Muscle cramp"
+        ],
+        "possibleCondition": "Vitamin B12 Deficiency"
+      },
+      {
+        "symptoms": [
+          "Cough"
+        ],
+        "possibleCondition": "Chronic Bronchitis"
+      }
+    ],
+    "summary": "The patient's medical history of hypertension and frequent cough and colds increases the risk of hypertensive heart disease and chronic bronchitis. The recent symptoms of headache and muscle cramp may indicate a vitamin B12 deficiency, which is common in vegetarians. It is recommended to see a doctor soon to monitor the patient's condition and adjust the treatment plan as necessary.",
+    "createdAt": "2026-04-17T20:10:49.933Z"
+  },
+  {
+    "_id": "mo3e5zsb46tf1",
+    "userId": "mo346v9qcv6tz",
+    "risks": [
+      {
+        "disease": "Hypertensive Heart Disease",
+        "confidence": 60,
+        "contributingSymptoms": [
+          "Headache",
+          "Hypertension"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Chronic Bronchitis",
+        "confidence": 70,
+        "contributingSymptoms": [
+          "Cough"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Vitamin B12 Deficiency",
+        "confidence": 40,
+        "contributingSymptoms": [
+          "Headache",
+          "Muscle cramp"
+        ],
+        "urgency": "Monitor",
+        "geneticFactor": false
+      }
+    ],
+    "healthScore": 60,
+    "trend": "declining",
+    "correlations": [
+      {
+        "symptoms": [
+          "Headache",
+          "Muscle cramp"
+        ],
+        "possibleCondition": "Vitamin B12 Deficiency"
+      },
+      {
+        "symptoms": [
+          "Cough"
+        ],
+        "possibleCondition": "Chronic Bronchitis"
+      }
+    ],
+    "summary": "The patient's history of hypertension and frequent cough and colds, combined with recent symptoms of headache and cough, suggest a higher risk of hypertensive heart disease and chronic bronchitis. The patient's vegetarian diet may also contribute to a risk of vitamin B12 deficiency. It is recommended that the patient sees a doctor soon to discuss these risks and develop a plan to mitigate them.",
+    "createdAt": "2026-04-17T20:59:38.987Z"
+  }
+]

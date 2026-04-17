@@ -1,0 +1,13 @@
+{
+  "id": "mo399fp11ys7a",
+  "name": "aman",
+  "email": "aman@gmail",
+  "password": "$2a$10$moogFFLXlNShBzGR48N41.x3I8bR/Hn896i4j5XsAR/9fzwVq43ei",
+  "createdAt": "2026-04-17T18:42:21.494Z",
+  "age": 20,
+  "gender": "male",
+  "location": {
+    "city": "",
+    "country": ""
+  }
+}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { runPrediction } from "../services/api";
+import { Bot, Dna, TrendingUp, TrendingDown, ArrowRight, CloudRain } from 'lucide-react';
 import HealthScoreCircle from "../components/HealthScoreCircle";
 import RiskCard from "../components/RiskCard";
 import LoadingOverlay from "../components/LoadingOverlay";
@@ -32,12 +33,15 @@ export default function AIAnalysis() {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <LoadingOverlay visible={loading} message="🧬 Analyzing your health data and checking genetic risk factors..." />
+      <LoadingOverlay visible={loading} message="Analyzing your health data and checking genetic risk factors..." />
 
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold">🤖 AI Risk Analysis</h1>
-          <p className="text-sm text-[var(--color-text-muted)] mt-1">Get a comprehensive disease risk assessment based on all your data</p>
+        <div className="flex items-center gap-3">
+          <Bot size={28} className="text-[var(--color-brand)]" />
+          <div>
+            <h1 className="text-2xl font-bold">AI Risk Analysis</h1>
+            <p className="text-sm text-[var(--color-text-muted)] mt-1">Get a comprehensive disease risk assessment based on all your data</p>
+          </div>
         </div>
         <button onClick={handlePredict} className="btn-primary" disabled={loading}>
           {prediction ? "Re-Analyze" : "Run Analysis"}
@@ -46,7 +50,7 @@ export default function AIAnalysis() {
 
       {!prediction && !loading && (
         <div className="glass-card p-12 text-center">
-          <div className="text-5xl mb-4">🧬</div>
+          <div className="flex justify-center mb-4 text-[var(--color-brand)]"><Dna size={48} /></div>
           <h3 className="text-lg font-semibold mb-2">No Analysis Yet</h3>
           <p className="text-sm text-[var(--color-text-muted)] mb-4">
             Click "Run Analysis" to get your AI-powered health risk assessment.<br />
@@ -65,8 +69,8 @@ export default function AIAnalysis() {
             <div className="glass-card p-6 flex flex-col items-center">
               <HealthScoreCircle score={prediction.healthScore || 75} size={200} />
               <div className="mt-3 flex items-center gap-2">
-                <span className="text-xl">
-                  {prediction.trend === "improving" ? "📈" : prediction.trend === "declining" ? "📉" : "➡️"}
+                <span className="flex items-center justify-center">
+                  {prediction.trend === "improving" ? <TrendingUp size={24} className="text-[var(--color-success)]" /> : prediction.trend === "declining" ? <TrendingDown size={24} className="text-[var(--color-danger)]" /> : <ArrowRight size={24} className="text-[var(--color-text-muted)]" />}
                 </span>
                 <span className="text-sm capitalize text-[var(--color-text-secondary)]">
                   Trend: {prediction.trend || "stable"}
@@ -82,7 +86,7 @@ export default function AIAnalysis() {
 
               {prediction.seasonalAlert && (
                 <div className="mt-4 p-3 rounded-lg bg-[rgba(245,158,11,0.1)] border border-[var(--color-warning)]">
-                  <span className="text-xs font-medium text-[var(--color-warning)]">🌧️ Seasonal Alert:</span>
+                  <span className="text-xs font-medium text-[var(--color-warning)] flex items-center gap-1"><CloudRain size={12} /> Seasonal Alert:</span>
                   <p className="text-xs text-[var(--color-text-secondary)] mt-1">{prediction.seasonalAlert}</p>
                 </div>
               )}

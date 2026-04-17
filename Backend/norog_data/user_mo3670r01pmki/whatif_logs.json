@@ -1,0 +1,43 @@
+[
+  {
+    "_id": "mo369xx73z7l1",
+    "userId": "mo3670r01pmki",
+    "scenario": "start eating healthy food",
+    "impact": {
+      "oneYear": {
+        "summary": "Improved overall health with reduced inflammation and increased energy levels",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "Reduced joint pain",
+          "Improved digestion",
+          "Increased energy levels"
+        ],
+        "healthScoreChange": 8
+      },
+      "fiveYear": {
+        "summary": "Significant reduction in risk of developing chronic diseases, such as osteoarthritis and fibromyalgia",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "Reduced risk of osteoarthritis",
+          "Improved mental health",
+          "Healthier weight management"
+        ],
+        "healthScoreChange": 15
+      },
+      "tenYear": {
+        "summary": "Substantial reduction in risk of developing chronic diseases, with improved overall health and well-being",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "Reduced risk of herniated disk",
+          "Improved bone density",
+          "Reduced risk of chronic diseases"
+        ],
+        "healthScoreChange": 25
+      }
+    },
+    "createdAt": "2026-04-17T17:18:46.267Z"
+  }
+]

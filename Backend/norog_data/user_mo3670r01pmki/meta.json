@@ -1,0 +1,13 @@
+{
+  "id": "mo3670r01pmki",
+  "name": "laalu",
+  "email": "laalu@yadav",
+  "password": "$2a$10$ZBOo1P42GfGjRBLfve5ckuG665duxu1fcnGjd9LA0RyjY8pULaxY6",
+  "createdAt": "2026-04-17T17:16:29.965Z",
+  "age": 23,
+  "gender": "female",
+  "location": {
+    "city": "dhj",
+    "country": "j"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "currentSymptoms": [
+    "Cough"
+  ],
+  "medicalHistory": [
+    "Hypertension"
+  ],
+  "familyHistory": [],
+  "lifestyle": {
+    "smoker": true,
+    "alcohol": "none",
+    "exerciseFrequency": "never",
+    "sleepHours": 7,
+    "diet": "balanced"
+  },
+  "medicines": [],
+  "onboardingComplete": true,
+  "updatedAt": "2026-04-17T21:19:39.261Z",
+  "userId": "mo3eveys504lp"
+}

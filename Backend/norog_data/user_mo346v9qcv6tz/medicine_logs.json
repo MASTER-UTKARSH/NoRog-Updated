@@ -1,0 +1,52 @@
+[
+  {
+    "_id": "mo34nhywi30dt",
+    "userId": "mo346v9qcv6tz",
+    "medicines": [
+      "asprin",
+      "nicorandil"
+    ],
+    "interactions": [
+      {
+        "drug1": "aspirin",
+        "drug2": "nicorandil",
+        "severity": "moderate",
+        "description": "Aspirin may increase the risk of bleeding when taken with nicorandil, a vasodilator that can also affect blood clotting."
+      }
+    ],
+    "diseaseInteractions": [
+      "aspirin + Hypertension: Aspirin can help reduce blood pressure, but long-term use may require monitoring to avoid hypotension.",
+      "aspirin + cough and cold: Aspirin can help relieve headache and fever associated with cough and cold, but it may not be suitable for patients with asthma or other respiratory conditions.",
+      "nicorandil + Hypertension: Nicorandil is used to treat angina, but it can also lower blood pressure, so patients with hypertension should be monitored for hypotension.",
+      "nicorandil + cough and cold: Nicorandil is not typically used to treat cough and cold, and its vasodilatory effects may not be beneficial in this context."
+    ],
+    "safeToTake": false,
+    "recommendation": "Consult a doctor before taking aspirin and nicorandil together, as the risk of bleeding and hypotension may be increased. Monitor blood pressure and bleeding risk closely if these medications are prescribed.",
+    "createdAt": "2026-04-17T16:33:19.544Z"
+  },
+  {
+    "_id": "mo34oe5pjnd92",
+    "userId": "mo346v9qcv6tz",
+    "medicines": [
+      "gyfgd",
+      "gyfjh"
+    ],
+    "interactions": [
+      {
+        "drug1": "gyfgd",
+        "drug2": "gyfjh",
+        "severity": "unknown",
+        "description": "No information available for interaction between gyfgd and gyfjh"
+      }
+    ],
+    "diseaseInteractions": [
+      "gyfgd + Hypertension: No information available for interaction between gyfgd and Hypertension",
+      "gyfgd + Cough and cold: No information available for interaction between gyfgd and Cough and cold",
+      "gyfjh + Hypertension: No information available for interaction between gyfjh and Hypertension",
+      "gyfjh + Cough and cold: No information available for interaction between gyfjh and Cough and cold"
+    ],
+    "safeToTake": false,
+    "recommendation": "Consult a doctor before taking gyfgd and gyfjh due to lack of information on potential interactions",
+    "createdAt": "2026-04-17T16:34:01.261Z"
+  }
+]

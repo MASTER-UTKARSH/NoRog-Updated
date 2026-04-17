@@ -1,0 +1,13 @@
+[
+  {
+    "role": "user",
+    "content": "kya kr rha",
+    "timestamp": "2026-04-17T17:19:54.416Z"
+  },
+  {
+    "role": "assistant",
+    "content": "Main aapki madad ke liye yahaan hoon. Aap kya jaanna chahte hain ya kis tarah ki madad chaahte hain? ",
+    "options": [],
+    "timestamp": "2026-04-17T17:19:55.187Z"
+  }
+]

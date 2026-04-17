@@ -7,7 +7,7 @@ import {
   getSymptomLogs,
   getLatestPrediction,
   getLatestMedicineLog
-} from "../services/localDB.js";
+} from "../services/firebaseDB.js";
 
 const router = Router();
 router.use(authMiddleware);
@@ -15,11 +15,11 @@ router.use(authMiddleware);
 // GET /api/report/generate — generate and download PDF report
 router.get("/generate", async (req, res) => {
   try {
-    const user = findUserById(req.user.id);
-    const profile = getProfile(req.user.id);
-    const symptomLogs = getSymptomLogs(req.user.id, 30);
-    const prediction = getLatestPrediction(req.user.id);
-    const latestMed = getLatestMedicineLog(req.user.id);
+    const user = await findUserById(req.user.id);
+    const profile = await getProfile(req.user.id);
+    const symptomLogs = await getSymptomLogs(req.user.id, 30);
+    const prediction = await getLatestPrediction(req.user.id);
+    const latestMed = await getLatestMedicineLog(req.user.id);
     const medicineLogs = latestMed ? [latestMed] : [];
 
     const { password: _, ...safeUser } = user || {};

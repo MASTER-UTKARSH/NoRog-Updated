@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AlertTriangle, Siren, Info, X } from 'lucide-react';
 
 export default function EarlyWarningBanner({ warning, onDismiss }) {
   const [dismissed, setDismissed] = useState(false);
@@ -9,17 +10,17 @@ export default function EarlyWarningBanner({ warning, onDismiss }) {
     monitor: {
       bg: "rgba(245, 158, 11, 0.1)",
       border: "var(--color-warning)",
-      icon: "⚠️"
+      icon: <AlertTriangle size={24} className="text-[var(--color-warning)]" />
     },
     see_doctor: {
       bg: "rgba(239, 68, 68, 0.1)",
       border: "var(--color-danger)",
-      icon: "🚨"
+      icon: <Siren size={24} className="text-[var(--color-danger)]" />
     },
     none: {
       bg: "rgba(16, 185, 129, 0.1)",
       border: "var(--color-success)",
-      icon: "ℹ️"
+      icon: <Info size={24} className="text-[var(--color-success)]" />
     }
   };
 
@@ -33,7 +34,7 @@ export default function EarlyWarningBanner({ warning, onDismiss }) {
         border: `1px solid ${style.border}`
       }}
     >
-      <span className="text-2xl mt-0.5">{style.icon}</span>
+      <span className="mt-0.5">{style.icon}</span>
       <div className="flex-1">
         <h4 className="font-semibold text-sm mb-1">Early Warning Alert</h4>
         <p className="text-sm text-[var(--color-text-secondary)]">{warning.reason}</p>
@@ -42,7 +43,7 @@ export default function EarlyWarningBanner({ warning, onDismiss }) {
         onClick={() => { setDismissed(true); onDismiss?.(); }}
         className="text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] text-lg"
       >
-        ✕
+        <X size={16} />
       </button>
     </div>
   );

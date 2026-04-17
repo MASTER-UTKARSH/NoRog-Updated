@@ -1,6 +1,6 @@
 import { Router } from "express";
 import authMiddleware from "../middleware/authMiddleware.js";
-import { findUserById, updateUser, getProfile, saveProfile } from "../services/localDB.js";
+import { findUserById, updateUser, getProfile, saveProfile } from "../services/firebaseDB.js";
 
 const router = Router();
 router.use(authMiddleware);
@@ -8,10 +8,10 @@ router.use(authMiddleware);
 // GET /api/profile
 router.get("/", async (req, res) => {
   try {
-    const user = findUserById(req.user.id);
+    const user = await findUserById(req.user.id);
     if (!user) return res.status(404).json({ success: false, error: "User not found" });
 
-    const profile = getProfile(req.user.id);
+    const profile = await getProfile(req.user.id);
 
     // Strip password from response
     const { password: _, ...safeUser } = user;
@@ -28,14 +28,14 @@ router.post("/", async (req, res) => {
     const { age, gender, location, currentSymptoms, medicalHistory, familyHistory, lifestyle, medicines } = req.body;
 
     // Update user demographics
-    const updatedUser = updateUser(req.user.id, {
+    const updatedUser = await updateUser(req.user.id, {
       ...(age !== undefined && { age }),
       ...(gender && { gender }),
       ...(location && { location })
     });
 
     // Update health profile
-    const profile = saveProfile(req.user.id, {
+    const profile = await saveProfile(req.user.id, {
       currentSymptoms: currentSymptoms || [],
       medicalHistory: medicalHistory || [],
       familyHistory: familyHistory || [],
@@ -55,7 +55,7 @@ router.post("/", async (req, res) => {
 router.put("/medicines", async (req, res) => {
   try {
     const { medicines } = req.body;
-    const profile = saveProfile(req.user.id, { medicines: medicines || [] });
+    const profile = await saveProfile(req.user.id, { medicines: medicines || [] });
     res.json({ success: true, data: profile });
   } catch (error) {
     console.error("Update medicines error:", error);

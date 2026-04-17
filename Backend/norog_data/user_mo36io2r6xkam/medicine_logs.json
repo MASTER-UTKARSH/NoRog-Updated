@@ -1,0 +1,41 @@
+[
+  {
+    "_id": "mo36w2x8cmlzh",
+    "userId": "mo36io2r6xkam",
+    "medicines": [
+      "ondem",
+      "crosen",
+      "paracetamol"
+    ],
+    "interactions": [
+      {
+        "drug1": "ondem",
+        "drug2": "paracetamol",
+        "severity": "mild",
+        "description": "Ondem and paracetamol may increase the risk of gastrointestinal side effects when taken together"
+      },
+      {
+        "drug1": "crosen",
+        "drug2": "paracetamol",
+        "severity": "mild",
+        "description": "Crosen and paracetamol may increase the risk of liver damage when taken together"
+      },
+      {
+        "drug1": "ondem",
+        "drug2": "crosen",
+        "severity": "moderate",
+        "description": "Ondem and crosen may increase the risk of serotonin syndrome when taken together, monitor for symptoms"
+      }
+    ],
+    "diseaseInteractions": [
+      "ondem + Depression: Ondem may worsen depressive symptoms, monitor mood and adjust treatment as needed",
+      "crosen + PCOS: Crosen may affect hormonal balance, monitor for changes in menstrual cycle and adjust treatment as needed",
+      "paracetamol + periods pain: Paracetamol may be effective in relieving menstrual cramps, but use with caution and follow recommended dosage",
+      "ondem + periods pain: Ondem may be effective in relieving menstrual cramps, but use with caution and follow recommended dosage",
+      "crosen + Depression: Crosen may have antidepressant effects, but use with caution and monitor for mood changes"
+    ],
+    "safeToTake": false,
+    "recommendation": "Consult a doctor before taking these medications, as the potential interactions and warnings require careful consideration and monitoring",
+    "createdAt": "2026-04-17T17:35:59.180Z"
+  }
+]

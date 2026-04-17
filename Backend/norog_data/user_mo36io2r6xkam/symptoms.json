@@ -1,0 +1,47 @@
+[
+  {
+    "_id": "mo36z0r1dytac",
+    "userId": "mo36io2r6xkam",
+    "symptoms": [
+      "Headache"
+    ],
+    "severity": 5,
+    "notes": "",
+    "photoUrl": "",
+    "photoAIDescription": "",
+    "warningFlagged": false,
+    "warningReason": "",
+    "warningUrgency": "none",
+    "createdAt": "2026-04-17T17:38:16.333Z"
+  },
+  {
+    "_id": "mo37cxf7et04t",
+    "userId": "mo36io2r6xkam",
+    "symptoms": [
+      "Headache"
+    ],
+    "severity": 5,
+    "notes": "",
+    "photoUrl": "",
+    "photoAIDescription": "",
+    "warningFlagged": false,
+    "warningReason": "",
+    "warningUrgency": "none",
+    "createdAt": "2026-04-17T17:49:05.203Z"
+  },
+  {
+    "_id": "mo37fuqsfvc1d",
+    "userId": "mo36io2r6xkam",
+    "symptoms": [
+      "Chest pain"
+    ],
+    "severity": 5,
+    "notes": "qs",
+    "photoUrl": "",
+    "photoAIDescription": "",
+    "warningFlagged": true,
+    "warningReason": "Recurring chest pain and recent headache symptoms may indicate a cardiovascular issue",
+    "warningUrgency": "see_doctor",
+    "createdAt": "2026-04-17T17:51:21.700Z"
+  }
+]

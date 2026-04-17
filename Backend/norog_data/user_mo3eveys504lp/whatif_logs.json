@@ -1,0 +1,330 @@
+[
+  {
+    "_id": "mo3ew2pa7spob",
+    "userId": "mo3eveys504lp",
+    "scenario": "Start smoking",
+    "impact": {
+      "oneYear": {
+        "summary": "Increased risk of respiratory issues and cardiovascular disease",
+        "worseningConditions": [
+          "Hypertension"
+        ],
+        "newRisks": [
+          "Chronic Bronchitis",
+          "Emphysema"
+        ],
+        "improvements": [],
+        "healthScoreChange": -10
+      },
+      "fiveYear": {
+        "summary": "Significant increase in lung disease risk and cardiovascular complications",
+        "worseningConditions": [
+          "Hypertension",
+          "Chronic Obstructive Pulmonary Disease (COPD)"
+        ],
+        "newRisks": [
+          "Heart Disease",
+          "Asthma"
+        ],
+        "improvements": [],
+        "healthScoreChange": -25
+      },
+      "tenYear": {
+        "summary": "High risk of life-threatening lung cancer, heart disease, and other smoking-related illnesses",
+        "worseningConditions": [
+          "Hypertension",
+          "Chronic Obstructive Pulmonary Disease (COPD)",
+          "Lung Cancer"
+        ],
+        "newRisks": [
+          "Coronary Artery Disease",
+          "Chronic Heart Failure"
+        ],
+        "improvements": [],
+        "healthScoreChange": -40
+      }
+    },
+    "createdAt": "2026-04-17T21:19:55.822Z"
+  },
+  {
+    "_id": "mo3f1edy83ijk",
+    "userId": "mo3eveys504lp",
+    "scenario": "Eat junk food daily",
+    "impact": {
+      "oneYear": {
+        "summary": "Significant decline in overall health due to increased calorie and fat intake, exacerbating hypertension and potentially leading to weight gain and insulin resistance",
+        "worseningConditions": [
+          "Hypertension"
+        ],
+        "newRisks": [
+          "Type 2 Diabetes",
+          "Obesity"
+        ],
+        "improvements": [],
+        "healthScoreChange": -12
+      },
+      "fiveYear": {
+        "summary": "Increased risk of cardiovascular disease, potential development of metabolic syndrome, and worsening of existing hypertension, with potential for kidney damage and increased risk of heart failure",
+        "worseningConditions": [
+          "Hypertension",
+          "Potential Kidney Damage"
+        ],
+        "newRisks": [
+          "Cardiovascular Disease",
+          "Metabolic Syndrome",
+          "Heart Failure"
+        ],
+        "improvements": [],
+        "healthScoreChange": -25
+      },
+      "tenYear": {
+        "summary": "High risk of developing severe cardiovascular disease, potential for end-stage kidney disease, and increased risk of mortality due to complications from hypertension, cardiovascular disease, and potential development of other diet-related conditions",
+        "worseningConditions": [
+          "Hypertension",
+          "Potential Kidney Damage",
+          "Cardiovascular Disease"
+        ],
+        "newRisks": [
+          "End-Stage Kidney Disease",
+          "Mortality"
+        ],
+        "improvements": [],
+        "healthScoreChange": -40
+      }
+    },
+    "createdAt": "2026-04-17T21:24:04.246Z"
+  },
+  {
+    "_id": "mo3f1lhb95ov8",
+    "userId": "mo3eveys504lp",
+    "scenario": "Drink alcohol daily",
+    "impact": {
+      "oneYear": {
+        "summary": "Increased risk of hypertension complications and potential development of new conditions",
+        "worseningConditions": [
+          "Hypertension"
+        ],
+        "newRisks": [
+          "Alcoholic Liver Disease",
+          "Breast Cancer"
+        ],
+        "improvements": [],
+        "healthScoreChange": -10
+      },
+      "fiveYear": {
+        "summary": "Significant increase in risk of chronic diseases and potential organ damage",
+        "worseningConditions": [
+          "Hypertension",
+          "Alcoholic Liver Disease"
+        ],
+        "newRisks": [
+          "Heart Disease",
+          "Mental Health Disorders"
+        ],
+        "improvements": [],
+        "healthScoreChange": -25
+      },
+      "tenYear": {
+        "summary": "High risk of severe chronic diseases, organ damage, and potential mortality",
+        "worseningConditions": [
+          "Hypertension",
+          "Alcoholic Liver Disease",
+          "Heart Disease"
+        ],
+        "newRisks": [
+          "Cirrhosis",
+          "Pancreatitis"
+        ],
+        "improvements": [],
+        "healthScoreChange": -40
+      }
+    },
+    "createdAt": "2026-04-17T21:24:13.439Z"
+  },
+  {
+    "_id": "mo3f5ip9av6ju",
+    "userId": "mo3eveys504lp",
+    "scenario": "Eat junk food daily",
+    "impact": {
+      "oneYear": {
+        "summary": "Significant decline in overall health due to increased calorie and fat intake, exacerbating hypertension and contributing to potential weight gain and insulin resistance",
+        "worseningConditions": [
+          "Hypertension"
+        ],
+        "newRisks": [
+          "Type 2 Diabetes",
+          "Obesity"
+        ],
+        "improvements": [],
+        "healthScoreChange": -12
+      },
+      "fiveYear": {
+        "summary": "Increased risk of cardiovascular disease, potential development of metabolic syndrome, and worsening of existing hypertension due to prolonged unhealthy diet",
+        "worseningConditions": [
+          "Hypertension",
+          "Potential development of Metabolic Syndrome"
+        ],
+        "newRisks": [
+          "Cardiovascular Disease",
+          "Stroke"
+        ],
+        "improvements": [],
+        "healthScoreChange": -25
+      },
+      "tenYear": {
+        "summary": "High risk of developing severe and chronic conditions, including heart disease, kidney disease, and certain types of cancer, due to long-term effects of an unhealthy diet and existing hypertension",
+        "worseningConditions": [
+          "Hypertension",
+          "Metabolic Syndrome",
+          "Potential development of Kidney Disease"
+        ],
+        "newRisks": [
+          "Heart Disease",
+          "Kidney Disease",
+          "Certain types of Cancer"
+        ],
+        "improvements": [],
+        "healthScoreChange": -40
+      }
+    },
+    "createdAt": "2026-04-17T21:27:16.461Z"
+  },
+  {
+    "_id": "mo3f65ubb96cm",
+    "userId": "mo3eveys504lp",
+    "scenario": "Eat junk food daily",
+    "impact": {
+      "oneYear": {
+        "summary": "Increased risk of weight gain, insulin resistance, and cardiovascular disease due to high calorie, high fat, and high sodium intake",
+        "worseningConditions": [
+          "Hypertension"
+        ],
+        "newRisks": [
+          "Type 2 Diabetes",
+          "Hyperlipidemia"
+        ],
+        "improvements": [],
+        "healthScoreChange": -10
+      },
+      "fiveYear": {
+        "summary": "Significant increase in risk of cardiovascular disease, with potential development of atherosclerosis and increased blood pressure",
+        "worseningConditions": [
+          "Hypertension",
+          "Hyperlipidemia"
+        ],
+        "newRisks": [
+          "Cardiovascular Disease",
+          "Stroke"
+        ],
+        "improvements": [],
+        "healthScoreChange": -20
+      },
+      "tenYear": {
+        "summary": "High risk of developing multiple chronic diseases, including cardiovascular disease, type 2 diabetes, and certain types of cancer, with significant impact on quality of life and life expectancy",
+        "worseningConditions": [
+          "Hypertension",
+          "Hyperlipidemia",
+          "Cardiovascular Disease"
+        ],
+        "newRisks": [
+          "Heart Failure",
+          "Chronic Kidney Disease",
+          "Certain Types of Cancer"
+        ],
+        "improvements": [],
+        "healthScoreChange": -35
+      }
+    },
+    "createdAt": "2026-04-17T21:27:46.451Z"
+  },
+  {
+    "_id": "mo3f6yyqcfbra",
+    "userId": "mo3eveys504lp",
+    "scenario": "Eating junk food daily",
+    "impact": {
+      "oneYear": {
+        "summary": "Significant decline in overall health due to increased calorie and fat intake, exacerbating hypertension and potentially leading to weight gain and insulin resistance",
+        "worseningConditions": [
+          "Hypertension"
+        ],
+        "newRisks": [
+          "Type 2 Diabetes",
+          "Obesity"
+        ],
+        "improvements": [],
+        "healthScoreChange": -12
+      },
+      "fiveYear": {
+        "summary": "Increased risk of cardiovascular disease, potential development of metabolic syndrome, and worsening of existing hypertension, with potential for kidney damage and vision problems",
+        "worseningConditions": [
+          "Hypertension",
+          "Potential Cardiovascular Disease"
+        ],
+        "newRisks": [
+          "Heart Failure",
+          "Chronic Kidney Disease",
+          "Vision Problems"
+        ],
+        "improvements": [],
+        "healthScoreChange": -25
+      },
+      "tenYear": {
+        "summary": "High risk of severe cardiovascular events, such as heart attack or stroke, and potential development of end-stage kidney disease, with significant impact on quality of life and life expectancy",
+        "worseningConditions": [
+          "Hypertension",
+          "Cardiovascular Disease",
+          "Chronic Kidney Disease"
+        ],
+        "newRisks": [
+          "End-Stage Kidney Disease",
+          "Vision Loss",
+          "Cognitive Decline"
+        ],
+        "improvements": [],
+        "healthScoreChange": -40
+      }
+    },
+    "createdAt": "2026-04-17T21:28:24.194Z"
+  },
+  {
+    "_id": "mo3f8650d0dse",
+    "userId": "mo3eveys504lp",
+    "scenario": "Start meditating daily",
+    "impact": {
+      "oneYear": {
+        "summary": "Reduced stress and anxiety, improved sleep quality, and lowered blood pressure",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "Reduced hypertension symptoms",
+          "Improved mental health",
+          "Enhanced sleep quality"
+        ],
+        "healthScoreChange": 10
+      },
+      "fiveYear": {
+        "summary": "Sustained reduction in blood pressure, improved cardiovascular health, and reduced risk of chronic diseases",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "Reduced risk of cardiovascular disease",
+          "Improved emotional well-being",
+          "Increased resilience to stress"
+        ],
+        "healthScoreChange": 20
+      },
+      "tenYear": {
+        "summary": "Long-term reduction in hypertension, improved overall health, and reduced risk of age-related diseases",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "Reduced risk of stroke and heart disease",
+          "Improved cognitive function",
+          "Enhanced overall well-being"
+        ],
+        "healthScoreChange": 30
+      }
+    },
+    "createdAt": "2026-04-17T21:29:20.148Z"
+  }
+]

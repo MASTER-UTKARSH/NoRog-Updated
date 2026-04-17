@@ -1,0 +1,22 @@
+{
+  "currentSymptoms": [
+    "Headache",
+    "Chest pain",
+    "Shortness of breath"
+  ],
+  "medicalHistory": [
+    "Depression"
+  ],
+  "familyHistory": [],
+  "lifestyle": {
+    "smoker": false,
+    "alcohol": "none",
+    "exerciseFrequency": "3-5x",
+    "sleepHours": 6,
+    "diet": "balanced"
+  },
+  "medicines": [],
+  "onboardingComplete": true,
+  "updatedAt": "2026-04-17T18:44:12.615Z",
+  "userId": "mo399fp11ys7a"
+}

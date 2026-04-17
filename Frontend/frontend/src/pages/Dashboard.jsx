@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { TrendingUp, ArrowRight, TrendingDown, CloudRain, Lightbulb, FileText, Bot, Sparkles, AlertTriangle } from 'lucide-react';
 import { LineChart, Line, ResponsiveContainer } from "recharts";
 import { useAuth } from "../context/AuthContext";
 import { getProfile, getSymptomHistory, checkSeasonal } from "../services/api";
 import HealthScoreCircle from "../components/HealthScoreCircle";
 import EarlyWarningBanner from "../components/EarlyWarningBanner";
 import RiskCard from "../components/RiskCard";
+import InsightsPanel from "../components/InsightsPanel";
 import toast from "react-hot-toast";
 
 export default function Dashboard() {
@@ -39,13 +41,13 @@ export default function Dashboard() {
       }
 
       if (historyRes.success) {
-        const logs = historyRes.data;
+        const logs = Array.isArray(historyRes.data) ? historyRes.data : [];
         setRecentLogs(logs);
         
         // Check for warnings
         const warned = logs.find(l => l.warningFlagged);
-        if (warned) {
-          setWarning({ reason: warned.warningReason, urgency: warned.warningUrgency });
+        if (warned && warned.warningReason) {
+          setWarning({ reason: warned.warningReason, urgency: warned.warningUrgency || "monitor" });
         }
       }
 
@@ -54,8 +56,10 @@ export default function Dashboard() {
         const cached = localStorage.getItem("norog_predictions");
         if (cached) {
           const parsed = JSON.parse(cached);
-          setPredictions(parsed);
-          if (parsed.length > 0) setLatestPrediction(parsed[0]);
+          if (Array.isArray(parsed)) {
+            setPredictions(parsed);
+            if (parsed.length > 0) setLatestPrediction(parsed[0]);
+          }
         }
       } catch {}
 
@@ -74,7 +78,11 @@ export default function Dashboard() {
     }
   };
 
-  const trendEmoji = { improving: "📈", stable: "➡️", declining: "📉" };
+  const trendIcon = { 
+    improving: <TrendingUp size={16} className="text-success" />, 
+    stable: <ArrowRight size={16} className="text-text-muted" />, 
+    declining: <TrendingDown size={16} className="text-danger" /> 
+  };
   const trendText = { improving: "Improving", stable: "Stable", declining: "Declining" };
 
   // Sparkline data from predictions
@@ -108,12 +116,12 @@ export default function Dashboard() {
       {seasonal?.alert && (
         <div className="rounded-xl p-4 mb-2 flex items-start gap-3 animate-fade-in-up"
           style={{ background: "rgba(245, 158, 11, 0.1)", border: "1px solid var(--color-warning)" }}>
-          <span className="text-2xl">🌧️</span>
+          <CloudRain size={24} className="text-[var(--color-warning)]" />
           <div className="flex-1">
             <h4 className="font-semibold text-sm mb-1">Seasonal Alert</h4>
             <p className="text-sm text-[var(--color-text-secondary)]">{seasonal.alert}</p>
             {seasonal.recommendation && (
-              <p className="text-xs text-[var(--color-text-muted)] mt-1">💡 {seasonal.recommendation}</p>
+              <p className="text-xs text-[var(--color-text-muted)] mt-1 flex items-center gap-1"><Lightbulb size={12} /> {seasonal.recommendation}</p>
             )}
           </div>
         </div>
@@ -125,7 +133,7 @@ export default function Dashboard() {
         <div className="glass-card p-6 flex flex-col items-center">
           <HealthScoreCircle score={latestPrediction?.healthScore || 75} />
           <div className="mt-3 flex items-center gap-2">
-            <span className="text-lg">{trendEmoji[latestPrediction?.trend || "stable"]}</span>
+            <span className="flex items-center justify-center">{trendIcon[latestPrediction?.trend || "stable"]}</span>
             <span className="text-sm text-[var(--color-text-secondary)]">
               {trendText[latestPrediction?.trend || "stable"]}
             </span>
@@ -157,14 +165,14 @@ export default function Dashboard() {
         {/* Quick Actions */}
         <div className="glass-card p-6 flex flex-col gap-3">
           <h3 className="text-sm font-medium text-[var(--color-text-muted)]">Quick Actions</h3>
-          <button onClick={() => navigate("/symptoms")} className="btn-primary text-sm py-2.5 w-full">
-            📋 Log Symptoms
+          <button onClick={() => navigate("/symptoms")} className="btn-primary text-sm py-2.5 w-full flex items-center justify-center gap-2">
+            <FileText size={16} /> Log Symptoms
           </button>
-          <button onClick={() => navigate("/analysis")} className="btn-secondary text-sm py-2.5 w-full">
-            🤖 Run AI Analysis
+          <button onClick={() => navigate("/analysis")} className="btn-secondary text-sm py-2.5 w-full flex items-center justify-center gap-2">
+            <Bot size={16} /> Run AI Analysis
           </button>
-          <button onClick={() => navigate("/whatif")} className="btn-secondary text-sm py-2.5 w-full">
-            🔮 What-If Scenarios
+          <button onClick={() => navigate("/whatif")} className="btn-secondary text-sm py-2.5 w-full flex items-center justify-center gap-2">
+            <Sparkles size={16} /> What-If Scenarios
           </button>
         </div>
       </div>
@@ -194,7 +202,7 @@ export default function Dashboard() {
             {recentLogs.slice(0, 3).map((log, i) => (
               <div key={i} className="glass-card p-4 flex items-center gap-4">
                 <div className="text-xs text-[var(--color-text-muted)] w-20 flex-shrink-0">
-                  {new Date(log.date).toLocaleDateString()}
+                  {new Date(log.createdAt || log.date).toLocaleDateString()}
                 </div>
                 <div className="flex-1 flex flex-wrap gap-1.5">
                   {log.symptoms.map((s, j) => (
@@ -212,12 +220,15 @@ export default function Dashboard() {
                   </div>
                   <span className="text-xs text-[var(--color-text-muted)]">{log.severity}/10</span>
                 </div>
-                {log.warningFlagged && <span className="text-sm">⚠️</span>}
+                {log.warningFlagged && <AlertTriangle size={14} className="text-[var(--color-danger)]" />}
               </div>
             ))}
           </div>
         </div>
       )}
+
+      {/* AI Life Insights */}
+      <InsightsPanel />
     </div>
   );
 }

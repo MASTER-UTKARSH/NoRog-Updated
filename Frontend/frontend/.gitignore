@@ -22,3 +22,23 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+node_modules/
+.env
+.DS_Store
+
+# Ignore user data
+Backend/norog_data/
+
+# System
+.DS_Store
+
+# Node
+node_modules/
+
+# Env & secrets
+.env
+Backend/firebaseServiceAccount.json
+
+# User data (VERY IMPORTANT)
+Backend/norog_data/

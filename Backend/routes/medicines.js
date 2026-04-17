@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { callGroq } from "../services/groqService.js";
 import authMiddleware from "../middleware/authMiddleware.js";
-import { getProfile, addMedicineLog } from "../services/localDB.js";
+import { getProfile, addMedicineLog } from "../services/firebaseDB.js";
 
 const router = Router();
 router.use(authMiddleware);
@@ -14,7 +14,7 @@ router.post("/check", async (req, res) => {
       return res.status(400).json({ success: false, error: "Provide at least one medicine" });
     }
 
-    const profile = getProfile(req.user.id);
+    const profile = await getProfile(req.user.id);
 
     const systemPrompt = `You are a pharmacology AI. Check for drug-drug interactions and drug-disease interactions for this patient.
 
@@ -39,7 +39,7 @@ Check ALL combinations for interactions. Be thorough.`;
 
     const result = await callGroq(systemPrompt, userMessage);
 
-    const medLog = addMedicineLog(req.user.id, {
+    const medLog = await addMedicineLog(req.user.id, {
       medicines,
       interactions: result.drugInteractions || [],
       diseaseInteractions: (result.diseaseInteractions || []).map(d => `${d.drug} + ${d.condition}: ${d.warning}`),

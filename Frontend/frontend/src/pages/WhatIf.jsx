@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, CartesianGrid } from "recharts";
+import { Sparkles, Calendar, Flame, Wine, Moon, Activity, Utensils, Smile, Pill, AlertTriangle, PlusCircle, CheckCircle, Edit3 } from 'lucide-react';
 import { runWhatIf } from "../services/api";
 import LoadingOverlay from "../components/LoadingOverlay";
 import toast from "react-hot-toast";
 
 const PRESETS = [
-  { icon: "🚬", label: "Start smoking" },
-  { icon: "🍺", label: "Drink alcohol daily" },
-  { icon: "🛌", label: "Sleep only 4 hrs/day" },
-  { icon: "🏃", label: "Exercise 5x per week" },
-  { icon: "🍔", label: "Eat junk food daily" },
-  { icon: "🧘", label: "Start meditating daily" },
-  { icon: "💊", label: "Stop taking my medicines" },
+  { icon: <Flame size={24} />, label: "Start smoking" },
+  { icon: <Wine size={24} />, label: "Drink alcohol daily" },
+  { icon: <Moon size={24} />, label: "Sleep only 4 hrs/day" },
+  { icon: <Activity size={24} />, label: "Exercise 5x per week" },
+  { icon: <Utensils size={24} />, label: "Eat junk food daily" },
+  { icon: <Smile size={24} />, label: "Start meditating daily" },
+  { icon: <Pill size={24} />, label: "Stop taking my medicines" },
 ];
 
 export default function WhatIf() {
@@ -45,14 +46,14 @@ export default function WhatIf() {
   const getChartData = () => {
     if (!result?.impact) return [];
     const baseScore = 75; // Assume current score
-    const oy = result.impact.oneYear?.healthScoreChange || 0;
-    const fy = result.impact.fiveYear?.healthScoreChange || 0;
-    const ty = result.impact.tenYear?.healthScoreChange || 0;
+    const oy = result.impact.oneMonth?.healthScoreChange || 0;
+    const fy = result.impact.sixMonth?.healthScoreChange || 0;
+    const ty = result.impact.oneYear?.healthScoreChange || 0;
     return [
       { year: "Now", score: baseScore },
-      { year: "1 Year", score: Math.max(0, Math.min(100, baseScore + oy)) },
-      { year: "5 Years", score: Math.max(0, Math.min(100, baseScore + fy)) },
-      { year: "10 Years", score: Math.max(0, Math.min(100, baseScore + ty)) },
+      { year: "1 Month", score: Math.max(0, Math.min(100, baseScore + oy)) },
+      { year: "6 Month", score: Math.max(0, Math.min(100, baseScore + fy)) },
+      { year: "1 Year", score: Math.max(0, Math.min(100, baseScore + ty)) },
     ];
   };
 
@@ -60,17 +61,19 @@ export default function WhatIf() {
     if (!data) return null;
     return (
       <div className="glass-card p-5 animate-fade-in-up" style={{ animationDelay: `${delay}s` }}>
-        <h3 className="text-base font-semibold mb-3">{label}</h3>
-        
+        <h3 className="text-base font-semibold mb-3 flex items-center gap-2">
+          <Calendar size={16} className="text-[var(--color-brand)]" />
+          {label}
+        </h3>
+
         {/* Score change badge */}
         {data.healthScoreChange !== undefined && (
-          <div className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium mb-3 ${
-            data.healthScoreChange > 0
-              ? "bg-[rgba(16,185,129,0.15)] text-[var(--color-success)]"
-              : data.healthScoreChange < 0
+          <div className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium mb-3 ${data.healthScoreChange > 0
+            ? "bg-[rgba(16,185,129,0.15)] text-[var(--color-success)]"
+            : data.healthScoreChange < 0
               ? "bg-[rgba(239,68,68,0.15)] text-[var(--color-danger)]"
               : "bg-[rgba(100,116,139,0.15)] text-[var(--color-text-muted)]"
-          }`}>
+            }`}>
             {data.healthScoreChange > 0 ? "+" : ""}{data.healthScoreChange} pts
           </div>
         )}
@@ -80,7 +83,7 @@ export default function WhatIf() {
         {/* Worsening */}
         {data.worseningConditions?.length > 0 && (
           <div className="mb-3">
-            <span className="text-xs font-medium text-[var(--color-danger)]">⚠️ Worsening:</span>
+            <span className="text-xs font-medium text-[var(--color-danger)] flex items-center gap-1"><AlertTriangle size={12} /> Worsening:</span>
             <div className="flex flex-wrap gap-1.5 mt-1">
               {data.worseningConditions.map((c, i) => (
                 <span key={i} className="text-xs px-2 py-1 rounded-full bg-[rgba(239,68,68,0.15)] text-[var(--color-danger)]">{c}</span>
@@ -92,7 +95,7 @@ export default function WhatIf() {
         {/* New risks */}
         {data.newRisks?.length > 0 && (
           <div className="mb-3">
-            <span className="text-xs font-medium text-[var(--color-warning)]">🆕 New Risks:</span>
+            <span className="text-xs font-medium text-[var(--color-warning)] flex items-center gap-1"><PlusCircle size={12} /> New Risks:</span>
             <div className="flex flex-wrap gap-1.5 mt-1">
               {data.newRisks.map((r, i) => (
                 <span key={i} className="text-xs px-2 py-1 rounded-full bg-[rgba(245,158,11,0.15)] text-[var(--color-warning)]">{r}</span>
@@ -104,7 +107,7 @@ export default function WhatIf() {
         {/* Improvements */}
         {data.improvements?.length > 0 && (
           <div>
-            <span className="text-xs font-medium text-[var(--color-success)]">✅ Improvements:</span>
+            <span className="text-xs font-medium text-[var(--color-success)] flex items-center gap-1"><CheckCircle size={12} /> Improvements:</span>
             <div className="flex flex-wrap gap-1.5 mt-1">
               {data.improvements.map((m, i) => (
                 <span key={i} className="text-xs px-2 py-1 rounded-full bg-[rgba(16,185,129,0.15)] text-[var(--color-success)]">{m}</span>
@@ -118,10 +121,13 @@ export default function WhatIf() {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <LoadingOverlay visible={loading} message="📊 Running What-If simulation across 1, 5, and 10 year timelines..." />
+      <LoadingOverlay visible={loading} message="Running What-If simulation across 1, 5, and 10 year timelines..." />
 
+      <div className="flex items-center gap-3">
+        <Sparkles size={28} className="text-[var(--color-brand)]" />
+        <h1 className="text-2xl font-bold">What-If Scenario Analyzer</h1>
+      </div>
       <div>
-        <h1 className="text-2xl font-bold">🔮 What-If Scenario Analyzer</h1>
         <p className="text-sm text-[var(--color-text-muted)] mt-1">
           Explore how lifestyle changes could impact your health over time
         </p>
@@ -143,7 +149,7 @@ export default function WhatIf() {
 
       {/* Custom Scenario */}
       <div className="glass-card p-5">
-        <h3 className="text-sm font-medium mb-3">✏️ Custom Scenario</h3>
+        <h3 className="text-sm font-medium mb-3 flex items-center gap-2"><Edit3 size={16} /> Custom Scenario</h3>
         <div className="flex gap-3">
           <input
             className="input-field flex-1"
@@ -167,9 +173,9 @@ export default function WhatIf() {
 
           {/* Timeline Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {renderTimeframe(result.impact?.oneYear, "📅 1 Year", 0)}
-            {renderTimeframe(result.impact?.fiveYear, "📅 5 Years", 0.15)}
-            {renderTimeframe(result.impact?.tenYear, "📅 10 Years", 0.3)}
+            {renderTimeframe(result.impact?.oneYear, "1 Month", 0)}
+            {renderTimeframe(result.impact?.fiveYear, "6 Months", 0.15)}
+            {renderTimeframe(result.impact?.tenYear, "1 Year", 0.3)}
           </div>
 
           {/* Projected Score Chart */}

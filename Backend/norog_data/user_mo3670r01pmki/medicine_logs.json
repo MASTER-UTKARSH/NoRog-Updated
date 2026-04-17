@@ -1,0 +1,25 @@
+[
+  {
+    "_id": "mo36au004wrty",
+    "userId": "mo3670r01pmki",
+    "medicines": [
+      "asprin",
+      "ibuprofen"
+    ],
+    "interactions": [
+      {
+        "drug1": "aspirin",
+        "drug2": "ibuprofen",
+        "severity": "moderate",
+        "description": "Increased risk of gastrointestinal bleeding when taken together"
+      }
+    ],
+    "diseaseInteractions": [
+      "aspirin + hernia: May exacerbate hernia by increasing abdominal pressure",
+      "ibuprofen + hernia: May exacerbate hernia by increasing abdominal pressure"
+    ],
+    "safeToTake": false,
+    "recommendation": "Consult a doctor before taking aspirin or ibuprofen, consider alternative pain relief options",
+    "createdAt": "2026-04-17T17:19:27.840Z"
+  }
+]

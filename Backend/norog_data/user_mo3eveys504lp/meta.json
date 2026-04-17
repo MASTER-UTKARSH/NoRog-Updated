@@ -1,0 +1,13 @@
+{
+  "id": "mo3eveys504lp",
+  "name": "aaluBhujiya",
+  "email": "aalu@gmail.com",
+  "password": "$2a$10$VTM.YjboxxksPHSzsXLm2eLwa9r9FyQmQx6Dr87BLJlM0UtOotf9y",
+  "createdAt": "2026-04-17T21:19:25.060Z",
+  "age": 20,
+  "gender": "female",
+  "location": {
+    "city": "",
+    "country": ""
+  }
+}

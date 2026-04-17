@@ -1,14 +1,14 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { LayoutDashboard, FileText, Bot, Sparkles, Pill, FolderOpen, Activity } from 'lucide-react';
 
 const navItems = [
-  { to: "/dashboard", label: "Dashboard", icon: "🏠" },
-  { to: "/symptoms", label: "Log Symptoms", icon: "📋" },
-  { to: "/analysis", label: "AI Analysis", icon: "🤖" },
-  { to: "/whatif", label: "What-If", icon: "🔮" },
-  { to: "/medicines", label: "Medicines", icon: "💊" },
-  { to: "/history", label: "My History", icon: "📁" },
-  { to: "/report", label: "Doctor Report", icon: "📄" },
+  { to: "/dashboard", label: "Dashboard", icon: <LayoutDashboard size={20} /> },
+  { to: "/symptoms", label: "Log Symptoms", icon: <FileText size={20} /> },
+  { to: "/analysis", label: "AI Analysis", icon: <Bot size={20} /> },
+  { to: "/whatif", label: "What-If", icon: <Sparkles size={20} /> },
+  { to: "/medicines", label: "Medicines", icon: <Pill size={20} /> },
+  { to: "/history", label: "My History", icon: <FolderOpen size={20} /> },
 ];
 
 export default function Navbar() {
@@ -21,9 +21,9 @@ export default function Navbar() {
       <aside className="sidebar hidden md:flex">
         <div className="p-5 border-b border-[var(--color-border)]">
           <NavLink to="/dashboard" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
-                 style={{ background: "linear-gradient(135deg, var(--color-brand), var(--color-accent))" }}>
-              🩺
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white"
+              style={{ background: "linear-gradient(135deg, var(--color-brand), var(--color-accent))" }}>
+              <Activity size={24} />
             </div>
             <div>
               <div className="text-lg font-bold gradient-text">NoRog</div>
@@ -64,25 +64,7 @@ export default function Navbar() {
       </aside>
 
       {/* Mobile Bottom Tab Bar */}
-      <nav className="bottom-tabs md:hidden">
-        {navItems.slice(0, 5).map((item) => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            className={({ isActive }) => `bottom-tab ${isActive ? "active" : ""}`}
-          >
-            <span>{item.icon}</span>
-            <span>{item.label}</span>
-          </NavLink>
-        ))}
-        <NavLink
-          to="/history"
-          className={({ isActive }) => `bottom-tab ${isActive ? "active" : ""}`}
-        >
-          <span>📁</span>
-          <span>More</span>
-        </NavLink>
-      </nav>
+
     </>
   );
 }

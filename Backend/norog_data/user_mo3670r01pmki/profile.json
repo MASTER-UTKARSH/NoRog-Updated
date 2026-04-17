@@ -1,0 +1,21 @@
+{
+  "currentSymptoms": [
+    "Joint pain",
+    "Back pain"
+  ],
+  "medicalHistory": [
+    "hernia"
+  ],
+  "familyHistory": [],
+  "lifestyle": {
+    "smoker": false,
+    "alcohol": "none",
+    "exerciseFrequency": "never",
+    "sleepHours": 6,
+    "diet": "balanced"
+  },
+  "medicines": [],
+  "onboardingComplete": true,
+  "updatedAt": "2026-04-17T17:17:14.537Z",
+  "userId": "mo3670r01pmki"
+}

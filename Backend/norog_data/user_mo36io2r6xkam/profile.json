@@ -1,0 +1,23 @@
+{
+  "currentSymptoms": [
+    "Stomach pain",
+    "Skin rash"
+  ],
+  "medicalHistory": [
+    "Depression",
+    "PCOS",
+    "periods pain"
+  ],
+  "familyHistory": [],
+  "lifestyle": {
+    "smoker": true,
+    "alcohol": "regular",
+    "exerciseFrequency": "never",
+    "sleepHours": 12,
+    "diet": "keto"
+  },
+  "medicines": [],
+  "onboardingComplete": true,
+  "updatedAt": "2026-04-17T17:26:35.104Z",
+  "userId": "mo36io2r6xkam"
+}

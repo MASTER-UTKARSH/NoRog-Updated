@@ -1,0 +1,46 @@
+[
+  {
+    "_id": "mo36lpul7ed32",
+    "userId": "mo36io2r6xkam",
+    "risks": [
+      {
+        "disease": "Gastrointestinal Disorder",
+        "confidence": 80,
+        "contributingSymptoms": [
+          "Stomach pain"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Skin Condition",
+        "confidence": 70,
+        "contributingSymptoms": [
+          "Skin rash"
+        ],
+        "urgency": "Monitor",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Mental Health Disorder",
+        "confidence": 60,
+        "contributingSymptoms": [],
+        "urgency": "Monitor",
+        "geneticFactor": false
+      }
+    ],
+    "healthScore": 40,
+    "trend": "declining",
+    "correlations": [
+      {
+        "symptoms": [
+          "Stomach pain",
+          "Skin rash"
+        ],
+        "possibleCondition": "Autoimmune Disorder"
+      }
+    ],
+    "summary": "The patient's current symptoms and lifestyle suggest a high risk of gastrointestinal and skin disorders. The patient's history of depression and PCOS also increases the risk of mental health disorders. It is essential to monitor the patient's symptoms and adjust their lifestyle to reduce the risk of these conditions.",
+    "createdAt": "2026-04-17T17:27:55.677Z"
+  }
+]

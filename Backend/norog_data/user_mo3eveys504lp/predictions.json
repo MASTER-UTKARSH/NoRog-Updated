@@ -1,0 +1,47 @@
+[
+  {
+    "_id": "mo3evwzf6ebgu",
+    "userId": "mo3eveys504lp",
+    "risks": [
+      {
+        "disease": "Chronic Obstructive Pulmonary Disease (COPD)",
+        "confidence": 60,
+        "contributingSymptoms": [
+          "Cough"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Pneumonia",
+        "confidence": 40,
+        "contributingSymptoms": [
+          "Cough"
+        ],
+        "urgency": "Monitor",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Lung Cancer",
+        "confidence": 30,
+        "contributingSymptoms": [
+          "Cough"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      }
+    ],
+    "healthScore": 70,
+    "trend": "declining",
+    "correlations": [
+      {
+        "symptoms": [
+          "Cough"
+        ],
+        "possibleCondition": "Respiratory Infection"
+      }
+    ],
+    "summary": "The patient is at risk for respiratory diseases due to smoking and lack of exercise. The cough symptom is a concern and should be monitored by a doctor. A healthy diet and adequate sleep are positive factors, but overall lifestyle changes are needed to reduce disease risk.",
+    "createdAt": "2026-04-17T21:19:48.411Z"
+  }
+]

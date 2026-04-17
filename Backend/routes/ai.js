@@ -8,7 +8,7 @@ import {
   addPrediction,
   getLatestPrediction,
   addWhatIfLog
-} from "../services/localDB.js";
+} from "../services/firebaseDB.js";
 
 const router = Router();
 router.use(authMiddleware);
@@ -16,9 +16,9 @@ router.use(authMiddleware);
 // POST /api/ai/predict — full risk prediction
 router.post("/predict", async (req, res) => {
   try {
-    const user = findUserById(req.user.id);
-    const profile = getProfile(req.user.id);
-    const recentLogs = getSymptomLogs(req.user.id, 30);
+    const user = await findUserById(req.user.id);
+    const profile = await getProfile(req.user.id);
+    const recentLogs = await getSymptomLogs(req.user.id, 30);
 
     const systemPrompt = `You are a proactive medical AI assistant. Analyze the following patient data and return a disease risk assessment.
 
@@ -58,7 +58,7 @@ IMPORTANT: Factor in genetic predispositions heavily (family history increases b
 
     const result = await callGroq(systemPrompt, userMessage);
 
-    const prediction = addPrediction(req.user.id, {
+    const prediction = await addPrediction(req.user.id, {
       risks: result.risks || [],
       healthScore: result.healthScore || 75,
       trend: result.trend || "stable",
@@ -79,9 +79,9 @@ router.post("/whatif", async (req, res) => {
     const { scenario } = req.body;
     if (!scenario) return res.status(400).json({ success: false, error: "Scenario is required" });
 
-    const user = findUserById(req.user.id);
-    const profile = getProfile(req.user.id);
-    const latestPrediction = getLatestPrediction(req.user.id);
+    const user = await findUserById(req.user.id);
+    const profile = await getProfile(req.user.id);
+    const latestPrediction = await getLatestPrediction(req.user.id);
 
     const systemPrompt = `You are a predictive health AI. The user wants to know the long-term health impact of a lifestyle change.
 
@@ -90,15 +90,15 @@ You must respond with ONLY valid JSON. No markdown formatting, no backticks, no 
 Return this exact JSON structure:
 {
   "scenario": "string",
-  "oneYear": {
+  "oneMonth": {
     "summary": "string",
     "worseningConditions": ["string array"],
     "newRisks": ["string array"],
     "improvements": ["string array"],
     "healthScoreChange": number (e.g. -5 or +8)
   },
-  "fiveYear": { same structure },
-  "tenYear": { same structure }
+  "sixMonth": { same structure },
+  "oneYear": { same structure }
 }`;
 
     const userMessage = `The user wants to know: "${scenario}"
@@ -117,7 +117,7 @@ Consider how this change INTERACTS with their existing conditions and genetic pr
 
     const result = await callGroq(systemPrompt, userMessage);
 
-    const whatifLog = addWhatIfLog(req.user.id, {
+    const whatifLog = await addWhatIfLog(req.user.id, {
       scenario: result.scenario || scenario,
       impact: {
         oneYear: result.oneYear || {},
@@ -136,11 +136,11 @@ Consider how this change INTERACTS with their existing conditions and genetic pr
 // POST /api/ai/seasonal — seasonal risk check
 router.post("/seasonal", async (req, res) => {
   try {
-    const user = findUserById(req.user.id);
-    const profile = getProfile(req.user.id);
-    const recentLogs = getSymptomLogs(req.user.id, 5);
+    const user = await findUserById(req.user.id);
+    const profile = await getProfile(req.user.id);
+    const recentLogs = await getSymptomLogs(req.user.id, 5);
 
-    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const currentMonth = months[new Date().getMonth()];
     const city = user?.location?.city || "Unknown";
     const country = user?.location?.country || "Unknown";

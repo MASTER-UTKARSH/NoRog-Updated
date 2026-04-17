@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { Search, Camera, FileText, X, AlertTriangle } from 'lucide-react';
 import { logSymptoms } from "../services/api";
 import LoadingOverlay from "../components/LoadingOverlay";
 import toast from "react-hot-toast";
@@ -64,7 +65,7 @@ export default function SymptomLogger() {
         toast.success("Symptoms logged successfully!");
         
         if (res.data.warning?.warningTriggered) {
-          toast(res.data.warning.reason, { icon: "⚠️", duration: 6000 });
+          toast(res.data.warning.reason, { icon: <AlertTriangle size={16} color="orange"/>, duration: 6000 });
         }
         
         // Reset form
@@ -86,10 +87,13 @@ export default function SymptomLogger() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-fade-in">
-      <LoadingOverlay visible={loading} message="🔍 Analyzing your symptoms and checking for warnings..." />
+      <LoadingOverlay visible={loading} message="Analyzing your symptoms and checking for warnings..." />
 
+      <div className="flex items-center gap-3">
+        <FileText size={28} className="text-[var(--color-brand)]" />
+        <h1 className="text-2xl font-bold">Log Symptoms</h1>
+      </div>
       <div>
-        <h1 className="text-2xl font-bold">📋 Log Symptoms</h1>
         <p className="text-sm text-[var(--color-text-muted)] mt-1">Track your symptoms for more accurate AI predictions</p>
       </div>
 
@@ -97,13 +101,16 @@ export default function SymptomLogger() {
         {/* Symptom Selection */}
         <div className="glass-card p-6">
           <h3 className="text-sm font-medium mb-3">Select Symptoms</h3>
-          <input
-            type="text"
-            className="input-field mb-3"
-            placeholder="🔍 Search symptoms..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+          <div className="relative mb-3">
+            <Search className="absolute left-3 top-2.5 text-[var(--color-text-muted)]" size={16} />
+            <input
+              type="text"
+              className="input-field pl-9"
+              placeholder="Search symptoms..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
           <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto">
             {filteredSymptoms.map(s => (
               <button
@@ -123,7 +130,7 @@ export default function SymptomLogger() {
                 {selected.map(s => (
                   <span key={s} className="symptom-chip selected text-xs">
                     {s}
-                    <button type="button" className="ml-1.5" onClick={() => toggleSymptom(s)}>✕</button>
+                    <button type="button" className="ml-1.5 flex items-center justify-center p-0.5 rounded-full hover:bg-black/10" onClick={() => toggleSymptom(s)}><X size={12} /></button>
                   </span>
                 ))}
               </div>
@@ -160,7 +167,7 @@ export default function SymptomLogger() {
 
         {/* Photo Upload */}
         <div className="glass-card p-6">
-          <h3 className="text-sm font-medium mb-3">📸 Photo Upload (Optional)</h3>
+          <h3 className="text-sm font-medium mb-3 flex items-center gap-2"><Camera size={16} /> Photo Upload (Optional)</h3>
           <p className="text-xs text-[var(--color-text-muted)] mb-3">Upload a photo of visible symptoms (rash, swelling, etc.) for AI analysis</p>
           
           <input ref={fileRef} type="file" accept="image/jpeg,image/png" className="hidden" onChange={handlePhoto} />
@@ -172,15 +179,15 @@ export default function SymptomLogger() {
                 type="button"
                 className="absolute top-2 right-2 w-8 h-8 bg-[rgba(0,0,0,0.6)] rounded-full flex items-center justify-center text-white"
                 onClick={() => { setPhoto(null); setPhotoPreview(null); }}
-              >✕</button>
+              ><X size={16} /></button>
             </div>
           ) : (
             <button
               type="button"
               onClick={() => fileRef.current?.click()}
-              className="w-full py-8 border-2 border-dashed border-[var(--color-border)] rounded-xl text-[var(--color-text-muted)] hover:border-[var(--color-brand)] hover:text-[var(--color-brand-light)] transition-all"
+              className="w-full py-8 border-2 border-dashed border-[var(--color-border)] rounded-xl text-[var(--color-text-muted)] hover:border-[var(--color-brand)] hover:text-[var(--color-brand-light)] transition-all flex flex-col items-center gap-2"
             >
-              📷 Click to upload photo
+              <Camera size={24} /> Click to upload photo
             </button>
           )}
         </div>

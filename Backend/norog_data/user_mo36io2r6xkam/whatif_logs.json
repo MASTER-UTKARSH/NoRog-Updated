@@ -1,0 +1,152 @@
+[
+  {
+    "_id": "mo36qzck9p7ps",
+    "userId": "mo36io2r6xkam",
+    "scenario": "daily piyungi daaru",
+    "impact": {
+      "oneYear": {
+        "summary": "Increased risk of liver damage and worsening mental health due to excessive alcohol consumption",
+        "worseningConditions": [
+          "Depression",
+          "PCOS"
+        ],
+        "newRisks": [
+          "Liver Disease",
+          "Alcohol-Induced Psychosis"
+        ],
+        "improvements": [],
+        "healthScoreChange": -10
+      },
+      "fiveYear": {
+        "summary": "Significant increase in risk of liver cirrhosis, pancreatitis, and certain types of cancer, with potential worsening of PCOS symptoms and mental health",
+        "worseningConditions": [
+          "Depression",
+          "PCOS",
+          "Gastrointestinal Disorder"
+        ],
+        "newRisks": [
+          "Liver Cirrhosis",
+          "Pancreatitis",
+          "Certain Types of Cancer"
+        ],
+        "improvements": [],
+        "healthScoreChange": -25
+      },
+      "tenYear": {
+        "summary": "Severe and potentially life-threatening health consequences, including liver failure, increased risk of certain cancers, and significant decline in mental and physical health",
+        "worseningConditions": [
+          "Depression",
+          "PCOS",
+          "Gastrointestinal Disorder",
+          "Mental Health Disorder"
+        ],
+        "newRisks": [
+          "Liver Failure",
+          "Certain Types of Cancer",
+          "Alcohol-Induced Dementia"
+        ],
+        "improvements": [],
+        "healthScoreChange": -40
+      }
+    },
+    "createdAt": "2026-04-17T17:32:01.268Z"
+  },
+  {
+    "_id": "mo36s39zas7oh",
+    "userId": "mo36io2r6xkam",
+    "scenario": "daily sugar and salt consumption",
+    "impact": {
+      "oneYear": {
+        "summary": "Increased risk of chronic diseases due to excessive sugar and salt intake, exacerbating existing conditions",
+        "worseningConditions": [
+          "Depression",
+          "PCOS",
+          "Periods pain"
+        ],
+        "newRisks": [
+          "Hypertension",
+          "Type 2 Diabetes",
+          "Gout"
+        ],
+        "improvements": [],
+        "healthScoreChange": -10
+      },
+      "fiveYear": {
+        "summary": "Significant decline in overall health, increased risk of cardiovascular disease and other complications",
+        "worseningConditions": [
+          "Depression",
+          "PCOS",
+          "Periods pain",
+          "Gastrointestinal Disorder"
+        ],
+        "newRisks": [
+          "Cardiovascular Disease",
+          "Kidney Disease",
+          "Certain types of Cancer"
+        ],
+        "improvements": [],
+        "healthScoreChange": -25
+      },
+      "tenYear": {
+        "summary": "Severe health consequences, potential organ damage, and increased mortality risk",
+        "worseningConditions": [
+          "Depression",
+          "PCOS",
+          "Periods pain",
+          "Gastrointestinal Disorder",
+          "Cardiovascular Disease"
+        ],
+        "newRisks": [
+          "Heart Failure",
+          "Chronic Kidney Disease",
+          "Vision Loss"
+        ],
+        "improvements": [],
+        "healthScoreChange": -40
+      }
+    },
+    "createdAt": "2026-04-17T17:32:53.015Z"
+  },
+  {
+    "_id": "mo36swsqb5lej",
+    "userId": "mo36io2r6xkam",
+    "scenario": "no daily sugar and salt",
+    "impact": {
+      "oneYear": {
+        "summary": "Reduced inflammation and improved hormonal balance, but potential for withdrawal symptoms and nutrient deficiencies",
+        "worseningConditions": [
+          "Depression",
+          "PCOS symptoms may temporarily worsen due to withdrawal from sugar"
+        ],
+        "newRisks": [
+          "Nutrient deficiencies, particularly potassium and iodine"
+        ],
+        "improvements": [
+          "Reduced blood pressure, improved insulin sensitivity, decreased symptoms of Gastrointestinal Disorder"
+        ],
+        "healthScoreChange": 12
+      },
+      "fiveYear": {
+        "summary": "Significant reduction in chronic disease risk, improved mental health, and reduced PCOS symptoms",
+        "worseningConditions": [],
+        "newRisks": [
+          "Osteoporosis risk if calcium intake is not adequately replaced"
+        ],
+        "improvements": [
+          "Reduced risk of Mental Health Disorder, improved skin health, decreased symptoms of Skin Condition"
+        ],
+        "healthScoreChange": 25
+      },
+      "tenYear": {
+        "summary": "Substantial reduction in mortality risk, improved overall health, and reduced risk of chronic diseases",
+        "worseningConditions": [],
+        "newRisks": [],
+        "improvements": [
+          "Reduced risk of Gastrointestinal Disorder, improved hormonal balance, decreased risk of osteoporosis with adequate calcium intake"
+        ],
+        "healthScoreChange": 40
+      }
+    },
+    "createdAt": "2026-04-17T17:33:31.274Z"
+  }
+]

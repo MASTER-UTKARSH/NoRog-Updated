@@ -11,6 +11,7 @@ import symptomRoutes from "./routes/symptoms.js";
 import aiRoutes from "./routes/ai.js";
 import medicineRoutes from "./routes/medicines.js";
 import reportRoutes from "./routes/report.js";
+import chatRoutes from "./routes/chat.js";
 import { DATA_ROOT } from "./services/localDB.js";
 
 dotenv.config();
@@ -51,6 +52,7 @@ app.use("/api/symptoms", symptomRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/medicines", medicineRoutes);
 app.use("/api/report", reportRoutes);
+app.use("/api/chat", chatRoutes);
 
 // Health check
 app.get("/", (req, res) => {

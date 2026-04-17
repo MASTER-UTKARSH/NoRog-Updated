@@ -1,0 +1,46 @@
+[
+  {
+    "role": "user",
+    "content": "vo sab to theek hai lekin aap kese hai?",
+    "timestamp": "2026-04-17T17:29:13.333Z"
+  },
+  {
+    "role": "assistant",
+    "content": "Main theek hoon, dhanyavad. Aapke swasthya ke bare mein kuchh charcha karna chahte hain?",
+    "options": [],
+    "timestamp": "2026-04-17T17:29:16.530Z"
+  },
+  {
+    "role": "user",
+    "content": "nhi",
+    "timestamp": "2026-04-17T17:29:25.450Z"
+  },
+  {
+    "role": "assistant",
+    "content": "Theek hai, agar aapko kisi bhi samay kuchh chahiye ho, to mujhe bataiye.",
+    "options": [],
+    "timestamp": "2026-04-17T17:29:26.201Z"
+  },
+  {
+    "role": "user",
+    "content": "aap chahiye ho",
+    "timestamp": "2026-04-17T17:29:47.798Z"
+  },
+  {
+    "role": "assistant",
+    "content": "Main yahan hoon, aapke liye uplabdh hoon. Agar aapko kisi bhi tarah ki madad ya samarthan ki avashyakta hai, to kripaya mujhe bataiye.",
+    "options": [],
+    "timestamp": "2026-04-17T17:29:48.707Z"
+  },
+  {
+    "role": "user",
+    "content": "hai naaaaaaaaa.. vooo naaa.. thoda sa naa",
+    "timestamp": "2026-04-17T17:30:25.672Z"
+  },
+  {
+    "role": "assistant",
+    "content": "Main samajh gaya, aap thoda udasin lag rahe hain. Aap apne dil ki baat mujhse share kar sakte hain, main sunne ke liye yahan hoon. Ek practical suggestion: Thoda sa aram karein aur apne vicharon ko likhne ki koshish karein, yeh aapko thoda bahatar mehsoos kara sakta hai.",
+    "options": [],
+    "timestamp": "2026-04-17T17:30:27.723Z"
+  }
+]

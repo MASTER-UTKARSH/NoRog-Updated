@@ -55,4 +55,10 @@ export const checkMedicineInteractions = (medicines) => api.post("/medicines/che
 // ─── Report ───
 export const downloadReport = () => api.get("/report/generate", { responseType: "blob" }).then(r => r.data);
 
+// ─── Chat Assistant ───
+export const getChatHistory = () => api.get("/chat/history").then(r => r.data);
+export const sendChatMessage = (message) => api.post("/chat", { message }).then(r => r.data);
+export const getAssistantInsights = () => api.get("/chat/insights").then(r => r.data);
+export const resetChatHistory = () => api.delete("/chat/history").then(r => r.data);
+
 export default api;

@@ -1,3 +1,5 @@
+import { Dna } from 'lucide-react';
+
 export default function RiskCard({ risk }) {
   const level = risk.confidence > 60 ? "high" : risk.confidence > 30 ? "moderate" : "low";
   const levelColors = {
@@ -22,8 +24,8 @@ export default function RiskCard({ risk }) {
         <h3 className="text-base font-semibold">{risk.disease}</h3>
         <div className="flex items-center gap-2">
           {risk.geneticFactor && (
-            <span className="text-xs px-2 py-1 rounded-full bg-[rgba(139,92,246,0.2)] text-[#a78bfa]">
-              🧬 Genetic
+            <span className="text-xs px-2 py-1 rounded-full bg-[rgba(139,92,246,0.2)] text-[#a78bfa] flex items-center gap-1">
+              <Dna size={12} /> Genetic
             </span>
           )}
           <span

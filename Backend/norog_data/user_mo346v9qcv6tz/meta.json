@@ -1,0 +1,13 @@
+{
+  "id": "mo346v9qcv6tz",
+  "name": "Aman",
+  "email": "aman@gmail.com",
+  "password": "$2a$10$OyTgRDBIOREJ1Rux4dSMrefw6MDr8Ox1Q17iRHW5E4SL0EPMIOnpC",
+  "createdAt": "2026-04-17T16:20:23.631Z",
+  "age": 20,
+  "gender": "male",
+  "location": {
+    "city": "jush",
+    "country": "as"
+  }
+}

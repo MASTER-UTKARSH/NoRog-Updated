@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { saveProfile } from "../services/api";
 import toast from "react-hot-toast";
+import { User, Hospital, Activity, Dna, Pill, X, Check } from 'lucide-react';
 
 const COMMON_SYMPTOMS = ["Headache", "Fatigue", "Fever", "Cough", "Body ache", "Nausea", "Dizziness", "Chest pain", "Shortness of breath", "Joint pain", "Back pain", "Insomnia", "Anxiety", "Skin rash", "Stomach pain"];
 
@@ -83,7 +84,7 @@ export default function Onboarding() {
         medicines: data.medicines
       };
       await saveProfile(payload);
-      toast.success("Profile saved! Welcome to NoRog 🩺");
+      toast.success("Profile saved! Welcome to NoRog", { icon: <Check size={16} /> });
       navigate("/dashboard");
     } catch (err) {
       toast.error("Failed to save profile. Please try again.");
@@ -110,7 +111,7 @@ export default function Onboarding() {
           {/* Step 1: Demographics & Current Symptoms */}
           {step === 1 && (
             <div className="space-y-6 animate-fade-in">
-              <h2 className="text-lg font-semibold">👤 Basic Info & Current Symptoms</h2>
+              <h2 className="text-lg font-semibold flex items-center gap-2"><User size={20} className="text-[var(--color-brand)]" /> Basic Info & Current Symptoms</h2>
               
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -146,7 +147,7 @@ export default function Onboarding() {
           {/* Step 2: Medical History */}
           {step === 2 && (
             <div className="space-y-6 animate-fade-in">
-              <h2 className="text-lg font-semibold">🏥 Medical History</h2>
+              <h2 className="text-lg font-semibold flex items-center gap-2"><Hospital size={20} className="text-[var(--color-brand)]" /> Medical History</h2>
               <p className="text-sm text-[var(--color-text-muted)]">Select any conditions you have been diagnosed with</p>
               
               <div className="flex flex-wrap gap-2">
@@ -169,7 +170,7 @@ export default function Onboarding() {
           {/* Step 3: Lifestyle */}
           {step === 3 && (
             <div className="space-y-6 animate-fade-in">
-              <h2 className="text-lg font-semibold">🏃 Lifestyle</h2>
+              <h2 className="text-lg font-semibold flex items-center gap-2"><Activity size={20} className="text-[var(--color-brand)]" /> Lifestyle</h2>
               
               <div className="flex items-center justify-between p-4 bg-[var(--color-bg-surface-alt)] rounded-xl">
                 <span className="text-sm">Do you smoke?</span>
@@ -229,7 +230,7 @@ export default function Onboarding() {
           {/* Step 4: Family History, Medicines, Location */}
           {step === 4 && (
             <div className="space-y-6 animate-fade-in">
-              <h2 className="text-lg font-semibold">🧬 Family History & Medications</h2>
+              <h2 className="text-lg font-semibold flex items-center gap-2"><Dna size={20} className="text-[var(--color-brand)]" /> Family History & Medications</h2>
 
               {/* Family History */}
               <div>
@@ -247,7 +248,7 @@ export default function Onboarding() {
                   {data.familyHistory.map((fh, i) => (
                     <span key={i} className="symptom-chip selected">
                       {fh.relation} → {fh.condition}
-                      <button className="ml-2" onClick={() => setData(d => ({...d, familyHistory: d.familyHistory.filter((_, j) => j !== i)}))}>✕</button>
+                      <button className="ml-2 flex items-center justify-center p-0.5 rounded-full hover:bg-black/10" onClick={() => setData(d => ({...d, familyHistory: d.familyHistory.filter((_, j) => j !== i)}))}><X size={12} /></button>
                     </span>
                   ))}
                 </div>
@@ -266,8 +267,8 @@ export default function Onboarding() {
                 <div className="flex flex-wrap gap-2">
                   {data.medicines.map((m, i) => (
                     <span key={i} className="symptom-chip selected">
-                      💊 {m.name} {m.dosage}
-                      <button className="ml-2" onClick={() => setData(d => ({...d, medicines: d.medicines.filter((_, j) => j !== i)}))}>✕</button>
+                      <span className="flex items-center gap-1"><Pill size={12} /> {m.name} {m.dosage}</span>
+                      <button className="ml-2 flex items-center justify-center p-0.5 rounded-full hover:bg-black/10" onClick={() => setData(d => ({...d, medicines: d.medicines.filter((_, j) => j !== i)}))}><X size={12} /></button>
                     </span>
                   ))}
                 </div>
