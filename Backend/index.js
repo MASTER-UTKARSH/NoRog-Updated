@@ -27,29 +27,33 @@ if (!fs.existsSync(uploadsDir)) {
 }
 
 // Middleware
+// 1. Updated Origin List
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
   "http://localhost:3000",
   "https://no-rog.netlify.app",
-  process.env.FRONTEND_URL,
-].filter(Boolean);
+];
 
-app.use(cors({
+// 2. Updated Logic
+const corsOptions = {
   origin: (origin, callback) => {
-    // allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV === "development") {
+
+    if (allowedOrigins.includes(origin) || process.env.NODE_ENV === "development") {
       callback(null, true);
     } else {
-      console.warn(`Blocked by CORS: ${origin}`);
-      callback(new Error("Not allowed by CORS"));
+      // 🕵️‍♀️ THIS LINE IS KEY: It will print the exact URL that is failing in your Render logs
+      console.error(`🚨 CORS BLOCKED THIS URL: [${origin}]`);
+      callback(null, false);
     }
   },
-  credentials: true
-}));
+  credentials: true,
+  optionsSuccessStatus: 200
+};
 
-app.options("(.*)", cors()); // Correct wildcard syntax for Express 5 preflight handled by path-to-regexp
+app.use(cors(corsOptions));
+app.options("(.*)", cors(corsOptions));// Correct wildcard syntax for Express 5 preflight handled by path-to-regexp
 app.use(express.json({ limit: "10mb" }));
 app.use("/uploads", express.static(uploadsDir));
 
@@ -79,14 +83,15 @@ app.get("/", (req, res) => {
 });
 
 // Global error handler
+// Global error handler ✨
 app.use((err, req, res, next) => {
-  console.error("Unhandled error:", err.message);
-  res.status(500).json({ success: false, error: "Internal server error" });
-});
+  console.error("🚨 Unhandled error:", err);
 
-app.use((err, req, res, next) => {
-  console.error("ERROR:", err);
-  res.status(500).json({ error: err.message });
+  // Send back a clean error response
+  res.status(500).json({
+    success: false,
+    error: err.message || "Internal server error"
+  });
 });
 
 app.listen(PORT, () => {
