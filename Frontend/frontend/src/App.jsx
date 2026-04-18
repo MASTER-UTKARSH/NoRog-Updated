@@ -35,7 +35,7 @@ function AppLayout() {
   const { isAuthenticated } = useAuth();
   const location = useLocation();
   
-  const noNavRoutes = ["/", "/auth", "/onboarding", "/dashboard"];
+  const noNavRoutes = ["/", "/auth", "/onboarding"];
   const showNav = isAuthenticated && !noNavRoutes.includes(location.pathname);
 
   return (

@@ -1,10 +1,10 @@
 import { RadialBarChart, RadialBar, ResponsiveContainer } from "recharts";
 
-export default function HealthScoreCircle({ score = 75, size = 180 }) {
+export default function HealthScoreCircle({ score = 75, size = 160 }) {
   const getColor = (s) => {
-    if (s >= 70) return "#10B981";
-    if (s >= 40) return "#F59E0B";
-    return "#EF4444";
+    if (s >= 70) return "#059669";
+    if (s >= 40) return "#D97706";
+    return "#DC2626";
   };
 
   const color = getColor(score);
@@ -15,21 +15,21 @@ export default function HealthScoreCircle({ score = 75, size = 180 }) {
       <ResponsiveContainer width="100%" height="100%">
         <RadialBarChart
           cx="50%" cy="50%"
-          innerRadius="75%" outerRadius="95%"
+          innerRadius="78%" outerRadius="96%"
           startAngle={90} endAngle={-270}
           data={data}
-          barSize={12}
+          barSize={10}
         >
           <RadialBar
             dataKey="value"
             cornerRadius={10}
-            background={{ fill: "rgba(42, 42, 64, 0.5)" }}
+            background={{ fill: "#F1F3F5" }}
           />
         </RadialBarChart>
       </ResponsiveContainer>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="text-3xl font-bold" style={{ color }}>{score}</span>
-        <span className="text-xs text-[var(--color-text-muted)]">Health Score</span>
+        <span className="text-3xl font-extrabold tracking-tight" style={{ color }}>{score}</span>
+        <span className="text-[10px] font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mt-0.5">Health Score</span>
       </div>
     </div>
   );

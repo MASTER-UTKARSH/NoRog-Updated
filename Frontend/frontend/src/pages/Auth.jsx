@@ -90,22 +90,21 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-[var(--color-bg-body)]">
+      <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white"
-                 style={{ background: "linear-gradient(135deg, var(--color-brand), var(--color-accent))" }}>
-              <Activity size={24} />
+          <div className="inline-flex items-center gap-2.5 mb-3">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white bg-[var(--color-brand)]">
+              <Activity size={22} />
             </div>
-            <span className="text-2xl font-bold gradient-text">Noरोग</span>
+            <span className="text-xl font-extrabold text-[var(--color-text)]">Noरोग</span>
           </div>
-          <p className="text-sm text-[var(--color-text-muted)]">Proactive Disease Monitoring System</p>
+          <p className="text-sm text-[var(--color-text-muted)]">Preventive Health Intelligence</p>
         </div>
 
         {/* Card */}
-        <div className="glass-card p-8">
+        <div className="card-elevated p-7">
           {/* Tabs */}
           <div className="flex mb-6 bg-[var(--color-bg-surface-alt)] rounded-lg p-1">
             <button
@@ -133,7 +132,7 @@ export default function Auth() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {tab === "register" && (
               <div>
-                <label className="block text-xs font-medium text-[var(--color-text-muted)] mb-1.5">Full Name</label>
+                <label className="block text-xs font-semibold text-[var(--color-text-secondary)] mb-1.5">Full Name</label>
                 <input
                   type="text"
                   className="input-field"
@@ -146,7 +145,7 @@ export default function Auth() {
               </div>
             )}
             <div>
-              <label className="block text-xs font-medium text-[var(--color-text-muted)] mb-1.5">Email</label>
+              <label className="block text-xs font-semibold text-[var(--color-text-secondary)] mb-1.5">Email</label>
               <input
                 type="email"
                 className="input-field"
@@ -157,7 +156,7 @@ export default function Auth() {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-[var(--color-text-muted)] mb-1.5">Password</label>
+              <label className="block text-xs font-semibold text-[var(--color-text-secondary)] mb-1.5">Password</label>
               <input
                 type="password"
                 className="input-field"

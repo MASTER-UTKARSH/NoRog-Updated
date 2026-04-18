@@ -1,104 +1,203 @@
 import { Link } from "react-router-dom";
-import { Bot, Sparkles, Pill, Dna, CloudRain, FileText, Activity, ShieldAlert } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { Activity, ArrowRight, Shield, Zap, BarChart3, Pill, HeartPulse, Dna, Brain, ChevronRight } from 'lucide-react';
 
-const features = [
-  { icon: <Bot size={32} className="text-blue-500" />, title: "AI-Powered Risk Prediction", desc: "Advanced AI analyzes your symptoms, medical history, and genetics to predict disease risks." },
-  { icon: <Sparkles size={32} className="text-purple-500" />, title: "What-If Scenario Analyzer", desc: "See how lifestyle changes would impact your health in 1, 5, and 10 years." },
-  { icon: <Pill size={32} className="text-rose-500" />, title: "Drug Interaction Checker", desc: "Check medicine combinations for dangerous interactions before you take them." },
-  { icon: <Dna size={32} className="text-indigo-500" />, title: "Genetic Risk Profiling", desc: "Factor in family history to identify hereditary disease predispositions." },
-  { icon: <CloudRain size={32} className="text-amber-500" />, title: "Seasonal Disease Alerts", desc: "Location-based alerts for diseases common in your area this season." },
+const FEATURES = [
+  {
+    icon: <Brain size={22} />,
+    title: "AI Risk Prediction",
+    desc: "Our model analyzes 10+ health factors to catch risks early.",
+    color: "#2563EB"
+  },
+  {
+    icon: <BarChart3 size={22} />,
+    title: "What-If Simulator",
+    desc: "See how lifestyle changes affect your health over 1 month to 1 year.",
+    color: "#7C3AED"
+  },
+  {
+    icon: <Pill size={22} />,
+    title: "Drug Interaction Checker",
+    desc: "Instantly check medicine combos for dangerous interactions.",
+    color: "#DC2626"
+  },
+  {
+    icon: <Dna size={22} />,
+    title: "Genetic Risk Profiling",
+    desc: "Factor in family history for hereditary disease detection.",
+    color: "#059669"
+  },
+  {
+    icon: <HeartPulse size={22} />,
+    title: "Symptom Tracking",
+    desc: "Log and monitor symptoms over time with intelligent severity tracking.",
+    color: "#D97706"
+  },
+  {
+    icon: <Shield size={22} />,
+    title: "Seasonal Alerts",
+    desc: "Location-aware alerts for diseases common in your area this season.",
+    color: "#0891B2"
+  },
+];
+
+const STATS = [
+  { value: "10+", label: "Health factors analyzed" },
+  { value: "AI", label: "Powered predictions" },
+  { value: "24/7", label: "Health monitoring" },
 ];
 
 export default function Landing() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => { setVisible(true); }, []);
+
   return (
-    <div className="min-h-screen">
-      {/* Hero */}
-      <section className="relative overflow-hidden py-20 px-4">
-        <div className="absolute inset-0 opacity-30"
+    <div className="min-h-screen bg-[var(--color-bg-body)]">
+      {/* ── Navigation Bar ── */}
+      <nav className="sticky top-0 z-50 border-b border-[var(--color-border)]" style={{ background: "rgba(250,251,252,0.85)", backdropFilter: "blur(12px)" }}>
+        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-[var(--color-brand)] flex items-center justify-center text-white">
+              <Activity size={18} />
+            </div>
+            <span className="text-[17px] font-bold text-[var(--color-text)]">Noरोग</span>
+          </Link>
+          <div className="flex items-center gap-3">
+            <a href="#features" className="hidden sm:block text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors px-3 py-1.5">Features</a>
+            <Link to="/auth" className="btn-primary text-sm py-2 px-5">
+              Get Started <ArrowRight size={14} />
+            </Link>
+          </div>
+        </div>
+      </nav>
+
+      {/* ── Hero Section ── */}
+      <section className="relative overflow-hidden">
+        {/* Subtle grid background */}
+        <div className="absolute inset-0 opacity-[0.03]"
           style={{
-            background: "radial-gradient(ellipse at 30% 20%, rgba(37,99,235,0.3) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(16,185,129,0.2) 0%, transparent 50%)"
+            backgroundImage: "radial-gradient(circle, #000 1px, transparent 1px)",
+            backgroundSize: "24px 24px"
           }}
         />
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(37,99,235,0.1)] border border-[rgba(37,99,235,0.3)] mb-6">
-            <span className="flex items-center justify-center"><Activity size={14} className="text-[var(--color-brand)]" /></span>
-            <span className="text-xs font-medium text-[var(--color-brand-light)]">Proactive Disease Monitoring System</span>
-          </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-            Your Health,{" "}
-            <span className="gradient-text">Predicted</span>
-            <br />Not Just Treated
-          </h1>
-          <p className="text-lg text-[var(--color-text-secondary)] mb-8 max-w-2xl mx-auto">
-            Noरोग uses AI to analyze your symptoms, lifestyle, and family history
-            to predict health risks before they become serious. Stay one step ahead.
-          </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Link to="/auth" className="btn-primary text-base px-8 py-3.5">
-              Get Started — Free
-            </Link>
-            <a href="#features" className="btn-secondary text-base px-8 py-3.5">
-              See Features ↓
-            </a>
+        {/* Gradient orbs */}
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full opacity-[0.06]"
+          style={{ background: "radial-gradient(circle, #2563EB, transparent 70%)" }}
+        />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full opacity-[0.04]"
+          style={{ background: "radial-gradient(circle, #7C3AED, transparent 70%)" }}
+        />
+
+        <div className="relative max-w-3xl mx-auto text-center px-6 pt-20 pb-16 md:pt-28 md:pb-24">
+          <div className={`transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            {/* Pill badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-brand-alpha)] border border-[var(--color-brand-lighter)] mb-6">
+              <Zap size={12} className="text-[var(--color-brand)]" />
+              <span className="text-xs font-semibold text-[var(--color-brand)]">Proactive Health Intelligence</span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl md:text-[56px] font-extrabold leading-[1.1] tracking-tight text-[var(--color-text)] mb-5">
+              Predict health risks
+              <br />
+              <span className="gradient-text">before they strike</span>
+            </h1>
+
+            <p className="text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-xl mx-auto mb-8">
+              Noरोग uses AI to analyze your symptoms, lifestyle, and genetics
+              to predict disease risks — so you can act early, not react late.
+            </p>
+
+            <div className="flex items-center justify-center gap-3 flex-wrap">
+              <Link to="/auth" className="btn-primary text-[15px] px-7 py-3">
+                Start Free <ArrowRight size={16} />
+              </Link>
+              <a href="#features" className="btn-secondary text-[15px] px-7 py-3">
+                How it works
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-12 px-4 border-y border-[var(--color-border)]">
-        <div className="max-w-4xl mx-auto grid grid-cols-3 gap-6 text-center">
-          <div>
-            <div className="text-3xl font-bold gradient-text">AI-Powered</div>
-            <div className="text-sm text-[var(--color-text-muted)] mt-1">Risk Analysis</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold gradient-text">10+ Factors</div>
-            <div className="text-sm text-[var(--color-text-muted)] mt-1">Analyzed per Check</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold gradient-text">Real-Time</div>
-            <div className="text-sm text-[var(--color-text-muted)] mt-1">Health Monitoring</div>
-          </div>
+      {/* ── Stats Strip ── */}
+      <section className="border-y border-[var(--color-border)] bg-[var(--color-bg-surface)]">
+        <div className="max-w-4xl mx-auto px-6 py-8 grid grid-cols-3 gap-6">
+          {STATS.map((s, i) => (
+            <div key={i} className="text-center">
+              <div className="text-2xl md:text-3xl font-extrabold text-[var(--color-text)] tracking-tight">{s.value}</div>
+              <div className="text-xs md:text-sm text-[var(--color-text-muted)] mt-1 font-medium">{s.label}</div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Features */}
-      <section id="features" className="py-20 px-4">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Everything You Need for <span className="gradient-text">Proactive Health</span>
+      {/* ── Features Grid ── */}
+      <section id="features" className="max-w-5xl mx-auto px-6 py-16 md:py-24">
+        <div className="text-center mb-12">
+          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--color-text)]">
+            Everything for proactive health
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((f, i) => (
-              <div key={i} className="glass-card p-6 animate-fade-in-up" style={{ animationDelay: `${i * 0.1}s` }}>
-                <div className="text-3xl mb-3">{f.icon}</div>
-                <h3 className="text-base font-semibold mb-2">{f.title}</h3>
-                <p className="text-sm text-[var(--color-text-secondary)]">{f.desc}</p>
+          <p className="text-sm md:text-base text-[var(--color-text-muted)] mt-2 max-w-md mx-auto">
+            Six powerful tools that work together to keep you ahead of health risks.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {FEATURES.map((f, i) => (
+            <div
+              key={i}
+              className="group glass-card p-6 animate-fade-in-up"
+              style={{ animationDelay: `${i * 0.06}s` }}
+            >
+              <div
+                className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 transition-transform group-hover:scale-110"
+                style={{ background: `${f.color}10`, color: f.color }}
+              >
+                {f.icon}
               </div>
-            ))}
+              <h3 className="text-[15px] font-bold text-[var(--color-text)] mb-1.5">{f.title}</h3>
+              <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── CTA Section ── */}
+      <section className="max-w-5xl mx-auto px-6 pb-16 md:pb-24">
+        <div className="rounded-2xl p-8 md:p-12 text-center relative overflow-hidden"
+          style={{ background: "linear-gradient(135deg, var(--color-brand), var(--color-accent))" }}
+        >
+          {/* Noise overlay */}
+          <div className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage: "radial-gradient(circle at 30% 20%, rgba(255,255,255,0.3) 0%, transparent 50%)"
+            }}
+          />
+          <div className="relative z-10">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-3 tracking-tight">
+              Take control of your health today
+            </h2>
+            <p className="text-white/70 text-sm md:text-base mb-6 max-w-md mx-auto">
+              Join Noरोग and start monitoring your health proactively — completely free.
+            </p>
+            <Link to="/auth" className="inline-flex items-center gap-2 bg-white text-[var(--color-brand)] font-bold text-[15px] px-7 py-3 rounded-xl hover:shadow-lg transition-all hover:-translate-y-0.5">
+              Create Account <ChevronRight size={16} />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 px-4">
-        <div className="max-w-2xl mx-auto text-center glass-card p-10"
-          style={{ background: "linear-gradient(135deg, rgba(37,99,235,0.1), rgba(16,185,129,0.1))" }}
-        >
-          <h2 className="text-2xl font-bold mb-4">Ready to take control of your health?</h2>
-          <p className="text-[var(--color-text-secondary)] mb-6">
-            Join Noरोग and start monitoring your health proactively with AI.
+      {/* ── Footer ── */}
+      <footer className="border-t border-[var(--color-border)] bg-[var(--color-bg-surface)]">
+        <div className="max-w-5xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <Activity size={14} className="text-[var(--color-brand)]" />
+            <span className="text-sm font-bold text-[var(--color-text)]">Noरोग</span>
+          </div>
+          <p className="text-xs text-[var(--color-text-muted)] text-center">
+            AI-powered health intelligence tool — not a substitute for professional medical advice.
           </p>
-          <Link to="/auth" className="btn-primary text-base px-10 py-3.5">
-            Create Your Account
-          </Link>
         </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="text-center py-8 px-4 border-t border-[var(--color-border)] text-xs text-[var(--color-text-muted)]">
-        <p className="flex items-center justify-center gap-1"><ShieldAlert size={14} /> Noरोग is an AI-powered health intelligence tool, not a medical diagnosis system.</p>
-        <p className="mt-1">Always consult a qualified healthcare professional for medical advice.</p>
       </footer>
     </div>
   );
