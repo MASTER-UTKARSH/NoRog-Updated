@@ -155,5 +155,16 @@
     "content": "Starting a new exercise routine can trigger headaches, consider monitoring and adjusting your routine as needed. Start with low-intensity exercises and gradually increase the intensity.",
     "options": [],
     "timestamp": "2026-04-17T17:14:11.748Z"
+  },
+  {
+    "role": "user",
+    "content": "maze aa rahe hai",
+    "timestamp": "2026-04-18T05:49:08.709Z"
+  },
+  {
+    "role": "assistant",
+    "content": "I'm having a bit of trouble connecting right now, but I'm still here for you. How else can I help?",
+    "options": [],
+    "timestamp": "2026-04-18T05:49:08.963Z"
   }
 ]

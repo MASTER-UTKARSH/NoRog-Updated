@@ -1,127 +1,172 @@
 import axios from "axios";
 
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
-const MODEL = process.env.GROQ_MODEL || "llama-3.3-70b-versatile";
 
 /**
- * Call Groq API with system prompt and user message.
- * Returns parsed JSON object from the AI response.
+ * Ordered fallback chain of Groq models.
+ * When one hits a rate limit, the next one is tried automatically.
+ * Groq free tier has different rate limits per model — spreading
+ * requests across models dramatically increases total throughput.
  */
-export const callGroq = async (systemPrompt, userMessage, fallbackMode = false) => {
-  const CURRENT_MODEL = process.env.GROQ_MODEL || (fallbackMode ? "llama-3.1-8b-instant" : "llama-3.3-70b-versatile");
+const MODEL_CHAIN = [
+  "llama-3.3-70b-versatile",    // Best quality, lowest free-tier limit
+  "llama-3.1-8b-instant",       // Fast, higher limit
+  "llama3-70b-8192",            // Older Llama3, separate limit pool
+  "llama3-8b-8192",             // Older small Llama3, very high limit
+  "gemma2-9b-it",               // Google Gemma on Groq, separate pool
+  "mixtral-8x7b-32768",         // Mistral MoE, separate pool
+];
 
+/**
+ * Try a single Groq API call with a specific model.
+ * Returns { success: true, data } or { success: false, status, error }.
+ */
+const tryModel = async (model, messages, options = {}) => {
+  const { temperature = 0.2, max_tokens = 3000, timeout = 50000 } = options;
   try {
     const key = process.env.GROQ_API_KEY?.trim();
-    if (!key) console.error("GROQ_API_KEY is MISSING in process.env");
+    if (!key) {
+      return { success: false, status: 0, error: "GROQ_API_KEY is missing" };
+    }
 
     const response = await axios.post(
       GROQ_URL,
-      {
-        model: CURRENT_MODEL,
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userMessage }
-        ],
-        temperature: 0.2, // lower temperature for more consistent JSON
-        max_tokens: 3000
-      },
+      { model, messages, temperature, max_tokens },
       {
         headers: {
-          "Authorization": `Bearer ${process.env.GROQ_API_KEY?.trim()}`,
+          "Authorization": `Bearer ${key}`,
           "Content-Type": "application/json"
         },
-        timeout: 45000 // slightly longer timeout
+        timeout
       }
     );
 
     const content = response.data?.choices?.[0]?.message?.content;
     if (!content) {
-      throw new Error("Empty response from Groq");
+      return { success: false, status: 0, error: "Empty response" };
     }
-
-    // ROBUST JSON EXTRACTION: Find the first { and last }
-    const startIdx = content.indexOf('{');
-    const endIdx = content.lastIndexOf('}');
-    
-    if (startIdx === -1 || endIdx === -1) {
-      console.warn("AI did not return a valid JSON block, content:", content);
-      throw new Error("AI returned a non-JSON response");
-    }
-
-    const jsonStr = content.substring(startIdx, endIdx + 1);
-    
-    try {
-      return JSON.parse(jsonStr);
-    } catch (parseError) {
-      console.error("JSON Parse Error. Data:", jsonStr);
-      throw new Error("Failed to parse AI response");
-    }
+    return { success: true, data: content };
   } catch (error) {
-    if (error.response?.status === 429 && !fallbackMode) {
-      console.warn(`Groq rate limit hit for ${CURRENT_MODEL}. Attempting fallback to llama-3.1-8b-instant...`);
-      // Wait 1 second before retrying to let the API breathe slightly
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      return callGroq(systemPrompt, userMessage, true);
-    }
-    
-    if (error.response?.status === 401) {
-      console.error("Groq Authentication Error. Check your API key.");
-      throw new Error("Invalid Groq API Key.");
-    }
-    if (error.response?.status === 429) {
-      console.error("Groq rate limit hit completely.");
-      throw new Error("AI service is busy. Please try again in a moment.");
-    }
-    console.error("Groq API error:", error.message);
-    if (error.response?.data) {
-      console.error("Groq API Error Details:", JSON.stringify(error.response.data, null, 2));
-    }
-    throw new Error(`AI service Error: ${error.message}`);
+    const status = error.response?.status || 0;
+    const msg = error.response?.data?.error?.message || error.message;
+    return { success: false, status, error: msg };
   }
 };
 
 /**
- * Call Groq for raw text response (no JSON parsing).
+ * Call Groq API with automatic multi-model fallback.
+ * Tries each model in MODEL_CHAIN until one succeeds.
+ * Returns parsed JSON object from the AI response.
  */
-export const callGroqRaw = async (systemPrompt, userMessage, fallbackMode = false) => {
-  const CURRENT_MODEL = process.env.GROQ_MODEL || (fallbackMode ? "llama-3.1-8b-instant" : "llama-3.3-70b-versatile");
+export const callGroq = async (systemPrompt, userMessage) => {
+  const messages = [
+    { role: "system", content: systemPrompt },
+    { role: "user", content: userMessage }
+  ];
 
-  try {
-    const key = process.env.GROQ_API_KEY?.trim();
-    if (!key) console.error("GROQ_API_KEY is MISSING in process.env");
+  // If user set a specific model via env, put it first
+  const envModel = process.env.GROQ_MODEL?.trim();
+  const chain = envModel
+    ? [envModel, ...MODEL_CHAIN.filter(m => m !== envModel)]
+    : [...MODEL_CHAIN];
 
-    const response = await axios.post(
-      GROQ_URL,
-      {
-        model: CURRENT_MODEL,
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userMessage }
-        ],
-        temperature: 0.4,
-        max_tokens: 2000
-      },
-      {
-        headers: {
-          "Authorization": `Bearer ${process.env.GROQ_API_KEY?.trim()}`,
-          "Content-Type": "application/json"
-        },
-        timeout: 45000
+  let lastError = "";
+
+  for (let i = 0; i < chain.length; i++) {
+    const model = chain[i];
+    const result = await tryModel(model, messages, { temperature: 0.2, max_tokens: 3000 });
+
+    if (result.success) {
+      if (i > 0) console.log(`✅ Groq succeeded with fallback model: ${model}`);
+
+      // Parse JSON from response
+      const content = result.data;
+      const startIdx = content.indexOf('{');
+      const endIdx = content.lastIndexOf('}');
+
+      if (startIdx === -1 || endIdx === -1) {
+        console.warn(`Model ${model} returned non-JSON, trying next...`);
+        lastError = "AI returned non-JSON response";
+        continue; // Try next model if this one gave garbage
       }
-    );
 
-    return response.data?.choices?.[0]?.message?.content?.trim() || "";
-  } catch (error) {
-    if (error.response?.status === 429 && !fallbackMode) {
-      console.warn(`Groq raw rate limit hit for ${CURRENT_MODEL}. Attempting fallback...`);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      return callGroqRaw(systemPrompt, userMessage, true);
+      try {
+        return JSON.parse(content.substring(startIdx, endIdx + 1));
+      } catch (parseError) {
+        console.warn(`Model ${model} returned invalid JSON, trying next...`);
+        lastError = "Failed to parse AI response";
+        continue;
+      }
     }
-    
-    console.error("Groq raw call error:", error.message);
-    if (error.response?.data) {
-      console.error("Groq Raw API Error Details:", JSON.stringify(error.response.data, null, 2));
+
+    // If rate limited (429), try next model immediately
+    if (result.status === 429) {
+      console.warn(`⚠️ Rate limit on ${model}, trying next model...`);
+      lastError = result.error;
+      continue;
     }
-    throw new Error(`AI service unavailable: ${error.message}`);
+
+    // If auth error, don't bother trying other models
+    if (result.status === 401) {
+      throw new Error("Invalid Groq API Key. Please check your GROQ_API_KEY.");
+    }
+
+    // For other errors (500, timeout, etc.), try next model
+    console.warn(`⚠️ Error with ${model}: ${result.error}`);
+    lastError = result.error;
+
+    // Small delay before trying next model on server errors
+    if (result.status >= 500) {
+      await new Promise(r => setTimeout(r, 500));
+    }
   }
+
+  // All models exhausted
+  throw new Error(`AI service temporarily unavailable. All models are rate-limited. Please wait 30-60 seconds and try again. Last error: ${lastError}`);
+};
+
+/**
+ * Call Groq for raw text response (no JSON parsing).
+ * Also uses multi-model fallback.
+ */
+export const callGroqRaw = async (systemPrompt, userMessage) => {
+  const messages = [
+    { role: "system", content: systemPrompt },
+    { role: "user", content: userMessage }
+  ];
+
+  const envModel = process.env.GROQ_MODEL?.trim();
+  const chain = envModel
+    ? [envModel, ...MODEL_CHAIN.filter(m => m !== envModel)]
+    : [...MODEL_CHAIN];
+
+  let lastError = "";
+
+  for (let i = 0; i < chain.length; i++) {
+    const model = chain[i];
+    const result = await tryModel(model, messages, { temperature: 0.4, max_tokens: 2000 });
+
+    if (result.success) {
+      if (i > 0) console.log(`✅ Groq raw succeeded with fallback model: ${model}`);
+      return result.data.trim();
+    }
+
+    if (result.status === 429) {
+      console.warn(`⚠️ Raw rate limit on ${model}, trying next...`);
+      lastError = result.error;
+      continue;
+    }
+
+    if (result.status === 401) {
+      throw new Error("Invalid Groq API Key. Please check your GROQ_API_KEY.");
+    }
+
+    console.warn(`⚠️ Raw error with ${model}: ${result.error}`);
+    lastError = result.error;
+    if (result.status >= 500) {
+      await new Promise(r => setTimeout(r, 500));
+    }
+  }
+
+  throw new Error(`AI service temporarily unavailable. Please wait 30-60 seconds and try again.`);
 };
