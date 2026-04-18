@@ -29,7 +29,7 @@ export default function ChatAssistant() {
         // Just show a quiet welcome message without calling the API
         setMessages([{ 
           role: "assistant", 
-          content: "Hello! I'm your NoRog Assistant. I'm here to help whenever you have a health question or need to log a concern.",
+          content: "Hello! I'm your Noरोग Assistant. I'm here to help whenever you have a health question or need to log a concern.",
           options: [] 
         }]);
       } else {
@@ -80,7 +80,7 @@ export default function ChatAssistant() {
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-[var(--color-brand)] flex items-center justify-center text-white text-lg"><Activity size={18} /></div>
               <div>
-                <h3 className="text-sm font-bold">NoRog Assistant</h3>
+                <h3 className="text-sm font-bold">Noरोग Assistant</h3>
                 <div className="flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
                   <span className="text-[10px] text-[var(--color-text-muted)]">Always Online</span>

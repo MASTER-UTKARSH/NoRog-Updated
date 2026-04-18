@@ -30,7 +30,7 @@ export default function Landing() {
             <br />Not Just Treated
           </h1>
           <p className="text-lg text-[var(--color-text-secondary)] mb-8 max-w-2xl mx-auto">
-            NoRog uses AI to analyze your symptoms, lifestyle, and family history
+            Noरोग uses AI to analyze your symptoms, lifestyle, and family history
             to predict health risks before they become serious. Stay one step ahead.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
@@ -87,7 +87,7 @@ export default function Landing() {
         >
           <h2 className="text-2xl font-bold mb-4">Ready to take control of your health?</h2>
           <p className="text-[var(--color-text-secondary)] mb-6">
-            Join NoRog and start monitoring your health proactively with AI.
+            Join Noरोग and start monitoring your health proactively with AI.
           </p>
           <Link to="/auth" className="btn-primary text-base px-10 py-3.5">
             Create Your Account
@@ -97,7 +97,7 @@ export default function Landing() {
 
       {/* Footer */}
       <footer className="text-center py-8 px-4 border-t border-[var(--color-border)] text-xs text-[var(--color-text-muted)]">
-        <p className="flex items-center justify-center gap-1"><ShieldAlert size={14} /> NoRog is an AI-powered health intelligence tool, not a medical diagnosis system.</p>
+        <p className="flex items-center justify-center gap-1"><ShieldAlert size={14} /> Noरोग is an AI-powered health intelligence tool, not a medical diagnosis system.</p>
         <p className="mt-1">Always consult a qualified healthcare professional for medical advice.</p>
       </footer>
     </div>

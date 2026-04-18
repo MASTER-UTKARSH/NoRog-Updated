@@ -81,7 +81,7 @@ function AppLayout() {
       <ChatAssistant />
       {showNav && (
         <footer className="text-center py-4 px-4 text-xs text-[var(--color-text-muted)] md:pl-[240px]">
-          <p className="flex items-center justify-center gap-2"><ShieldAlert size={14} /> NoRog is an AI-powered health intelligence tool, not a medical diagnosis system.</p>
+          <p className="flex items-center justify-center gap-2"><ShieldAlert size={14} /> Noरोग is an AI-powered health intelligence tool, not a medical diagnosis system.</p>
         </footer>
       )}
     </div>

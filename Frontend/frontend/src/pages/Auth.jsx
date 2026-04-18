@@ -50,7 +50,7 @@ export default function Auth() {
                  style={{ background: "linear-gradient(135deg, var(--color-brand), var(--color-accent))" }}>
               <Activity size={24} />
             </div>
-            <span className="text-2xl font-bold gradient-text">NoRog</span>
+            <span className="text-2xl font-bold gradient-text">Noरोग</span>
           </div>
           <p className="text-sm text-[var(--color-text-muted)]">Proactive Disease Monitoring System</p>
         </div>

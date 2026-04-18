@@ -1,4 +1,4 @@
-# NoRog Backend
+# Noरोग Backend
 
 Minimal Express backend for symptom-based disease prediction.
 

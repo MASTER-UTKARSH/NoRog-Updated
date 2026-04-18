@@ -18,7 +18,7 @@ export const generateHealthPDF = async ({ user, profile, symptomLogs, prediction
       const gray = "#64748B";
 
       // ─── Page 1: Patient Summary ───
-      doc.fontSize(28).fillColor(blue).text("NoRog Health Report", { align: "center" });
+      doc.fontSize(28).fillColor(blue).text("Noरोग Health Report", { align: "center" });
       doc.moveDown(0.5);
       doc.fontSize(10).fillColor(gray).text(`Generated on: ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`, { align: "center" });
       doc.moveDown(2);

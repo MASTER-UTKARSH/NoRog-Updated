@@ -26,7 +26,7 @@ export default function Navbar() {
               <Activity size={24} />
             </div>
             <div>
-              <div className="text-lg font-bold gradient-text">NoRog</div>
+              <div className="text-lg font-bold gradient-text">Noरोग</div>
               <div className="text-[10px] text-[var(--color-text-muted)]">Disease Monitor</div>
             </div>
           </NavLink>

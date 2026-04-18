@@ -72,7 +72,7 @@ app.use("/api/chat", chatRoutes);
 // Health check
 app.get("/", (req, res) => {
   res.json({
-    name: "NoRog API",
+    name: "Noरोग API",
     version: "4.0.0",
     storage: "Firebase/Firestore",
     status: "running"
@@ -89,7 +89,7 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`\nNoRog API Server running on port ${PORT}`);
+  console.log(`\nNoरोग API Server running on port ${PORT}`);
   console.log(`Environment: ${process.env.NODE_ENV || "production"}`);
   console.log(`Storage: Firebase Firestore\n`);
 });

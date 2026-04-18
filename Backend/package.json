@@ -1,7 +1,7 @@
 {
   "name": "norog-backend",
   "version": "3.0.0",
-  "description": "NoRog — Proactive Disease Monitoring System Backend",
+  "description": "Noरोग — Proactive Disease Monitoring System Backend",
   "type": "module",
   "main": "index.js",
   "scripts": {

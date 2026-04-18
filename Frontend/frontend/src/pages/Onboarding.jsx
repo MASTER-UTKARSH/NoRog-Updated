@@ -84,7 +84,7 @@ export default function Onboarding() {
         medicines: data.medicines
       };
       await saveProfile(payload);
-      toast.success("Profile saved! Welcome to NoRog", { icon: <Check size={16} /> });
+      toast.success("Profile saved! Welcome to Noरोग", { icon: <Check size={16} /> });
       navigate("/dashboard");
     } catch (err) {
       toast.error("Failed to save profile. Please try again.");
