@@ -35,18 +35,19 @@ const allowedOrigins = [
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
+
+// ✅ Put this at the VERY TOP (before routes)
 app.use(cors({
-  origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV === "development") {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
+  origin: [
+    "http://localhost:5173",
+    "https://no-rog.netlify.app"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true
 }));
+
+// ✅ THIS LINE IS CRITICAL (preflight fix)
+app.options("*", cors());
 app.use(express.json({ limit: "10mb" }));
 app.use("/uploads", express.static(uploadsDir));
 
@@ -79,6 +80,11 @@ app.get("/", (req, res) => {
 app.use((err, req, res, next) => {
   console.error("Unhandled error:", err.message);
   res.status(500).json({ success: false, error: "Internal server error" });
+});
+
+app.use((err, req, res, next) => {
+  console.error("ERROR:", err);
+  res.status(500).json({ error: err.message });
 });
 
 app.listen(PORT, () => {
