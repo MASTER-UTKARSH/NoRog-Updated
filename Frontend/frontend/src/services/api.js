@@ -1,15 +1,7 @@
 import axios from "axios";
 
-const getBaseURL = () => {
-  const envUrl = import.meta.env.VITE_API_URL;
-  if (!envUrl) return "/api"; // Local dev proxy
-  
-  // Ensure the URL ends with /api for consistency with route structure
-  return envUrl.endsWith("/api") ? envUrl : `${envUrl.replace(/\/$/, '')}/api`;
-};
-
 const api = axios.create({
-  baseURL: getBaseURL(),
+  baseURL: import.meta.env.VITE_API_URL,
   headers: { "Content-Type": "application/json" },
   timeout: 30000
 });
