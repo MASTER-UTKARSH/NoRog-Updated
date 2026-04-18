@@ -20,13 +20,20 @@ router.get("/history", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { message } = req.body;
-    if (!message) return res.status(400).json({ success: false, error: "Message is required" });
+    if (!message || typeof message !== "string") {
+      return res.status(400).json({ success: false, error: "Message is required" });
+    }
+
+    const cleanMessage = message.trim().slice(0, 2000);
+    if (!cleanMessage) {
+      return res.status(400).json({ success: false, error: "Message cannot be empty" });
+    }
 
     // Store user message
-    const userMsgEntry = await addToChatHistory(req.user.id, { role: "user", content: message });
+    const userMsgEntry = await addToChatHistory(req.user.id, { role: "user", content: cleanMessage });
 
     // Process with AI
-    const aiResponse = await processAssistantMessage(req.user.id, message);
+    const aiResponse = await processAssistantMessage(req.user.id, cleanMessage);
 
     // Store AI response
     const aiMsgEntry = await addToChatHistory(req.user.id, aiResponse);

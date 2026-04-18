@@ -15,10 +15,43 @@ const router = Router();
 // POST /api/auth/register
 router.post("/register", async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    let { name, email, password } = req.body;
 
+    // ── Input Validation ──
     if (!name || !email || !password) {
       return res.status(400).json({ success: false, error: "Name, email, and password are required" });
+    }
+
+    // Sanitize
+    name = String(name).trim();
+    email = String(email).trim().toLowerCase();
+    password = String(password);
+
+    // Name validation
+    if (name.length < 2) {
+      return res.status(400).json({ success: false, error: "Name must be at least 2 characters" });
+    }
+    if (name.length > 50) {
+      return res.status(400).json({ success: false, error: "Name must be under 50 characters" });
+    }
+    if (!/^[a-zA-Z\s.'\-]+$/.test(name)) {
+      return res.status(400).json({ success: false, error: "Name contains invalid characters" });
+    }
+
+    // Email validation
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res.status(400).json({ success: false, error: "Invalid email format" });
+    }
+    if (email.length > 254) {
+      return res.status(400).json({ success: false, error: "Email is too long" });
+    }
+
+    // Password validation
+    if (password.length < 6) {
+      return res.status(400).json({ success: false, error: "Password must be at least 6 characters" });
+    }
+    if (password.length > 128) {
+      return res.status(400).json({ success: false, error: "Password is too long" });
     }
 
     const existing = await findUserByEmail(email);
@@ -56,10 +89,18 @@ router.post("/register", async (req, res) => {
 // POST /api/auth/login
 router.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    let { email, password } = req.body;
 
     if (!email || !password) {
       return res.status(400).json({ success: false, error: "Email and password are required" });
+    }
+
+    // Sanitize
+    email = String(email).trim().toLowerCase();
+    password = String(password);
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res.status(400).json({ success: false, error: "Invalid email format" });
     }
 
     const user = await findUserByEmail(email);

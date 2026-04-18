@@ -29,6 +29,27 @@ router.post("/log", upload.single("photo"), async (req, res) => {
     const { symptoms, severity, notes } = req.body;
     const parsedSymptoms = typeof symptoms === "string" ? JSON.parse(symptoms) : symptoms;
 
+    // ── Validate symptoms ──
+    if (!Array.isArray(parsedSymptoms) || parsedSymptoms.length === 0) {
+      return res.status(400).json({ success: false, error: "At least one symptom is required" });
+    }
+    const safeSymptoms = parsedSymptoms
+      .filter(s => typeof s === "string" && s.trim())
+      .map(s => s.trim().slice(0, 100))
+      .slice(0, 30);
+
+    if (safeSymptoms.length === 0) {
+      return res.status(400).json({ success: false, error: "At least one valid symptom is required" });
+    }
+
+    // ── Validate severity (clamp 1-10) ──
+    let safeSeverity = Number(severity);
+    if (isNaN(safeSeverity)) safeSeverity = 5;
+    safeSeverity = Math.max(1, Math.min(10, Math.round(safeSeverity)));
+
+    // ── Validate notes ──
+    const safeNotes = String(notes || "").trim().slice(0, 1000);
+
     let photoUrl = "";
     let photoAIDescription = "";
 
@@ -36,8 +57,8 @@ router.post("/log", upload.single("photo"), async (req, res) => {
       photoUrl = `/uploads/${req.file.filename}`;
       try {
         const photoResult = await callGroq(
-          `You are a medical AI assistant. The user has uploaded a photo of a symptom along with these reported symptoms: ${parsedSymptoms.join(", ")}. Provide a helpful description of what these symptoms could indicate. Return ONLY valid JSON with no markdown, no backticks: { "description": "string describing likely visual symptoms", "flaggedSymptoms": ["array of concerning symptoms"], "urgencyFlag": "none|monitor|see_doctor" }`,
-          `The patient reports these symptoms: ${parsedSymptoms.join(", ")} with severity ${severity}/10. Notes: ${notes || "none"}. They have uploaded a photo of their symptoms. Please analyze.`
+          `You are a medical AI assistant. The user has uploaded a photo of a symptom along with these reported symptoms: ${safeSymptoms.join(", ")}. Provide a helpful description of what these symptoms could indicate. Return ONLY valid JSON with no markdown, no backticks: { "description": "string describing likely visual symptoms", "flaggedSymptoms": ["array of concerning symptoms"], "urgencyFlag": "none|monitor|see_doctor" }`,
+          `The patient reports these symptoms: ${safeSymptoms.join(", ")} with severity ${safeSeverity}/10. Notes: ${safeNotes || "none"}. They have uploaded a photo of their symptoms. Please analyze.`
         );
         photoAIDescription = photoResult.description || "";
       } catch (err) {
@@ -47,9 +68,9 @@ router.post("/log", upload.single("photo"), async (req, res) => {
 
     // Create the log entry (save to disk)
     let log = await addSymptomLog(req.user.id, {
-      symptoms: parsedSymptoms,
-      severity: Number(severity) || 5,
-      notes: notes || "",
+      symptoms: safeSymptoms,
+      severity: safeSeverity,
+      notes: safeNotes,
       photoUrl,
       photoAIDescription,
       warningFlagged: false,

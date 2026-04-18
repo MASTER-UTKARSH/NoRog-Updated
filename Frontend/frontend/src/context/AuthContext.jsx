@@ -14,16 +14,25 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const savedToken = localStorage.getItem("norog_token");
-    const savedUser = localStorage.getItem("norog_user");
-    if (savedToken && savedUser) {
-      try {
-        setToken(savedToken);
-        setUser(JSON.parse(savedUser));
-      } catch {
-        localStorage.removeItem("norog_token");
-        localStorage.removeItem("norog_user");
+    try {
+      const savedToken = localStorage.getItem("norog_token");
+      const savedUser = localStorage.getItem("norog_user");
+      if (savedToken && savedUser) {
+        const parsed = JSON.parse(savedUser);
+        // Verify the parsed data is actually a valid user object
+        if (parsed && typeof parsed === "object" && parsed.id) {
+          setToken(savedToken);
+          setUser(parsed);
+        } else {
+          // Corrupted user data — clean up
+          localStorage.removeItem("norog_token");
+          localStorage.removeItem("norog_user");
+        }
       }
+    } catch {
+      // JSON parse failed — corrupted data
+      localStorage.removeItem("norog_token");
+      localStorage.removeItem("norog_user");
     }
     setLoading(false);
   }, []);

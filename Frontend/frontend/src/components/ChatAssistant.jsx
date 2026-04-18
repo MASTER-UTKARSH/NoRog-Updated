@@ -24,25 +24,30 @@ export default function ChatAssistant() {
 
   const loadHistory = async () => {
     try {
-      const { data } = await getChatHistory();
-      if (data.length === 0) {
-        // Just show a quiet welcome message without calling the API
+      const res = await getChatHistory();
+      const history = Array.isArray(res?.data) ? res.data : [];
+      if (history.length === 0) {
         setMessages([{ 
           role: "assistant", 
           content: "Hello! I'm your Noरोग Assistant. I'm here to help whenever you have a health question or need to log a concern.",
           options: [] 
         }]);
       } else {
-        setMessages(data);
+        setMessages(history);
       }
     } catch (err) {
       console.error("Failed to load history");
+      setMessages([{ 
+        role: "assistant", 
+        content: "Hello! I'm your Noरोग Assistant. I'm here to help whenever you have a health question or need to log a concern.",
+        options: [] 
+      }]);
     }
   };
 
   const handleSend = async (text = null, quiet = false) => {
-    const msgText = text || input;
-    if (!msgText.trim()) return;
+    const msgText = (text || input).trim();
+    if (!msgText || msgText.length > 2000) return;
 
     if (!quiet) {
       setMessages(prev => [...prev, { role: "user", content: msgText }]);
@@ -62,9 +67,13 @@ export default function ChatAssistant() {
 
   const handleReset = async () => {
     if (window.confirm("Delete chat history and start over?")) {
-      await resetChatHistory();
-      setMessages([]);
-      handleSend("Hello! I'm starting over.", true);
+      try {
+        await resetChatHistory();
+        setMessages([]);
+        handleSend("Hello! I'm starting over.", true);
+      } catch {
+        toast.error("Failed to reset chat");
+      }
     }
   };
 
@@ -151,6 +160,7 @@ export default function ChatAssistant() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 disabled={loading}
+                maxLength={2000}
               />
               <button 
                 type="submit"

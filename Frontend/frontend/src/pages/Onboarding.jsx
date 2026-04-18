@@ -55,29 +55,112 @@ export default function Onboarding() {
   };
 
   const addFamilyHistory = () => {
-    if (newFH.condition.trim()) {
-      setData(d => ({ ...d, familyHistory: [...d.familyHistory, { ...newFH }] }));
-      setNewFH({ relation: "Father", condition: "" });
+    const condition = newFH.condition.trim();
+    if (!condition) {
+      toast.error("Enter a condition name");
+      return;
     }
+    if (condition.length > 100) {
+      toast.error("Condition name is too long");
+      return;
+    }
+    // Check for duplicates (same relation + same condition)
+    const exists = data.familyHistory.some(
+      fh => fh.relation === newFH.relation && fh.condition.toLowerCase() === condition.toLowerCase()
+    );
+    if (exists) {
+      toast.error("This entry already exists");
+      return;
+    }
+    setData(d => ({ ...d, familyHistory: [...d.familyHistory, { relation: newFH.relation, condition }] }));
+    setNewFH({ relation: "Father", condition: "" });
   };
 
   const addMedicine = () => {
-    if (newMed.name.trim()) {
-      setData(d => ({ ...d, medicines: [...d.medicines, { ...newMed }] }));
-      setNewMed({ name: "", dosage: "", frequency: "daily" });
+    const name = newMed.name.trim();
+    if (!name) {
+      toast.error("Enter the medicine name");
+      return;
+    }
+    if (name.length > 100) {
+      toast.error("Medicine name is too long");
+      return;
+    }
+    // Check for duplicate medicine names
+    const exists = data.medicines.some(m => m.name.toLowerCase() === name.toLowerCase());
+    if (exists) {
+      toast.error("This medicine is already added");
+      return;
+    }
+    setData(d => ({ ...d, medicines: [...d.medicines, { name, dosage: newMed.dosage.trim(), frequency: newMed.frequency }] }));
+    setNewMed({ name: "", dosage: "", frequency: "daily" });
+  };
+
+  // Age field handler — only allow digits, clamp 1-120
+  const handleAgeChange = (e) => {
+    const raw = e.target.value;
+    // Allow empty (for clearing)
+    if (raw === "") {
+      setData({ ...data, age: "" });
+      return;
+    }
+    // Only digits
+    if (!/^\d+$/.test(raw)) return;
+    const num = parseInt(raw, 10);
+    if (num > 120) return; // Silently reject >120
+    setData({ ...data, age: raw });
+  };
+
+  const validateStep = (targetStep) => {
+    // Validate Step 1 before advancing
+    if (step === 1 && targetStep > 1) {
+      const age = parseInt(data.age, 10);
+      if (!data.age || isNaN(age)) {
+        toast.error("Please enter your age");
+        return false;
+      }
+      if (age < 1 || age > 120) {
+        toast.error("Age must be between 1 and 120");
+        return false;
+      }
+      if (!data.gender) {
+        toast.error("Please select your gender");
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const handleNext = () => {
+    if (validateStep(step + 1)) {
+      setStep(s => s + 1);
     }
   };
 
   const handleSubmit = async () => {
+    // Final validation
+    const age = parseInt(data.age, 10);
+    if (!data.age || isNaN(age) || age < 1 || age > 120) {
+      toast.error("Please go back and enter a valid age (1-120)");
+      return;
+    }
+    if (!data.gender) {
+      toast.error("Please go back and select your gender");
+      return;
+    }
+
     setLoading(true);
     try {
       const payload = {
-        age: Number(data.age) || undefined,
+        age: age,
         gender: data.gender,
-        location: data.location,
+        location: {
+          city: data.location.city.trim().slice(0, 100),
+          country: data.location.country.trim().slice(0, 100)
+        },
         currentSymptoms: data.currentSymptoms,
-        medicalHistory: data.otherCondition
-          ? [...data.medicalHistory, data.otherCondition]
+        medicalHistory: data.otherCondition.trim()
+          ? [...data.medicalHistory, data.otherCondition.trim().slice(0, 100)]
           : data.medicalHistory,
         familyHistory: data.familyHistory,
         lifestyle: data.lifestyle,
@@ -115,12 +198,20 @@ export default function Onboarding() {
               
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-[var(--color-text-muted)] mb-1.5">Age</label>
-                  <input type="number" className="input-field" placeholder="25" value={data.age}
-                    onChange={(e) => setData({...data, age: e.target.value})} />
+                  <label className="block text-xs font-medium text-[var(--color-text-muted)] mb-1.5">Age <span className="text-[var(--color-danger)]">*</span></label>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    className="input-field"
+                    placeholder="25"
+                    value={data.age}
+                    onChange={handleAgeChange}
+                    maxLength={3}
+                  />
+                  <p className="text-[10px] text-[var(--color-text-muted)] mt-1">Between 1 and 120</p>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[var(--color-text-muted)] mb-1.5">Gender</label>
+                  <label className="block text-xs font-medium text-[var(--color-text-muted)] mb-1.5">Gender <span className="text-[var(--color-danger)]">*</span></label>
                   <select className="input-field" value={data.gender} onChange={(e) => setData({...data, gender: e.target.value})}>
                     <option value="">Select</option>
                     <option value="male">Male</option>
@@ -162,6 +253,7 @@ export default function Onboarding() {
               <div>
                 <label className="block text-xs font-medium text-[var(--color-text-muted)] mb-1.5">Other conditions</label>
                 <input className="input-field" placeholder="Type any other condition..." value={data.otherCondition}
+                  maxLength={100}
                   onChange={(e) => setData({...data, otherCondition: e.target.value})} />
               </div>
             </div>
@@ -241,7 +333,9 @@ export default function Onboarding() {
                     {RELATIONS.map(r => <option key={r} value={r}>{r}</option>)}
                   </select>
                   <input className="input-field flex-1" placeholder="Condition (e.g., Heart Disease)"
-                    value={newFH.condition} onChange={(e) => setNewFH({...newFH, condition: e.target.value})} />
+                    value={newFH.condition} onChange={(e) => setNewFH({...newFH, condition: e.target.value})}
+                    maxLength={100}
+                    onKeyDown={(e) => e.key === "Enter" && addFamilyHistory()} />
                   <button onClick={addFamilyHistory} className="btn-primary px-4 py-2 text-sm">+</button>
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -259,9 +353,12 @@ export default function Onboarding() {
                 <label className="block text-xs font-medium text-[var(--color-text-muted)] mb-2">Current Medicines</label>
                 <div className="flex gap-2 mb-2">
                   <input className="input-field flex-1" placeholder="Medicine name" value={newMed.name}
-                    onChange={(e) => setNewMed({...newMed, name: e.target.value})} />
+                    onChange={(e) => setNewMed({...newMed, name: e.target.value})}
+                    maxLength={100}
+                    onKeyDown={(e) => e.key === "Enter" && addMedicine()} />
                   <input className="input-field w-24" placeholder="Dosage" value={newMed.dosage}
-                    onChange={(e) => setNewMed({...newMed, dosage: e.target.value})} />
+                    onChange={(e) => setNewMed({...newMed, dosage: e.target.value})}
+                    maxLength={50} />
                   <button onClick={addMedicine} className="btn-primary px-4 py-2 text-sm">+</button>
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -279,11 +376,13 @@ export default function Onboarding() {
                 <div>
                   <label className="block text-xs font-medium text-[var(--color-text-muted)] mb-1.5">City</label>
                   <input className="input-field" placeholder="Mumbai" value={data.location.city}
+                    maxLength={100}
                     onChange={(e) => setData({...data, location: {...data.location, city: e.target.value}})} />
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-[var(--color-text-muted)] mb-1.5">Country</label>
                   <input className="input-field" placeholder="India" value={data.location.country}
+                    maxLength={100}
                     onChange={(e) => setData({...data, location: {...data.location, country: e.target.value}})} />
                 </div>
               </div>
@@ -297,12 +396,12 @@ export default function Onboarding() {
               ← Back
             </button>
             {step < 4 ? (
-              <button onClick={() => setStep(s => s + 1)} className="btn-primary">
+              <button onClick={handleNext} className="btn-primary">
                 Next →
               </button>
             ) : (
               <button onClick={handleSubmit} className="btn-primary" disabled={loading}>
-                {loading ? "Saving..." : "Complete Setup ✓"}
+                {loading ? "Saving..." : "Complete Setup"}
               </button>
             )}
           </div>

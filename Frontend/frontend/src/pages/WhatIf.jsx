@@ -21,9 +21,13 @@ export default function WhatIf() {
   const [loading, setLoading] = useState(false);
 
   const handleAnalyze = async (s) => {
-    const text = s || scenario;
-    if (!text.trim()) {
-      toast.error("Enter a scenario first");
+    const text = (s || scenario || "").trim();
+    if (!text) {
+      toast.error("Enter a valid scenario first");
+      return;
+    }
+    if (text.length > 500) {
+      toast.error("Scenario is too long (max 500 characters)");
       return;
     }
     setLoading(true);
@@ -181,6 +185,7 @@ export default function WhatIf() {
             value={scenario}
             onChange={(e) => setScenario(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleAnalyze()}
+            maxLength={500}
           />
           <button onClick={() => handleAnalyze()} className="btn-primary px-6" disabled={loading}>
             Analyze

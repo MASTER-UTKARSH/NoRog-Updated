@@ -28,9 +28,12 @@ export default function MedicineChecker() {
   };
 
   const addTempMed = () => {
-    if (newMed.trim() && !tempMeds.includes(newMed.trim())) {
-      setTempMeds([...tempMeds, newMed.trim()]);
+    const trimmed = newMed.trim();
+    if (trimmed && !tempMeds.some(m => m.toLowerCase() === trimmed.toLowerCase())) {
+      setTempMeds([...tempMeds, trimmed]);
       setNewMed("");
+    } else if (tempMeds.some(m => m.toLowerCase() === trimmed.toLowerCase())) {
+      toast.error("Medicine already added");
     }
   };
 

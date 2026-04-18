@@ -202,10 +202,10 @@ export default function Dashboard() {
             {recentLogs.slice(0, 3).map((log, i) => (
               <div key={i} className="glass-card p-4 flex items-center gap-4">
                 <div className="text-xs text-[var(--color-text-muted)] w-20 flex-shrink-0">
-                  {new Date(log.createdAt || log.date).toLocaleDateString()}
+                  {(() => { try { return new Date(log.createdAt || log.date).toLocaleDateString(); } catch { return "Unknown"; } })()}
                 </div>
                 <div className="flex-1 flex flex-wrap gap-1.5">
-                  {log.symptoms.map((s, j) => (
+                  {(Array.isArray(log.symptoms) ? log.symptoms : []).map((s, j) => (
                     <span key={j} className="text-xs px-2 py-0.5 rounded-full bg-[var(--color-bg-surface-alt)] text-[var(--color-text-secondary)]">
                       {s}
                     </span>

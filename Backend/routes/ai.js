@@ -77,7 +77,13 @@ IMPORTANT: Factor in genetic predispositions heavily (family history increases b
 router.post("/whatif", async (req, res) => {
   try {
     const { scenario } = req.body;
-    if (!scenario) return res.status(400).json({ success: false, error: "Scenario is required" });
+    if (!scenario || typeof scenario !== "string") {
+      return res.status(400).json({ success: false, error: "Scenario is required" });
+    }
+    const safeScenario = scenario.trim().slice(0, 500);
+    if (!safeScenario) {
+      return res.status(400).json({ success: false, error: "Valid scenario is required" });
+    }
 
     const user = await findUserById(req.user.id);
     const profile = await getProfile(req.user.id);
@@ -101,7 +107,7 @@ Return this exact JSON structure:
   "oneYear": { same structure }
 }`;
 
-    const userMessage = `The user wants to know: "${scenario}"
+    const userMessage = `The user wants to know: "${safeScenario}"
 
 Their current health context:
 - Age: ${user?.age || "unknown"}, Gender: ${user?.gender || "unknown"}

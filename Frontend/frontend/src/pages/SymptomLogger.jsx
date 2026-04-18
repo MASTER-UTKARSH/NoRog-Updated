@@ -162,7 +162,9 @@ export default function SymptomLogger() {
             placeholder="Describe how you're feeling, when symptoms started, etc."
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
+            maxLength={1000}
           />
+          <p className="text-[10px] text-[var(--color-text-muted)] mt-1 text-right">{notes.length}/1000</p>
         </div>
 
         {/* Photo Upload */}

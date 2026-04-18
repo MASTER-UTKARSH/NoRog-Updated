@@ -12,15 +12,64 @@ export default function Auth() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
+  const validate = () => {
+    const email = form.email.trim().toLowerCase();
+    const password = form.password;
+
+    if (!email) {
+      toast.error("Email is required");
+      return false;
+    }
+    // Basic email format check
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast.error("Please enter a valid email address");
+      return false;
+    }
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return false;
+    }
+    if (password.length > 128) {
+      toast.error("Password is too long");
+      return false;
+    }
+
+    if (tab === "register") {
+      const name = form.name.trim();
+      if (!name) {
+        toast.error("Name is required");
+        return false;
+      }
+      if (name.length < 2) {
+        toast.error("Name must be at least 2 characters");
+        return false;
+      }
+      if (name.length > 50) {
+        toast.error("Name must be under 50 characters");
+        return false;
+      }
+      if (!/^[a-zA-Z\s.'-]+$/.test(name)) {
+        toast.error("Name can only contain letters, spaces, dots, hyphens, and apostrophes");
+        return false;
+      }
+    }
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validate()) return;
+
     setLoading(true);
     try {
+      const cleanEmail = form.email.trim().toLowerCase();
+      const cleanName = form.name.trim();
+
       let res;
       if (tab === "register") {
-        res = await registerUser(form);
+        res = await registerUser({ name: cleanName, email: cleanEmail, password: form.password });
       } else {
-        res = await loginUser({ email: form.email, password: form.password });
+        res = await loginUser({ email: cleanEmail, password: form.password });
       }
 
       if (res.success) {
@@ -91,6 +140,7 @@ export default function Auth() {
                   placeholder="John Doe"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  maxLength={50}
                   required
                 />
               </div>
@@ -116,7 +166,9 @@ export default function Auth() {
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
                 required
                 minLength={6}
+                maxLength={128}
               />
+              <p className="text-[10px] text-[var(--color-text-muted)] mt-1">Minimum 6 characters</p>
             </div>
             <button type="submit" className="btn-primary w-full" disabled={loading}>
               {loading ? "Please wait..." : (tab === "register" ? "Create Account" : "Sign In")}

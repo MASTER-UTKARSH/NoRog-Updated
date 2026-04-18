@@ -79,12 +79,12 @@ export default function HealthHistory() {
                   <div className="text-sm text-[var(--color-brand)]"><Calendar size={18} /></div>
                   <div>
                     <div className="text-sm font-medium">
-                      {new Date(log.date).toLocaleDateString("en-US", {
+                      {(() => { try { return new Date(log.date || log.createdAt).toLocaleDateString("en-US", {
                         weekday: "short", year: "numeric", month: "short", day: "numeric"
-                      })}
+                      }); } catch { return "Unknown date"; } })()}
                     </div>
                     <div className="text-xs text-[var(--color-text-muted)]">
-                      {new Date(log.date).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })}
+                      {(() => { try { return new Date(log.date || log.createdAt).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }); } catch { return ""; } })()}
                     </div>
                   </div>
                 </div>
@@ -108,7 +108,7 @@ export default function HealthHistory() {
 
               {/* Symptoms */}
               <div className="flex flex-wrap gap-1.5 mb-2">
-                {log.symptoms.map((s, j) => (
+                {(Array.isArray(log.symptoms) ? log.symptoms : []).map((s, j) => (
                   <span key={j} className="text-xs px-2.5 py-1 rounded-full bg-[var(--color-bg-surface-alt)] text-[var(--color-text-secondary)] flex items-center gap-1">
                     <Thermometer size={12} /> {s}
                   </span>
