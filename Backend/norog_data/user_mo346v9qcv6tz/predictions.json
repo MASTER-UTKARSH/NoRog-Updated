@@ -258,5 +258,59 @@
     ],
     "summary": "The patient's history of hypertension and frequent cough and colds, combined with recent symptoms of headache and cough, suggest a higher risk of hypertensive heart disease and chronic bronchitis. The patient's vegetarian diet may also contribute to a risk of vitamin B12 deficiency. It is recommended that the patient sees a doctor soon to discuss these risks and develop a plan to mitigate them.",
     "createdAt": "2026-04-17T20:59:38.987Z"
+  },
+  {
+    "_id": "mo3wq3rhevwj5",
+    "userId": "mo346v9qcv6tz",
+    "risks": [
+      {
+        "disease": "Hypertensive Heart Disease",
+        "confidence": 60,
+        "contributingSymptoms": [
+          "Headache",
+          "Hypertension"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Chronic Bronchitis",
+        "confidence": 70,
+        "contributingSymptoms": [
+          "Cough"
+        ],
+        "urgency": "See doctor soon",
+        "geneticFactor": false
+      },
+      {
+        "disease": "Vitamin B12 Deficiency",
+        "confidence": 40,
+        "contributingSymptoms": [
+          "Headache",
+          "Muscle cramp"
+        ],
+        "urgency": "Monitor",
+        "geneticFactor": false
+      }
+    ],
+    "healthScore": 60,
+    "trend": "declining",
+    "correlations": [
+      {
+        "symptoms": [
+          "Headache",
+          "Muscle cramp"
+        ],
+        "possibleCondition": "Vitamin B12 Deficiency"
+      },
+      {
+        "symptoms": [
+          "Cough"
+        ],
+        "possibleCondition": "Chronic Bronchitis"
+      }
+    ],
+    "summary": "The patient's history of hypertension and frequent cough and colds, combined with recent symptoms of headache and cough, suggest a higher risk of hypertensive heart disease and chronic bronchitis. The patient's vegetarian diet may also contribute to a risk of vitamin B12 deficiency. It is recommended that the patient sees a doctor soon to discuss these risks and develop a plan to mitigate them.",
+    "createdAt": "2026-04-18T05:39:10.350Z"
   }
 ]

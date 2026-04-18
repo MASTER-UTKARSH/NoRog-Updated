@@ -56,10 +56,8 @@ export default function Landing() {
       {/* ── Navigation Bar ── */}
       <nav className="sticky top-0 z-50 border-b border-[var(--color-border)]" style={{ background: "rgba(250,251,252,0.85)", backdropFilter: "blur(12px)" }}>
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-[var(--color-brand)] flex items-center justify-center text-white">
-              <Activity size={18} />
-            </div>
+          <Link to="/" className="flex items-center gap-2">
+            <img src="/logo.png" alt="Noरोग Logo" className="w-8 h-8 object-contain rounded-md" />
             <span className="text-[17px] font-bold text-[var(--color-text)]">Noरोग</span>
           </Link>
           <div className="flex items-center gap-3">
@@ -191,7 +189,7 @@ export default function Landing() {
       <footer className="border-t border-[var(--color-border)] bg-[var(--color-bg-surface)]">
         <div className="max-w-5xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <Activity size={14} className="text-[var(--color-brand)]" />
+            <img src="/logo.png" alt="Noरोग Logo" className="w-5 h-5 object-contain rounded-sm" />
             <span className="text-sm font-bold text-[var(--color-text)]">Noरोग</span>
           </div>
           <p className="text-xs text-[var(--color-text-muted)] text-center">

@@ -20,12 +20,10 @@ export default function Navbar() {
       {/* Desktop Sidebar */}
       <aside className="sidebar hidden md:flex">
         <div className="p-5 border-b border-[var(--color-border)]">
-          <NavLink to="/dashboard" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-[var(--color-brand)] flex items-center justify-center text-white">
-              <Activity size={18} />
-            </div>
+          <NavLink to="/dashboard" className="flex items-center gap-2">
+            <img src="/logo.png" alt="Noरोग Logo" className="w-8 h-8 object-contain rounded-md shadow-sm" />
             <div>
-              <div className="text-[15px] font-extrabold text-[var(--color-text)]">Noरोग</div>
+              <div className="text-[17px] font-extrabold text-[var(--color-text)]">Noरोग</div>
             </div>
           </NavLink>
         </div>

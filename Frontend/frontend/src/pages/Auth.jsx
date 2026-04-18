@@ -94,10 +94,8 @@ export default function Auth() {
       <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2.5 mb-3">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white bg-[var(--color-brand)]">
-              <Activity size={22} />
-            </div>
+          <div className="inline-flex items-center gap-2 mb-3">
+            <img src="/logo.png" alt="Noरोग Logo" className="w-10 h-10 object-contain rounded-xl shadow-sm" />
             <span className="text-xl font-extrabold text-[var(--color-text)]">Noरोग</span>
           </div>
           <p className="text-sm text-[var(--color-text-muted)]">Preventive Health Intelligence</p>
