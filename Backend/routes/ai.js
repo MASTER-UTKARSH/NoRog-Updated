@@ -120,9 +120,9 @@ Consider how this change INTERACTS with their existing conditions and genetic pr
     const whatifLog = await addWhatIfLog(req.user.id, {
       scenario: result.scenario || scenario,
       impact: {
-        oneYear: result.oneYear || {},
-        fiveYear: result.fiveYear || {},
-        tenYear: result.tenYear || {}
+        oneMonth: result.oneMonth || {},
+        sixMonth: result.sixMonth || {},
+        oneYear: result.oneYear || {}
       }
     });
 
