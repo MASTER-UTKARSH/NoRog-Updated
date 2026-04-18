@@ -30,24 +30,26 @@ if (!fs.existsSync(uploadsDir)) {
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
-  "http://localhost:5175",
   "http://localhost:3000",
+  "https://no-rog.netlify.app",
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
-
-// ✅ Put this at the VERY TOP (before routes)
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://no-rog.netlify.app"
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  origin: (origin, callback) => {
+    // allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV === "development") {
+      callback(null, true);
+    } else {
+      console.warn(`Blocked by CORS: ${origin}`);
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 }));
 
-// ✅ THIS LINE IS CRITICAL (preflight fix)
-app.options("*", cors());
+app.options("*", cors()); // Explicit handle for preflight across all routes
 app.use(express.json({ limit: "10mb" }));
 app.use("/uploads", express.static(uploadsDir));
 

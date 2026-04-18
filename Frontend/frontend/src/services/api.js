@@ -1,7 +1,19 @@
 import axios from "axios";
 
+const getBaseURL = () => {
+  // Use the provided VITE_API_URL or fall back to local proxy
+  const base = import.meta.env.VITE_API_URL || "/api";
+  
+  // If we are in production (URL starts with http), ensure it ends with /api
+  if (base.startsWith("http")) {
+    return base.endsWith("/api") ? base : `${base.replace(/\/$/, '')}/api`;
+  }
+  
+  return base;
+};
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: getBaseURL(),
   headers: { "Content-Type": "application/json" },
   timeout: 30000
 });
