@@ -7,16 +7,17 @@ const MODEL = process.env.GROQ_MODEL || "llama-3.3-70b-versatile";
  * Call Groq API with system prompt and user message.
  * Returns parsed JSON object from the AI response.
  */
-export const callGroq = async (systemPrompt, userMessage) => {
+export const callGroq = async (systemPrompt, userMessage, fallbackMode = false) => {
+  const CURRENT_MODEL = process.env.GROQ_MODEL || (fallbackMode ? "llama-3.1-8b-instant" : "llama-3.3-70b-versatile");
+
   try {
     const key = process.env.GROQ_API_KEY?.trim();
     if (!key) console.error("GROQ_API_KEY is MISSING in process.env");
-    else console.log(`Attempting Groq call with key starting with: ${key.substring(0, 10)}... (Length: ${key.length})`);
 
     const response = await axios.post(
       GROQ_URL,
       {
-        model: MODEL,
+        model: CURRENT_MODEL,
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: userMessage }
@@ -56,12 +57,19 @@ export const callGroq = async (systemPrompt, userMessage) => {
       throw new Error("Failed to parse AI response");
     }
   } catch (error) {
+    if (error.response?.status === 429 && !fallbackMode) {
+      console.warn(`Groq rate limit hit for ${CURRENT_MODEL}. Attempting fallback to llama-3.1-8b-instant...`);
+      // Wait 1 second before retrying to let the API breathe slightly
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      return callGroq(systemPrompt, userMessage, true);
+    }
+    
     if (error.response?.status === 401) {
       console.error("Groq Authentication Error. Check your API key.");
       throw new Error("Invalid Groq API Key.");
     }
     if (error.response?.status === 429) {
-      console.error("Groq rate limit hit.");
+      console.error("Groq rate limit hit completely.");
       throw new Error("AI service is busy. Please try again in a moment.");
     }
     console.error("Groq API error:", error.message);
@@ -75,7 +83,9 @@ export const callGroq = async (systemPrompt, userMessage) => {
 /**
  * Call Groq for raw text response (no JSON parsing).
  */
-export const callGroqRaw = async (systemPrompt, userMessage) => {
+export const callGroqRaw = async (systemPrompt, userMessage, fallbackMode = false) => {
+  const CURRENT_MODEL = process.env.GROQ_MODEL || (fallbackMode ? "llama-3.1-8b-instant" : "llama-3.3-70b-versatile");
+
   try {
     const key = process.env.GROQ_API_KEY?.trim();
     if (!key) console.error("GROQ_API_KEY is MISSING in process.env");
@@ -83,7 +93,7 @@ export const callGroqRaw = async (systemPrompt, userMessage) => {
     const response = await axios.post(
       GROQ_URL,
       {
-        model: MODEL,
+        model: CURRENT_MODEL,
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: userMessage }
@@ -102,6 +112,12 @@ export const callGroqRaw = async (systemPrompt, userMessage) => {
 
     return response.data?.choices?.[0]?.message?.content?.trim() || "";
   } catch (error) {
+    if (error.response?.status === 429 && !fallbackMode) {
+      console.warn(`Groq raw rate limit hit for ${CURRENT_MODEL}. Attempting fallback...`);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      return callGroqRaw(systemPrompt, userMessage, true);
+    }
+    
     console.error("Groq raw call error:", error.message);
     if (error.response?.data) {
       console.error("Groq Raw API Error Details:", JSON.stringify(error.response.data, null, 2));
