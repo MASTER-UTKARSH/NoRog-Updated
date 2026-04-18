@@ -49,7 +49,7 @@ app.use(cors({
   credentials: true
 }));
 
-app.options("*", cors()); // Explicit handle for preflight across all routes
+app.options("(.*)", cors()); // Correct wildcard syntax for Express 5 preflight handled by path-to-regexp
 app.use(express.json({ limit: "10mb" }));
 app.use("/uploads", express.static(uploadsDir));
 
